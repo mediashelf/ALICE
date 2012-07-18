@@ -1,0 +1,15 @@
+common: &common
+  min_messages: warning
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: playbook
+  password:
+
+development:
+  database: playbook_development
+  <<: *common
+
+test: &test
+  database: playbook_test
+  <<: *common

@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %title Playbook
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    - if current_user
+      = link_to 'Sign out', destroy_user_session_path, method: :delete
+    - flash.each do |key, msg|
+      .flash{class: key}= msg
+    = yield
+    = yield :javascript
