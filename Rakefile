@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Playbook::Application.load_tasks
+Alice::Application.load_tasks
