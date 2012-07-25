@@ -1,5 +1,7 @@
 Alice::Application.routes.draw do
-  devise_for :users
+  root :to => "catalog#index"
 
-  root to: redirect('/users/sign_in')
+  Blacklight.add_routes(self)
+
+  devise_for :users
 end
