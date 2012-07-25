@@ -1,14 +1,28 @@
 !!!
 %html
   %head
-    %title Alice
-    = stylesheet_link_tag    "application", :media => "all"
-    = javascript_include_tag "application"
+    %meta{:content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type'}/
+    %title= h(@page_title || application_name)
+    %link{:href => opensearch_catalog_path(:format => 'xml', :only_path => false), :rel => 'search', :title => application_name, :type => 'application/opensearchdescription+xml'}/
+    = favicon_link_tag asset_path('favicon.ico')
+    = stylesheet_link_tag('application', :media => 'all')
+    = javascript_include_tag('application')
     = csrf_meta_tags
+    = raw(render_head_content)
+  - onload_text = "$('input#q').focus();" if params[:q].to_s.empty? and params[:f].to_s.empty? and params[:id].nil?
   %body
-    - if current_user
-      = link_to 'Sign out', destroy_user_session_path, method: :delete
-    - flash.each do |key, msg|
-      .flash{class: key}= msg
-    = yield
-    = yield :javascript
+    -#{:class => render_body_class.html_safe, :onload => onload_text}
+    %nav
+      = render partial: '/user_util_links'
+    #container
+      %header
+        = link_to image_tag('alice-medium.png'), root_path
+        - if ((params[:controller] == 'catalog') and params[:id]) # was !params[:id]
+          = content_tag(:span, t('blacklight.search.search_results'), id: 'results_text')
+        - else
+          = ''
+      %section#search
+        #flash_msg= render partial: '/flash_msg'
+        = yield
+      -#%aside= sidebar_items.join('').html_safe
+      -#%footer= raw(@footer)

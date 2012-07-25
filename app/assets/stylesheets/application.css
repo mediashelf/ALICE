@@ -19,6 +19,49 @@
  *= require_tree .
  */
 
-form .error {
-  background-color: red;
+a {
+  color: #40409e;
+  text-decoration: none;
+}
+
+div#container {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header {
+  text-align: center;
+}
+
+header img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+nav {
+  margin: 0px;
+  padding-top: 0.5em;
+  padding-right: 2em;
+  padding-bottom: 0.5em;
+  text-align: right;
+  height: 2em;
+  background-color: #eee;
+}
+
+nav a {
+  font-size: 1.5em;
+}
+
+section#search {
+  text-align: center;
+}
+
+div#flash_msg {
+}
+
+aside {
+}
+
+footer {
 }
