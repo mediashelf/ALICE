@@ -21,12 +21,12 @@ defaults: &defaults
 
 production: 
   <<: *defaults
-  app: playbook-production
+  app: alice-production
   tag: production/*
 
 staging:
   <<: *defaults
-  app: playbook-staging
+  app: alice-staging
   tag: staging/*
   config:
     RACK_ENV: staging

@@ -14,7 +14,7 @@ Alice::Application.configure do
   config.action_controller.perform_caching = false
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'playbook.lvh.me:3000' }
+  config.action_mailer.default_url_options = { :host => 'alice.lvh.me:3000' }
   config.action_mailer.delivery_method = :test
 
   # change to true to allow email to be sent during development

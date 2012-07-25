@@ -3,13 +3,13 @@ common: &common
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: playbook
+  username: plato
   password:
 
 development:
-  database: playbook_development
+  database: alice_development
   <<: *common
 
 test: &test
-  database: playbook_test
+  database: alice_test
   <<: *common
