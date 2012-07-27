@@ -19,6 +19,9 @@ db/*.sqlite3
 /log/*.log
 /tmp
 
+# jetty
+/jetty
+
 # various artifacts
 **.war
 *.rbc
