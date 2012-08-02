@@ -1,4 +1,4 @@
-@javascript
+@javascript @pending
 Feature: Search returns basic results by content
   In order to find assets I'm interested in
   As a user
