@@ -1,9 +1,13 @@
+Given /^I (?:am logged in|log in)$/ do
+  step %Q(I log in as "test@example.com")
+end
+
 Given /^I log in as "(.*?)"$/ do |email|
-  step "there is a user named \"#{email}\""
-  step "I am on the sign in page"
-  step "I fill in \"Email\" with \"#{email}\""
-  step "I fill in \"Password\" with \"password\""
-  step "I press the \"Sign in\" button"
+  step %Q(there is a user named "#{email}")
+  step %Q(I am on the sign in page)
+  step %Q(I fill in "Email" with "#{email}")
+  step %Q(I fill in "Password" with "password")
+  step %Q(I press the "Sign in" button)
 end
 
 Given /^there is a user named "(.*?)"$/ do |username|
@@ -16,4 +20,8 @@ end
 
 Then /^I should be logged in$/ do
   page.should have_content('Log Out')
+end
+
+Then /^I should be logged out$/ do
+  page.should have_content('Login')
 end

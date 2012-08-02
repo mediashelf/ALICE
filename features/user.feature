@@ -5,6 +5,12 @@ Feature: User behavior
   I want to log in
 
   Scenario: User logs in
-    Given I log in as "test@example.com"
+    Given I log in
     Then I should be logged in
+      And I should be on the homepage
+
+  Scenario: User logs out
+    Given I am logged in
+    When I follow "Log Out"
+    Then I should be logged out
       And I should be on the homepage

@@ -15,3 +15,7 @@ end
 Given /^I press the "(.*?)" button$/ do |button_name|
   click_button(button_name)
 end
+
+Given /^I follow "(.*?)"$/ do |link_name|
+  click_link(link_name)
+end
