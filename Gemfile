@@ -37,13 +37,13 @@ group :development do
 end
 
 group :test do
-  gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'email_spec'
 end
 
 group :development, :test do
   gem 'capybara'
+  gem 'cucumber-rails', require: false
   gem 'debugger'
   gem 'factory_girl_rails'
   gem 'pry-rails'
