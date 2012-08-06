@@ -10,23 +10,24 @@
 #     <Heroku config:var name>: <Heroku config:var value>
 #
 
-defaults: &defaults
+production:
   stack: cedar
   config:
     BUNDLE_WITHOUT: "development:test"
   addons:
     - newrelic:standard
     - pgbackups:auto-month
-    - sendgrid:starter
-
-production: 
-  <<: *defaults
-  app: alice-production
+  app: alicelaw-production
   tag: production/*
 
 staging:
-  <<: *defaults
-  app: alice-staging
+  stack: cedar
+  config:
+    BUNDLE_WITHOUT: "development:test"
+  addons:
+    - newrelic:standard
+    - pgbackups:auto-month
+  app: alicelaw-staging
   tag: staging/*
   config:
     RACK_ENV: staging
