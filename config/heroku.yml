@@ -32,3 +32,4 @@ staging:
   config:
     RACK_ENV: staging
     RAILS_ENV: staging
+    WEBSOLR_URL: http://index.websolr.com/solr/df6abc98af1
