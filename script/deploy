@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 ENVIRONMENT=$1
 export RAILS_ENV=$1
 
@@ -12,10 +13,10 @@ fi
 
 echo "Switching to ${ENVIRONMENT} heroku remote"
 if [ "$ENVIRONMENT" == "staging" ]; then
-  git push -f staging develop:master
+  git push -f git@github.com:alicelaw-staging develop:master
   APP_NAME=alicelaw-staging
 else
-  git push heroku master:master
+  git push git@github.com:alicelaw-production master:master
   APP_NAME=alicelaw-production
 fi
 
