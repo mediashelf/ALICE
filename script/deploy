@@ -20,8 +20,8 @@ else
   APP_NAME=alicelaw-production
 fi
 
-echo "Running heroku rake db:migrate for ${APP_NAME}"
-heroku rake db:migrate --app $APP_NAME
+echo "Running heroku run rake db:migrate for ${APP_NAME}"
+heroku run rake db:migrate --app $APP_NAME
 
 echo "Running heroku restart for ${APP_NAME}"
 heroku restart --app $APP_NAME
