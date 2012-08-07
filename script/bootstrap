@@ -9,7 +9,7 @@ class Bootstrap
     generate_jetty
     make_dirs
     copy_solr_cell_dependencies
-    adjust_solr_config
+    symlink_configs
     cleanup!
   end
 
@@ -48,11 +48,11 @@ class Bootstrap
     end
   end
 
-  def adjust_solr_config
-    conf = 'jetty/solr/conf/solrconfig.xml'
-    fixed_conf = File.read(conf).gsub('dir="../../', 'dir="../')
-    File.open(conf, 'w') do |f|
-      f.write(fixed_conf)
+  def symlink_configs
+    configs = %w(jetty/solr/conf/solrconfig.xml jetty/solr/conf/schema.xml)
+    configs.each do |f|
+      system("mv #{File.expand_path(f)} #{File.expand_path(f)}.bak")
+      system("ln -s #{File.expand_path(File.join('support', f.split('/').last))} #{File.expand_path(f)}")
     end
   end
 
