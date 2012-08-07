@@ -13,10 +13,10 @@ fi
 
 echo "Switching to ${ENVIRONMENT} heroku remote"
 if [ "$ENVIRONMENT" == "staging" ]; then
-  git push -f git@heroku.com:alicelaw-staging develop:master
+  git push -f git@heroku.com:alicelaw-staging.git develop:master
   APP_NAME=alicelaw-staging
 else
-  git push git@heroku.com:alicelaw-production master:master
+  git push git@heroku.com:alicelaw-production.git master:master
   APP_NAME=alicelaw-production
 fi
 
