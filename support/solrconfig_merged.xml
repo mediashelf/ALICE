@@ -2,6 +2,9 @@
 <config>
   <abortOnConfigurationError>${solr.abortOnConfigurationError:true}</abortOnConfigurationError>
 
+  <!-- Blacklight -->
+  <luceneMatchVersion>LUCENE_35</luceneMatchVersion>
+
   <!-- Sunspot -->
   <lib dir="../../contrib/extraction/lib"/>
   <lib dir="../../dist/" regex="apache-solr-cell-\d.*\.jar"/>
@@ -99,16 +102,16 @@
   </requestDispatcher>
 
   <!-- Sunspot -->
-  <requestHandler name="standard" class="solr.SearchHandler" default="true">
-    <lst name="defaults">
-      <str name="echoParams">explicit</str>
+  <!--<requestHandler name="standard" class="solr.SearchHandler" default="true">-->
+    <!--<lst name="defaults">-->
+      <!--<str name="echoParams">explicit</str>-->
       <!--
        <int name="rows">10</int>
        <str name="fl">*</str>
        <str name="version">2.1</str>
         -->
-    </lst>
-  </requestHandler>
+    <!--</lst>-->
+  <!--</requestHandler>-->
 
   <!-- Blacklight -->
   <requestHandler name="search" class="solr.SearchHandler" default="true">
@@ -347,18 +350,18 @@
   </requestHandler>
 
   <!-- Blacklight -->
-  <requestHandler name="/update"
-    class="solr.XmlUpdateRequestHandler">
-  </requestHandler>
+  <!--<requestHandler name="/update"-->
+    <!--class="solr.XmlUpdateRequestHandler">-->
+  <!--</requestHandler>-->
 
   <!-- Blacklight -->
-  <requestHandler name="/update/javabin"
-    class="solr.BinaryUpdateRequestHandler" />
+  <!--<requestHandler name="/update/javabin"-->
+    <!--class="solr.BinaryUpdateRequestHandler" />-->
 
   <!-- Blacklight -->
-  <requestHandler name="/update/csv"
-    class="solr.CSVRequestHandler"
-    startup="lazy" />
+  <!--<requestHandler name="/update/csv"-->
+    <!--class="solr.CSVRequestHandler"-->
+    <!--startup="lazy" />-->
 
   <!-- Blacklight -->
   <requestHandler name="/update/json"
@@ -384,17 +387,17 @@
   </requestHandler>
 
   <!-- Blacklight -->
-  <requestHandler name="/analysis/field" 
-    startup="lazy"
-    class="solr.FieldAnalysisRequestHandler" />
+  <!--<requestHandler name="/analysis/field" -->
+    <!--startup="lazy"-->
+    <!--class="solr.FieldAnalysisRequestHandler" />-->
 
   <!-- Blacklight -->
-  <requestHandler name="/analysis/document" 
-    class="solr.DocumentAnalysisRequestHandler" 
-    startup="lazy" />
+  <!--<requestHandler name="/analysis/document" -->
+    <!--class="solr.DocumentAnalysisRequestHandler" -->
+    <!--startup="lazy" />-->
 
   <!-- Blacklight -->
-  <requestHandler name="/admin/" 
+  <requestHandler name="/admin/"
     class="solr.admin.AdminHandlers" />
 
   <!-- Blacklight -->
@@ -407,12 +410,12 @@
   </requestHandler>
 
   <!-- Blacklight -->
-  <requestHandler name="/debug/dump" class="solr.DumpRequestHandler" >
-    <lst name="defaults">
-      <str name="echoParams">explicit</str> 
-      <str name="echoHandler">true</str>
-    </lst>
-  </requestHandler>
+  <!--<requestHandler name="/debug/dump" class="solr.DumpRequestHandler" >-->
+    <!--<lst name="defaults">-->
+      <!--<str name="echoParams">explicit</str> -->
+      <!--<str name="echoHandler">true</str>-->
+    <!--</lst>-->
+  <!--</requestHandler>-->
 
   <searchComponent name="spellcheck" class="solr.SpellCheckComponent">
     <str name="queryAnalyzerFieldType">textSpell</str>
@@ -424,33 +427,33 @@
     </lst>
 
     <!-- Blacklight -->
-    <lst name="spellchecker">
-      <str name="name">default</str>
-      <str name="field">spell</str>
-      <str name="spellcheckIndexDir">./spell</str>
-      <str name="buildOnOptimize">true</str>
-    </lst>
-    <lst name="spellchecker">
-      <str name="name">author</str>
-      <str name="field">author_spell</str>
-      <str name="spellcheckIndexDir">./spell_author</str>
-      <str name="accuracy">0.7</str>
-      <str name="buildOnOptimize">true</str>
-    </lst>
-    <lst name="spellchecker">
-      <str name="name">subject</str>
-      <str name="field">subject_spell</str>
-      <str name="spellcheckIndexDir">./spell_subject</str>
-      <str name="accuracy">0.7</str>
-      <str name="buildOnOptimize">true</str>
-    </lst>
-    <lst name="spellchecker">
-      <str name="name">title</str>
-      <str name="field">title_spell</str>
-      <str name="spellcheckIndexDir">./spell_title</str>
-      <str name="accuracy">0.7</str>
-      <str name="buildOnOptimize">true</str>
-    </lst>
+    <!--<lst name="spellchecker">-->
+      <!--<str name="name">default</str>-->
+      <!--<str name="field">spell</str>-->
+      <!--<str name="spellcheckIndexDir">./spell</str>-->
+      <!--<str name="buildOnOptimize">true</str>-->
+    <!--</lst>-->
+    <!--<lst name="spellchecker">-->
+      <!--<str name="name">author</str>-->
+      <!--<str name="field">author_spell</str>-->
+      <!--<str name="spellcheckIndexDir">./spell_author</str>-->
+      <!--<str name="accuracy">0.7</str>-->
+      <!--<str name="buildOnOptimize">true</str>-->
+    <!--</lst>-->
+    <!--<lst name="spellchecker">-->
+      <!--<str name="name">subject</str>-->
+      <!--<str name="field">subject_spell</str>-->
+      <!--<str name="spellcheckIndexDir">./spell_subject</str>-->
+      <!--<str name="accuracy">0.7</str>-->
+      <!--<str name="buildOnOptimize">true</str>-->
+    <!--</lst>-->
+    <!--<lst name="spellchecker">-->
+      <!--<str name="name">title</str>-->
+      <!--<str name="field">title_spell</str>-->
+      <!--<str name="spellcheckIndexDir">./spell_title</str>-->
+      <!--<str name="accuracy">0.7</str>-->
+      <!--<str name="buildOnOptimize">true</str>-->
+    <!--</lst>-->
   </searchComponent>
 
   <!-- Similar -->
@@ -535,19 +538,19 @@
   </requestHandler>
 
   <!-- Sunspot -->
-  <requestHandler name="/update/extract" class="org.apache.solr.handler.extraction.ExtractingRequestHandler" startup="lazy">
-    <lst name="defaults">
+  <!--<requestHandler name="/update/extract" class="org.apache.solr.handler.extraction.ExtractingRequestHandler" startup="lazy">-->
+    <!--<lst name="defaults">-->
       <!-- All the main content goes into "text"... if you need to return
            the extracted text or do highlighting, use a stored field. -->
-      <str name="fmap.content">text</str>
-      <str name="lowernames">true</str>
-      <str name="uprefix">ignored_</str>
+      <!--<str name="fmap.content">text</str>-->
+      <!--<str name="lowernames">true</str>-->
+      <!--<str name="uprefix">ignored_</str>-->
       <!-- capture link hrefs but ignore div attributes -->
-      <str name="captureAttr">true</str>
-      <str name="fmap.a">links</str>
-      <str name="fmap.div">ignored_</str>
-    </lst>
-  </requestHandler>
+      <!--<str name="captureAttr">true</str>-->
+      <!--<str name="fmap.a">links</str>-->
+      <!--<str name="fmap.div">ignored_</str>-->
+    <!--</lst>-->
+  <!--</requestHandler>-->
 
   <!-- Sunspot -->
   <searchComponent name="termsComponent" class="org.apache.solr.handler.component.TermsComponent"/>
@@ -591,15 +594,15 @@
   <requestHandler name="/update/csv" class="solr.CSVRequestHandler" startup="lazy"/>
 
   <!-- Sunspot -->
-  <requestHandler name="/admin/" class="org.apache.solr.handler.admin.AdminHandlers"/>
+  <!--<requestHandler name="/admin/" class="org.apache.solr.handler.admin.AdminHandlers"/>-->
   <!-- Sunspot -->
-  <requestHandler name="/admin/ping" class="PingRequestHandler">
-    <lst name="defaults">
-      <str name="qt">standard</str>
-      <str name="q">solrpingquery</str>
-      <str name="echoParams">all</str>
-    </lst>
-  </requestHandler>
+  <!--<requestHandler name="/admin/ping" class="PingRequestHandler">-->
+    <!--<lst name="defaults">-->
+      <!--<str name="qt">standard</str>-->
+      <!--<str name="q">solrpingquery</str>-->
+      <!--<str name="echoParams">all</str>-->
+    <!--</lst>-->
+  <!--</requestHandler>-->
 
  <!-- Sunspot -->
  <requestHandler name="/debug/dump" class="solr.DumpRequestHandler">
@@ -612,7 +615,7 @@
 
 
   <!-- Blacklight wraps the highlighting tag with searchComponent -->
-  <!--<searchComponent class="solr.HighlightComponent" name="highlight">-->
+  <searchComponent class="solr.HighlightComponent" name="highlight">
     <highlighting>
       <!-- Configure the standard fragmenter -->
       <!-- This could most likely be commented out in the "default" case -->
@@ -693,7 +696,7 @@
         </lst>
       </boundaryScanner>
     </highlighting>
-  <!--</searchComponent>-->
+  </searchComponent>
 
   <!-- Sunspot -->
   <!-- Blacklight uses class="solr.XSLTResponseWriter" -->
