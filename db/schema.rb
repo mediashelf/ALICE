@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120725182756) do
+ActiveRecord::Schema.define(:version => 20120806204245) do
+
+  create_table "assets", :force => true do |t|
+    t.string   "policy_area"
+    t.string   "sub_area"
+    t.string   "topic"
+    t.string   "asset"
+    t.string   "title"
+    t.integer  "year"
+    t.string   "source"
+    t.string   "state"
+    t.string   "format"
+    t.string   "level"
+    t.string   "type_of"
+    t.string   "keywords"
+    t.string   "summary"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
