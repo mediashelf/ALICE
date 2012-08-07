@@ -18,6 +18,7 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'newrelic_rpm'
 gem 'sendgrid'
+gem 'sunspot_rails'
 gem 'underscore-rails'
 
 group :development do
@@ -33,6 +34,7 @@ group :development do
   gem 'heroku_san'
 
   gem 'rb-fsevent'
+  gem 'sunspot_solr'
   gem 'growl'
 end
 

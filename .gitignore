@@ -22,6 +22,9 @@ db/*.sqlite3
 # jetty
 /jetty
 
+# solr
+/solr
+
 # example_data
 /example_data
 
