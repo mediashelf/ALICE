@@ -25,5 +25,5 @@ staging:
   url: <%= ENV['WEBSOLR_URL'] %>
 
 production:
-  # url: 
+  # url: http://index.websolr.com/solr/993abf0e424
   url: <%= ENV['WEBSOLR_URL'] %>
