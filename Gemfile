@@ -7,6 +7,8 @@ group :assets do
   gem 'coffee-rails'
   gem 'sass-rails'
   gem 'uglifier'
+  gem 'compass-rails', '~> 1.0.0'
+  gem 'compass-susy-plugin', '~> 0.9.0'
 end
 
 gem 'blacklight'
@@ -57,5 +59,3 @@ group :production, :staging do
   gem 'unicorn'
 end
 
-gem "compass-rails", "~> 1.0.0", :group => :assets
-gem "compass-susy-plugin", "~> 0.9.0", :group => :assets
