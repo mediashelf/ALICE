@@ -1,13 +1,17 @@
 production:
   solr:
-    hostname: <%= ENV['WEBSOLR_URL'] %>
+    #hostname: <%= ENV['WEBSOLR_URL'] %>
+    hostname: http://thinkpaste.com
     port: 8983
+    path: /solr
     log_level: WARNING
 
 staging:
   solr:
-    hostname: <%= ENV['WEBSOLR_URL'] %>
+    #hostname: <%= ENV['WEBSOLR_URL'] %>
+    hostname: http://thinkpaste.com
     port: 8983
+    path: /solr
     log_level: WARNING
 
 development:

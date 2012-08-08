@@ -12,7 +12,8 @@
 
 development:
   jetty_path: './jetty'
-  url: http://127.0.0.1:8983/solr
+  #url: http://127.0.0.1:8983/solr
+  url: http://thinkpaste.com:8983/solr
 
 test: &test
   url: <%= "http://127.0.0.1:#{ENV['TEST_JETTY_PORT'] || 8983}/solr" %>
@@ -22,7 +23,8 @@ cucumber:
 
 staging:
   # url: http://index.websolr.com/solr/df6abc98af1
-  url: <%= ENV['WEBSOLR_URL'] %>
+  #url: <%= ENV['WEBSOLR_URL'] %>
+  url: http://thinkpaste.com:8983/solr
 
 production:
   # url: http://index.websolr.com/solr/993abf0e424
