@@ -17,10 +17,14 @@
 # minimal Rails specific artifacts
 db/*.sqlite3
 /log/*.log
+/log/*.log.lck
 /tmp
 
 # jetty
 /jetty
+
+# solr
+/solr
 
 # example_data
 /example_data

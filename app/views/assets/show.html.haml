@@ -1,0 +1,45 @@
+%p#notice= notice
+
+%p
+  %b Policy area:
+  = @asset.policy_area
+%p
+  %b Sub area:
+  = @asset.sub_area
+%p
+  %b Topic:
+  = @asset.topic
+%p
+  %b Asset:
+  = @asset.asset
+%p
+  %b Title:
+  = @asset.title
+%p
+  %b Year:
+  = @asset.year
+%p
+  %b Source:
+  = @asset.source
+%p
+  %b State:
+  = @asset.state
+%p
+  %b Format:
+  = @asset.format
+%p
+  %b Level:
+  = @asset.level
+%p
+  %b Type:
+  = @asset.type_of
+%p
+  %b Keywords:
+  = @asset.keywords
+%p
+  %b Summary:
+  = @asset.summary
+
+= link_to 'Edit', edit_asset_path(@asset)
+\|
+= link_to 'Back', assets_path
