@@ -27,4 +27,4 @@ echo "Running heroku restart for ${APP_NAME}"
 heroku restart --app $APP_NAME
 
 echo "Grabbing website to wake up heroku"
-curl "http://${APP_NAME}.heroku.com" &> /dev/null &
+curl "http://${APP_NAME}.herokuapp.com" &> /dev/null &
