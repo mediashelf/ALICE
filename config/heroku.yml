@@ -17,7 +17,6 @@ production:
   addons:
     - newrelic:standard
     - pgbackups:auto-month
-    - websolr:cobalt
   app: alicelaw-production
   tag: production/*
 
@@ -28,7 +27,6 @@ staging:
   addons:
     - newrelic:standard
     - pgbackups:auto-month
-    - websolr:cobalt
   app: alicelaw-staging
   tag: staging/*
   config:
