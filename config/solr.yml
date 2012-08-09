@@ -24,4 +24,4 @@ staging:
   url: http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com:8983/solr
 
 production:
-  url: http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com:8983/solr
+  url: http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com:8982/solr
