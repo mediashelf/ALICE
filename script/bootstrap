@@ -4,61 +4,80 @@ class Bootstrap
   def initialize
     exit 1 unless wget_available?
 
-    delete_old_jetty!
-    download_solr
-    generate_jetty
-    make_dirs
-    copy_solr_cell_dependencies
+    delete_old_sunspot_solr!
+    #delete_old_jetty!
+    #download_solr
+    #generate_jetty
+    generate_sunspot_solr
+    #make_dirs
+    #copy_solr_cell_dependencies
     symlink_configs
-    cleanup!
+    #cleanup!
   end
 
   def wget_available?
     system('command -v wget >/dev/null 2>&1')
   end
 
-  def download_solr
-    system('wget http://archive.apache.org/dist/lucene/solr/3.5.0/apache-solr-3.5.0.tgz')
-    system('tar -zxvf apache-solr-3.5.0.tgz')
+  #def download_solr
+    #system('wget http://archive.apache.org/dist/lucene/solr/3.5.0/apache-solr-3.5.0.tgz')
+    #system('tar -zxvf apache-solr-3.5.0.tgz')
+  #end
+
+  #def generate_jetty
+    #system('rails g blacklight:jetty')
+  #end
+
+  def generate_sunspot_solr
+    system('rails g sunspot_rails:install')
   end
 
-  def generate_jetty
-    system('rails g blacklight:jetty')
+  #def make_dirs
+    #%w(jetty/contrib jetty/dist jetty/solr/contrib jetty/solr/dist).each do |dir|
+      #system("mkdir -p #{dir}")
+    #end
+  #end
+
+  #def delete_old_jetty!
+    #if Dir.exists?('jetty')
+      #system('rm -rf jetty')
+    #end
+  #end
+
+  def delete_old_sunspot_solr!
+    system('rm -rf solr') if Dir.exists?('solr')
   end
 
-  def make_dirs
-    %w(jetty/contrib jetty/dist jetty/solr/contrib jetty/solr/dist).each do |dir|
-      system("mkdir -p #{dir}")
-    end
-  end
+  #def copy_solr_cell_dependencies
+    #sources = %w(contrib dist)
+    #destinations = %w(jetty/contrib jetty/dist jetty/solr/contrib jetty/solr/dist)
 
-  def delete_old_jetty!
-    if Dir.exists?('jetty')
-      system('rm -rf jetty')
-    end
-  end
+    #destinations.each do |dest|
+      #source = "apache-solr-3.5.0/#{dest.split('/').last}/*"
+      #system("cp -R #{source} #{dest}")
+    #end
+  #end
 
-  def copy_solr_cell_dependencies
-    sources = %w(contrib dist)
-    destinations = %w(jetty/contrib jetty/dist jetty/solr/contrib jetty/solr/dist)
-
-    destinations.each do |dest|
-      source = "apache-solr-3.5.0/#{dest.split('/').last}/*"
-      system("cp -R #{source} #{dest}")
-    end
-  end
+  #def symlink_configs
+    #configs = %w(jetty/solr/conf/solrconfig.xml jetty/solr/conf/schema.xml)
+    #configs.each do |f|
+      #system("mv #{File.expand_path(f)} #{File.expand_path(f)}.bak")
+      #system("ln -s #{File.expand_path(File.join('support', f.split('/').last))} #{File.expand_path(f)}")
+    #end
+  #end
 
   def symlink_configs
-    configs = %w(jetty/solr/conf/solrconfig.xml jetty/solr/conf/schema.xml)
+    configs = %w(solr/conf/solrconfig.xml solr/conf/schema.xml).map { |f| File.expand_path(f) }
     configs.each do |f|
-      system("mv #{File.expand_path(f)} #{File.expand_path(f)}.bak")
-      system("ln -s #{File.expand_path(File.join('support', f.split('/').last))} #{File.expand_path(f)}")
+      system("mv #{f}\{,.bak}")
+      source = File.expand_path(File.join('support', File.basename(f)))
+      system("ln -s #{source} #{f}")
     end
   end
 
-  def cleanup!
-    system('rm -rf apache-solr-3.5.0*')
-  end
+  #def cleanup!
+    #system('rm -rf apache-solr-3.5.0*')
+  #end
 end
 
 Bootstrap.new
