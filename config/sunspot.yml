@@ -1,17 +1,13 @@
 production:
   solr:
-    #hostname: <%= ENV['WEBSOLR_URL'] %>
-    #hostname: http://thinkpaste.com
-    hostname: http://http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com
+    hostname: http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com
     port: 8983
     path: /solr
     log_level: WARNING
 
 staging:
   solr:
-    #hostname: <%= ENV['WEBSOLR_URL'] %>
-    #hostname: http://thinkpaste.com
-    hostname: http://http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com
+    hostname: http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com
     port: 8983
     path: /solr
     log_level: WARNING
