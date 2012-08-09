@@ -2,6 +2,10 @@ Given /^I (?:am logged in|log in)$/ do
   step %Q(I log in as "test@example.com")
 end
 
+Given /^I am logged out$/ do
+  page.should have_content('Login')
+end
+
 Given /^I log in as "(.*?)"$/ do |email|
   step %Q(there is a user named "#{email}")
   step %Q(I am on the sign in page)
@@ -24,4 +28,9 @@ end
 
 Then /^I should be logged out$/ do
   page.should have_content('Login')
+end
+
+Then /^I should not be allowed access the new asset page$/ do
+  step %Q(I go to the new asset page)
+  step %Q(I should be on the sign in page)
 end
