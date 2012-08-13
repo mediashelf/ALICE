@@ -1,4 +1,6 @@
 class PolicyAreasController < ApplicationController
+  before_filter :authenticate_user!, except: [:index, :show]
+
   # GET /policy_areas
   # GET /policy_areas.json
   def index

@@ -27,17 +27,12 @@ describe PolicyAreasController do
     {}
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # PolicyAreasController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
+  let(:user) { FactoryGirl.create :user }
 
   describe "GET index" do
     it "assigns all policy_areas as @policy_areas" do
       policy_area = PolicyArea.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:policy_areas).should eq([policy_area])
     end
   end
@@ -45,119 +40,169 @@ describe PolicyAreasController do
   describe "GET show" do
     it "assigns the requested policy_area as @policy_area" do
       policy_area = PolicyArea.create! valid_attributes
-      get :show, {:id => policy_area.to_param}, valid_session
+      get :show, {:id => policy_area.to_param}
       assigns(:policy_area).should eq(policy_area)
     end
   end
 
   describe "GET new" do
-    it "assigns a new policy_area as @policy_area" do
-      get :new, {}, valid_session
-      assigns(:policy_area).should be_a_new(PolicyArea)
+    context 'logged in' do
+      it "assigns a new policy_area as @policy_area" do
+        sign_in user
+        get :new, {}
+        response.should_not redirect_to(new_user_session_path)
+        assigns(:policy_area).should be_a_new(PolicyArea)
+      end
+    end
+
+    context 'logged out' do
+      it "redirects to the login page" do
+        get :new, {}
+        response.should redirect_to(new_user_session_path)
+      end
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested policy_area as @policy_area" do
-      policy_area = PolicyArea.create! valid_attributes
-      get :edit, {:id => policy_area.to_param}, valid_session
-      assigns(:policy_area).should eq(policy_area)
+    let(:policy_area) { PolicyArea.create! valid_attributes }
+
+    context 'logged in' do
+      it "assigns the requested policy_area as @policy_area" do
+        sign_in user
+        get :edit, {:id => policy_area.to_param}
+        assigns(:policy_area).should eq(policy_area)
+      end
+    end
+
+    context 'logged out' do
+      it "redirects to the login page" do
+        get :edit, {id: policy_area.to_param}
+        response.should redirect_to(new_user_session_path)
+      end
     end
   end
 
   describe "POST create" do
-    describe "with valid params" do
-      it "creates a new PolicyArea" do
-        expect {
-          post :create, {:policy_area => valid_attributes}, valid_session
-        }.to change(PolicyArea, :count).by(1)
+    context 'logged in' do
+      before { sign_in user }
+
+      describe "with valid params" do
+        it "creates a new PolicyArea" do
+          expect {
+            post :create, {:policy_area => valid_attributes}
+          }.to change(PolicyArea, :count).by(1)
+        end
+
+        it "assigns a newly created policy_area as @policy_area" do
+          post :create, {:policy_area => valid_attributes}
+          assigns(:policy_area).should be_a(PolicyArea)
+          assigns(:policy_area).should be_persisted
+        end
+
+        it "redirects to the created policy_area" do
+          post :create, {:policy_area => valid_attributes}
+          response.should redirect_to(PolicyArea.last)
+        end
       end
 
-      it "assigns a newly created policy_area as @policy_area" do
-        post :create, {:policy_area => valid_attributes}, valid_session
-        assigns(:policy_area).should be_a(PolicyArea)
-        assigns(:policy_area).should be_persisted
-      end
+      describe "with invalid params" do
+        it "assigns a newly created but unsaved policy_area as @policy_area" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          PolicyArea.any_instance.stub(:save).and_return(false)
+          post :create, {:policy_area => {}}
+          assigns(:policy_area).should be_a_new(PolicyArea)
+        end
 
-      it "redirects to the created policy_area" do
-        post :create, {:policy_area => valid_attributes}, valid_session
-        response.should redirect_to(PolicyArea.last)
+        it "re-renders the 'new' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          PolicyArea.any_instance.stub(:save).and_return(false)
+          post :create, {:policy_area => {}}
+          response.should render_template("new")
+        end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved policy_area as @policy_area" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        PolicyArea.any_instance.stub(:save).and_return(false)
-        post :create, {:policy_area => {}}, valid_session
-        assigns(:policy_area).should be_a_new(PolicyArea)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        PolicyArea.any_instance.stub(:save).and_return(false)
-        post :create, {:policy_area => {}}, valid_session
-        response.should render_template("new")
+    context 'logged out' do
+      it "redirects to the login page" do
+        post :create, {policy_area: {}}
+        response.should redirect_to(new_user_session_path)
       end
     end
   end
 
   describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested policy_area" do
-        policy_area = PolicyArea.create! valid_attributes
-        # Assuming there are no other policy_areas in the database, this
-        # specifies that the PolicyArea created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        PolicyArea.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => policy_area.to_param, :policy_area => {'these' => 'params'}}, valid_session
+
+    let(:policy_area) { PolicyArea.create! valid_attributes }
+    context 'logged in' do
+      before { sign_in user }
+      describe "with valid params" do
+        it "updates the requested policy_area" do
+          # Assuming there are no other policy areas in the database, this
+          # specifies that the PolicyArea created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          PolicyArea.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, {:id => policy_area.to_param, :policy_area => {'these' => 'params'}}
+        end
+
+        it "assigns the requested policy_area as @policy_area" do
+          put :update, {:id => policy_area.to_param, :policy_area => valid_attributes}
+          assigns(:policy_area).should eq(policy_area)
+        end
+
+        it "redirects to the policy_area" do
+          put :update, {:id => policy_area.to_param, :policy_area => valid_attributes}
+          response.should redirect_to(policy_area)
+        end
       end
 
-      it "assigns the requested policy_area as @policy_area" do
-        policy_area = PolicyArea.create! valid_attributes
-        put :update, {:id => policy_area.to_param, :policy_area => valid_attributes}, valid_session
-        assigns(:policy_area).should eq(policy_area)
-      end
+      describe "with invalid params" do
+        it "assigns the policy_area as @policy_area" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          PolicyArea.any_instance.stub(:save).and_return(false)
+          put :update, {:id => policy_area.to_param, :policy_area => {}}
+          assigns(:policy_area).should eq(policy_area)
+        end
 
-      it "redirects to the policy_area" do
-        policy_area = PolicyArea.create! valid_attributes
-        put :update, {:id => policy_area.to_param, :policy_area => valid_attributes}, valid_session
-        response.should redirect_to(policy_area)
+        it "re-renders the 'edit' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          PolicyArea.any_instance.stub(:save).and_return(false)
+          put :update, {:id => policy_area.to_param, :policy_area => {}}
+          response.should render_template("edit")
+        end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the policy_area as @policy_area" do
-        policy_area = PolicyArea.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        PolicyArea.any_instance.stub(:save).and_return(false)
-        put :update, {:id => policy_area.to_param, :policy_area => {}}, valid_session
-        assigns(:policy_area).should eq(policy_area)
-      end
-
-      it "re-renders the 'edit' template" do
-        policy_area = PolicyArea.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        PolicyArea.any_instance.stub(:save).and_return(false)
-        put :update, {:id => policy_area.to_param, :policy_area => {}}, valid_session
-        response.should render_template("edit")
+    context 'logged out' do
+      it "redirects to the login page" do
+        put :update, {:id => policy_area.to_param, :policy_area => {'these' => 'params'}}
+        response.should redirect_to(new_user_session_path)
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested policy_area" do
-      policy_area = PolicyArea.create! valid_attributes
-      expect {
-        delete :destroy, {:id => policy_area.to_param}, valid_session
-      }.to change(PolicyArea, :count).by(-1)
+    let!(:policy_area) { PolicyArea.create! valid_attributes }
+    context 'logged in' do
+      before { sign_in user }
+
+      it "destroys the requested policy_area" do
+        expect {
+          delete :destroy, {:id => policy_area.to_param}
+        }.to change(PolicyArea, :count).by(-1)
+      end
+
+      it "redirects to the policy areas list" do
+        delete :destroy, {:id => policy_area.to_param}
+        response.should redirect_to(policy_areas_url)
+      end
     end
 
-    it "redirects to the policy_areas list" do
-      policy_area = PolicyArea.create! valid_attributes
-      delete :destroy, {:id => policy_area.to_param}, valid_session
-      response.should redirect_to(policy_areas_url)
+    context 'logged out' do
+      it "redirects to the login page" do
+        delete :destroy, {:id => policy_area.to_param}
+        response.should redirect_to(new_user_session_path)
+      end
     end
   end
 
