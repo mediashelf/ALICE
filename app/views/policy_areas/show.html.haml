@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @policy_area.name
+%p
+  %b Description:
+  = @policy_area.description
+
+= link_to 'Edit', edit_policy_area_path(@policy_area)
+\|
+= link_to 'Back', policy_areas_path

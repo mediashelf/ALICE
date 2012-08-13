@@ -1,0 +1,21 @@
+%h1 Listing policy_areas
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th
+    %th
+    %th
+
+  - @policy_areas.each do |policy_area|
+    %tr
+      %td= policy_area.name
+      %td= policy_area.description
+      %td= link_to 'Show', policy_area
+      %td= link_to 'Edit', edit_policy_area_path(policy_area)
+      %td= link_to 'Destroy', policy_area, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Policy area', new_policy_area_path
