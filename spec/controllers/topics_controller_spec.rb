@@ -64,10 +64,21 @@ describe TopicsController do
   end
 
   describe "GET edit" do
-    it "assigns the requested topic as @topic" do
-      topic = Topic.create! valid_attributes
-      get :edit, {:id => topic.to_param}
-      assigns(:topic).should eq(topic)
+    let(:topic) { Topic.create! valid_attributes }
+
+    context 'logged in' do
+      it "assigns the requested topic as @topic" do
+        sign_in user
+        get :edit, {:id => topic.to_param}
+        assigns(:topic).should eq(topic)
+      end
+    end
+
+    context 'logged out' do
+      it "redirects to the login page" do
+        get :edit, {id: topic.to_param}
+        response.should redirect_to(new_user_session_path)
+      end
     end
   end
 
@@ -120,61 +131,78 @@ describe TopicsController do
   end
 
   describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested topic" do
-        topic = Topic.create! valid_attributes
-        # Assuming there are no other topics in the database, this
-        # specifies that the Topic created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Topic.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => topic.to_param, :topic => {'these' => 'params'}}
+
+    let(:topic) { Topic.create! valid_attributes }
+    context 'logged in' do
+      before { sign_in user }
+      describe "with valid params" do
+        it "updates the requested topic" do
+          # Assuming there are no other topics in the database, this
+          # specifies that the Topic created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          Topic.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, {:id => topic.to_param, :topic => {'these' => 'params'}}
+        end
+
+        it "assigns the requested topic as @topic" do
+          put :update, {:id => topic.to_param, :topic => valid_attributes}
+          assigns(:topic).should eq(topic)
+        end
+
+        it "redirects to the topic" do
+          put :update, {:id => topic.to_param, :topic => valid_attributes}
+          response.should redirect_to(topic)
+        end
       end
 
-      it "assigns the requested topic as @topic" do
-        topic = Topic.create! valid_attributes
-        put :update, {:id => topic.to_param, :topic => valid_attributes}
-        assigns(:topic).should eq(topic)
-      end
+      describe "with invalid params" do
+        it "assigns the topic as @topic" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Topic.any_instance.stub(:save).and_return(false)
+          put :update, {:id => topic.to_param, :topic => {}}
+          assigns(:topic).should eq(topic)
+        end
 
-      it "redirects to the topic" do
-        topic = Topic.create! valid_attributes
-        put :update, {:id => topic.to_param, :topic => valid_attributes}
-        response.should redirect_to(topic)
+        it "re-renders the 'edit' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Topic.any_instance.stub(:save).and_return(false)
+          put :update, {:id => topic.to_param, :topic => {}}
+          response.should render_template("edit")
+        end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the topic as @topic" do
-        topic = Topic.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Topic.any_instance.stub(:save).and_return(false)
-        put :update, {:id => topic.to_param, :topic => {}}
-        assigns(:topic).should eq(topic)
-      end
-
-      it "re-renders the 'edit' template" do
-        topic = Topic.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Topic.any_instance.stub(:save).and_return(false)
-        put :update, {:id => topic.to_param, :topic => {}}
-        response.should render_template("edit")
+    context 'logged out' do
+      it "redirects to the login page" do
+        put :update, {:id => topic.to_param, :topic => {'these' => 'params'}}
+        response.should redirect_to(new_user_session_path)
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested topic" do
-      topic = Topic.create! valid_attributes
-      expect {
+    let!(:topic) { Topic.create! valid_attributes }
+    context 'logged in' do
+      before { sign_in user }
+
+      it "destroys the requested topic" do
+        expect {
+          delete :destroy, {:id => topic.to_param}
+        }.to change(Topic, :count).by(-1)
+      end
+
+      it "redirects to the topics list" do
         delete :destroy, {:id => topic.to_param}
-      }.to change(Topic, :count).by(-1)
+        response.should redirect_to(topics_url)
+      end
     end
 
-    it "redirects to the topics list" do
-      topic = Topic.create! valid_attributes
-      delete :destroy, {:id => topic.to_param}
-      response.should redirect_to(topics_url)
+    context 'logged out' do
+      it "redirects to the login page" do
+        delete :destroy, {:id => topic.to_param}
+        response.should redirect_to(new_user_session_path)
+      end
     end
   end
 

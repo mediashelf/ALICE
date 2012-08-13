@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_filter :authenticate_user!, only: [:new, :create]
+  before_filter :authenticate_user!, except: [:index, :show]
 
   # GET /topics
   # GET /topics.json
