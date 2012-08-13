@@ -12,6 +12,6 @@ Feature: Editor enters asset metadata
   Scenario: Editor enters metadata
     Given I am logged in
     Then I should be on the homepage
-      And I should see a link to "Create New Asset"
-    #When I go to the new asset page
-    #Then I should be on the new asset page
+    # And I should see a link to "Create New Asset"
+    # When I go to the new asset page
+    # Then I should be on the new asset page
