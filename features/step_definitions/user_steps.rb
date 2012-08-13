@@ -11,7 +11,7 @@ Given /^I log in as "(.*?)"$/ do |email|
   step %Q(I am on the sign in page)
   step %Q(I fill in "Email" with "#{email}")
   step %Q(I fill in "Password" with "password")
-  step %Q(I press the "Sign in" button)
+  step %Q(I press "Sign in")
 end
 
 Given /^there is a user named "(.*?)"$/ do |username|

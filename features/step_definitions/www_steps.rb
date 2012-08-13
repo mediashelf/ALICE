@@ -12,10 +12,14 @@ Then /^I should be on the (.*?)(?: ?page)$/ do |page_name|
   end
 end
 
-Given /^I press the "(.*?)" button$/ do |button_name|
+Given /^I press "(.*?)"$/ do |button_name|
   click_button(button_name)
 end
 
 Given /^I follow "(.*?)"$/ do |link_name|
   click_link(link_name)
+end
+
+Then /^I should see "(.*?)"$/ do |expected_text|
+  page.should have_content(expected_text)
 end

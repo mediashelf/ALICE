@@ -27,17 +27,12 @@ describe TopicsController do
     {}
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # TopicsController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
+  let(:user) { FactoryGirl.create :user }
 
   describe "GET index" do
     it "assigns all topics as @topics" do
       topic = Topic.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:topics).should eq([topic])
     end
   end
@@ -45,59 +40,81 @@ describe TopicsController do
   describe "GET show" do
     it "assigns the requested topic as @topic" do
       topic = Topic.create! valid_attributes
-      get :show, {:id => topic.to_param}, valid_session
+      get :show, {:id => topic.to_param}
       assigns(:topic).should eq(topic)
     end
   end
 
   describe "GET new" do
-    it "assigns a new topic as @topic" do
-      get :new, {}, valid_session
-      assigns(:topic).should be_a_new(Topic)
+    context 'logged in' do
+      it "assigns a new topic as @topic" do
+        sign_in user
+        get :new, {}
+        response.should_not redirect_to(new_user_session_path)
+        assigns(:topic).should be_a_new(Topic)
+      end
+    end
+
+    context 'logged out' do
+      it "redirects to the login page" do
+        get :new, {}
+        response.should redirect_to(new_user_session_path)
+      end
     end
   end
 
   describe "GET edit" do
     it "assigns the requested topic as @topic" do
       topic = Topic.create! valid_attributes
-      get :edit, {:id => topic.to_param}, valid_session
+      get :edit, {:id => topic.to_param}
       assigns(:topic).should eq(topic)
     end
   end
 
   describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Topic" do
-        expect {
-          post :create, {:topic => valid_attributes}, valid_session
-        }.to change(Topic, :count).by(1)
+    context 'logged in' do
+      before { sign_in user }
+
+      describe "with valid params" do
+        it "creates a new Topic" do
+          expect {
+            post :create, {:topic => valid_attributes}
+          }.to change(Topic, :count).by(1)
+        end
+
+        it "assigns a newly created topic as @topic" do
+          post :create, {:topic => valid_attributes}
+          assigns(:topic).should be_a(Topic)
+          assigns(:topic).should be_persisted
+        end
+
+        it "redirects to the created topic" do
+          post :create, {:topic => valid_attributes}
+          response.should redirect_to(Topic.last)
+        end
       end
 
-      it "assigns a newly created topic as @topic" do
-        post :create, {:topic => valid_attributes}, valid_session
-        assigns(:topic).should be_a(Topic)
-        assigns(:topic).should be_persisted
-      end
+      describe "with invalid params" do
+        it "assigns a newly created but unsaved topic as @topic" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Topic.any_instance.stub(:save).and_return(false)
+          post :create, {:topic => {}}
+          assigns(:topic).should be_a_new(Topic)
+        end
 
-      it "redirects to the created topic" do
-        post :create, {:topic => valid_attributes}, valid_session
-        response.should redirect_to(Topic.last)
+        it "re-renders the 'new' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Topic.any_instance.stub(:save).and_return(false)
+          post :create, {:topic => {}}
+          response.should render_template("new")
+        end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved topic as @topic" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Topic.any_instance.stub(:save).and_return(false)
-        post :create, {:topic => {}}, valid_session
-        assigns(:topic).should be_a_new(Topic)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Topic.any_instance.stub(:save).and_return(false)
-        post :create, {:topic => {}}, valid_session
-        response.should render_template("new")
+    context 'logged out' do
+      it "redirects to the login page" do
+        post :create, {topic: {}}
+        response.should redirect_to(new_user_session_path)
       end
     end
   end
@@ -111,18 +128,18 @@ describe TopicsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Topic.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => topic.to_param, :topic => {'these' => 'params'}}, valid_session
+        put :update, {:id => topic.to_param, :topic => {'these' => 'params'}}
       end
 
       it "assigns the requested topic as @topic" do
         topic = Topic.create! valid_attributes
-        put :update, {:id => topic.to_param, :topic => valid_attributes}, valid_session
+        put :update, {:id => topic.to_param, :topic => valid_attributes}
         assigns(:topic).should eq(topic)
       end
 
       it "redirects to the topic" do
         topic = Topic.create! valid_attributes
-        put :update, {:id => topic.to_param, :topic => valid_attributes}, valid_session
+        put :update, {:id => topic.to_param, :topic => valid_attributes}
         response.should redirect_to(topic)
       end
     end
@@ -132,7 +149,7 @@ describe TopicsController do
         topic = Topic.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Topic.any_instance.stub(:save).and_return(false)
-        put :update, {:id => topic.to_param, :topic => {}}, valid_session
+        put :update, {:id => topic.to_param, :topic => {}}
         assigns(:topic).should eq(topic)
       end
 
@@ -140,7 +157,7 @@ describe TopicsController do
         topic = Topic.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Topic.any_instance.stub(:save).and_return(false)
-        put :update, {:id => topic.to_param, :topic => {}}, valid_session
+        put :update, {:id => topic.to_param, :topic => {}}
         response.should render_template("edit")
       end
     end
@@ -150,13 +167,13 @@ describe TopicsController do
     it "destroys the requested topic" do
       topic = Topic.create! valid_attributes
       expect {
-        delete :destroy, {:id => topic.to_param}, valid_session
+        delete :destroy, {:id => topic.to_param}
       }.to change(Topic, :count).by(-1)
     end
 
     it "redirects to the topics list" do
       topic = Topic.create! valid_attributes
-      delete :destroy, {:id => topic.to_param}, valid_session
+      delete :destroy, {:id => topic.to_param}
       response.should redirect_to(topics_url)
     end
   end
