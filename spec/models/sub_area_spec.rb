@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe SubArea do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { FactoryGirl.create :sub_area }
+
+  its(:name) { should == 'sub area name' }
+  its(:description) { should == 'sub area description' }
 end

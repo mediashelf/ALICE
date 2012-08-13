@@ -1,4 +1,6 @@
 class SubAreasController < ApplicationController
+  before_filter :authenticate_user!, except: [:index, :show]
+
   # GET /sub_areas
   # GET /sub_areas.json
   def index

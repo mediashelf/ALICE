@@ -27,17 +27,12 @@ describe SubAreasController do
     {}
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # SubAreasController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
+  let(:user) { FactoryGirl.create :user }
 
   describe "GET index" do
     it "assigns all sub_areas as @sub_areas" do
       sub_area = SubArea.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:sub_areas).should eq([sub_area])
     end
   end
@@ -45,119 +40,169 @@ describe SubAreasController do
   describe "GET show" do
     it "assigns the requested sub_area as @sub_area" do
       sub_area = SubArea.create! valid_attributes
-      get :show, {:id => sub_area.to_param}, valid_session
+      get :show, {:id => sub_area.to_param}
       assigns(:sub_area).should eq(sub_area)
     end
   end
 
   describe "GET new" do
-    it "assigns a new sub_area as @sub_area" do
-      get :new, {}, valid_session
-      assigns(:sub_area).should be_a_new(SubArea)
+    context 'logged in' do
+      it "assigns a new sub_area as @sub_area" do
+        sign_in user
+        get :new, {}
+        response.should_not redirect_to(new_user_session_path)
+        assigns(:sub_area).should be_a_new(SubArea)
+      end
+    end
+
+    context 'logged out' do
+      it "redirects to the login page" do
+        get :new, {}
+        response.should redirect_to(new_user_session_path)
+      end
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested sub_area as @sub_area" do
-      sub_area = SubArea.create! valid_attributes
-      get :edit, {:id => sub_area.to_param}, valid_session
-      assigns(:sub_area).should eq(sub_area)
+    let(:sub_area) { SubArea.create! valid_attributes }
+
+    context 'logged in' do
+      it "assigns the requested sub_area as @sub_area" do
+        sign_in user
+        get :edit, {:id => sub_area.to_param}
+        assigns(:sub_area).should eq(sub_area)
+      end
+    end
+
+    context 'logged out' do
+      it "redirects to the login page" do
+        get :edit, {id: sub_area.to_param}
+        response.should redirect_to(new_user_session_path)
+      end
     end
   end
 
   describe "POST create" do
-    describe "with valid params" do
-      it "creates a new SubArea" do
-        expect {
-          post :create, {:sub_area => valid_attributes}, valid_session
-        }.to change(SubArea, :count).by(1)
+    context 'logged in' do
+      before { sign_in user }
+
+      describe "with valid params" do
+        it "creates a new SubArea" do
+          expect {
+            post :create, {:sub_area => valid_attributes}
+          }.to change(SubArea, :count).by(1)
+        end
+
+        it "assigns a newly created sub_area as @sub_area" do
+          post :create, {:sub_area => valid_attributes}
+          assigns(:sub_area).should be_a(SubArea)
+          assigns(:sub_area).should be_persisted
+        end
+
+        it "redirects to the created sub_area" do
+          post :create, {:sub_area => valid_attributes}
+          response.should redirect_to(SubArea.last)
+        end
       end
 
-      it "assigns a newly created sub_area as @sub_area" do
-        post :create, {:sub_area => valid_attributes}, valid_session
-        assigns(:sub_area).should be_a(SubArea)
-        assigns(:sub_area).should be_persisted
-      end
+      describe "with invalid params" do
+        it "assigns a newly created but unsaved sub_area as @sub_area" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          SubArea.any_instance.stub(:save).and_return(false)
+          post :create, {:sub_area => {}}
+          assigns(:sub_area).should be_a_new(SubArea)
+        end
 
-      it "redirects to the created sub_area" do
-        post :create, {:sub_area => valid_attributes}, valid_session
-        response.should redirect_to(SubArea.last)
+        it "re-renders the 'new' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          SubArea.any_instance.stub(:save).and_return(false)
+          post :create, {:sub_area => {}}
+          response.should render_template("new")
+        end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved sub_area as @sub_area" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        SubArea.any_instance.stub(:save).and_return(false)
-        post :create, {:sub_area => {}}, valid_session
-        assigns(:sub_area).should be_a_new(SubArea)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        SubArea.any_instance.stub(:save).and_return(false)
-        post :create, {:sub_area => {}}, valid_session
-        response.should render_template("new")
+    context 'logged out' do
+      it "redirects to the login page" do
+        post :create, {sub_area: {}}
+        response.should redirect_to(new_user_session_path)
       end
     end
   end
 
   describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested sub_area" do
-        sub_area = SubArea.create! valid_attributes
-        # Assuming there are no other sub_areas in the database, this
-        # specifies that the SubArea created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        SubArea.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => sub_area.to_param, :sub_area => {'these' => 'params'}}, valid_session
+
+    let(:sub_area) { SubArea.create! valid_attributes }
+    context 'logged in' do
+      before { sign_in user }
+      describe "with valid params" do
+        it "updates the requested sub_area" do
+          # Assuming there are no other sub areas in the database, this
+          # specifies that the SubArea created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          SubArea.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, {:id => sub_area.to_param, :sub_area => {'these' => 'params'}}
+        end
+
+        it "assigns the requested sub_area as @sub_area" do
+          put :update, {:id => sub_area.to_param, :sub_area => valid_attributes}
+          assigns(:sub_area).should eq(sub_area)
+        end
+
+        it "redirects to the sub_area" do
+          put :update, {:id => sub_area.to_param, :sub_area => valid_attributes}
+          response.should redirect_to(sub_area)
+        end
       end
 
-      it "assigns the requested sub_area as @sub_area" do
-        sub_area = SubArea.create! valid_attributes
-        put :update, {:id => sub_area.to_param, :sub_area => valid_attributes}, valid_session
-        assigns(:sub_area).should eq(sub_area)
-      end
+      describe "with invalid params" do
+        it "assigns the sub_area as @sub_area" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          SubArea.any_instance.stub(:save).and_return(false)
+          put :update, {:id => sub_area.to_param, :sub_area => {}}
+          assigns(:sub_area).should eq(sub_area)
+        end
 
-      it "redirects to the sub_area" do
-        sub_area = SubArea.create! valid_attributes
-        put :update, {:id => sub_area.to_param, :sub_area => valid_attributes}, valid_session
-        response.should redirect_to(sub_area)
+        it "re-renders the 'edit' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          SubArea.any_instance.stub(:save).and_return(false)
+          put :update, {:id => sub_area.to_param, :sub_area => {}}
+          response.should render_template("edit")
+        end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the sub_area as @sub_area" do
-        sub_area = SubArea.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        SubArea.any_instance.stub(:save).and_return(false)
-        put :update, {:id => sub_area.to_param, :sub_area => {}}, valid_session
-        assigns(:sub_area).should eq(sub_area)
-      end
-
-      it "re-renders the 'edit' template" do
-        sub_area = SubArea.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        SubArea.any_instance.stub(:save).and_return(false)
-        put :update, {:id => sub_area.to_param, :sub_area => {}}, valid_session
-        response.should render_template("edit")
+    context 'logged out' do
+      it "redirects to the login page" do
+        put :update, {:id => sub_area.to_param, :sub_area => {'these' => 'params'}}
+        response.should redirect_to(new_user_session_path)
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested sub_area" do
-      sub_area = SubArea.create! valid_attributes
-      expect {
-        delete :destroy, {:id => sub_area.to_param}, valid_session
-      }.to change(SubArea, :count).by(-1)
+    let!(:sub_area) { SubArea.create! valid_attributes }
+    context 'logged in' do
+      before { sign_in user }
+
+      it "destroys the requested sub_area" do
+        expect {
+          delete :destroy, {:id => sub_area.to_param}
+        }.to change(SubArea, :count).by(-1)
+      end
+
+      it "redirects to the sub areas list" do
+        delete :destroy, {:id => sub_area.to_param}
+        response.should redirect_to(sub_areas_url)
+      end
     end
 
-    it "redirects to the sub_areas list" do
-      sub_area = SubArea.create! valid_attributes
-      delete :destroy, {:id => sub_area.to_param}, valid_session
-      response.should redirect_to(sub_areas_url)
+    context 'logged out' do
+      it "redirects to the login page" do
+        delete :destroy, {:id => sub_area.to_param}
+        response.should redirect_to(new_user_session_path)
+      end
     end
   end
 

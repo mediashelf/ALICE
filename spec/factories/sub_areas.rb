@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :sub_area do
-    name "MyString"
-    description "MyText"
+    name "sub area name"
+    description "sub area description"
   end
 end
