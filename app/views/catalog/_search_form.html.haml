@@ -5,5 +5,5 @@
       = label_tag(:search_field, " #{t('blacklight.search.form.search_field.label')} ")
       = select_tag(:search_field, options_for_select(search_fields, h(params[:search_field])), :title => t('blacklight.search.form.search_field.title'), :class=>"search_field")
     = search_as_hidden_fields(:omit_keys => [:q, :search_field, :qt, :page]).html_safe
-    = submit_tag t('blacklight.search.form.submit'), :class=>'submit'
+    = submit_tag 'Search', :class=>'submit'
   %hr/
