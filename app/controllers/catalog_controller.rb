@@ -8,8 +8,9 @@ class CatalogController < ApplicationController
   configure_blacklight do |config|
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
     config.default_solr_params = {
-      :qt => 'search',
-      :rows => 10
+      :qt => 'standard',
+      :rows => 10,
+      :'q.alt' => '*:*'
     }
 
     ## Default parameters to send on single-document requests to Solr. These settings are the Blackligt defaults (see SolrHelper#solr_doc_params) or
@@ -24,7 +25,7 @@ class CatalogController < ApplicationController
     #}
 
     # solr field configuration for search results/index views
-    #config.index.show_link = 'title_display'
+    config.index.show_link = 'topic_texts'
     #onfig.index.record_display_type = 'format'
 
     # solr field configuration for document/show views
@@ -62,7 +63,7 @@ class CatalogController < ApplicationController
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.
-    config.default_solr_params[:'facet.field'] = config.facet_fields.keys
+    # config.default_solr_params[:'facet.field'] = config.facet_fields.keys
     #use this instead if you don't want to query facets marked :show=>false
     #config.default_solr_params[:'facet.field'] = config.facet_fields.select{ |k, v| v[:show] != false}.keys
 

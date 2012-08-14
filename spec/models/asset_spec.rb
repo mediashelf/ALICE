@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe Asset do
   let(:shark_asset) { FactoryGirl.build :asset, topic: 'Shark Week', summary: 'I love sharks' }
+  let(:solr) { RSolr.connect(url: 'http://localhost:8983/solr') }
 
   before do
-    r = RSolr.connect(url: 'http://localhost:8983/solr')
-    r.delete_by_query('*:*')
-    r.commit
+    solr.delete_by_query('*:*')
+    solr.commit
+    solr.get('select')['response']['numFound'].should == 0
   end
 
   context 'before save' do
@@ -25,8 +26,7 @@ describe Asset do
   end
 
   def search_returns_results_for? search_text
-    r = RSolr.connect(url: 'http://localhost:8983/solr')
-    resp = r.get('select', params: { q: '*:*', qt: 'standard' })['response']
+    resp = solr.get('select')['response']
     resp['docs'].count > 0
   end
 end
