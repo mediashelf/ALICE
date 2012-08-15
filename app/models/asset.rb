@@ -5,12 +5,22 @@ class Asset < ActiveRecord::Base
   before_destroy :remove_from_index
 
   def to_solr
-    { 'id' => self.id, 'topic_texts' => self.topic, 'summary_texts' => self.summary }
+    { 'id' => id,
+      'topic_texts' => topic,
+      'summary_texts' => summary,
+      'asset_texts' => asset,
+      'format_texts' => format,
+      'keywords_texts' => keywords,
+      'level_texts' => level,
+      'source_texts' => source,
+      'state_texts' => state,
+      'sub_area_texts' => sub_area,
+      'title_texts' => title,
+      'type_of_texts' => type_of,
+      'year_is' => year }
   end
 
 private
-
-  SolrService = RSolr.connect(url: 'http://127.0.0.1:8983/solr')
 
   def index_record
     SolrService.add(self.to_solr)
