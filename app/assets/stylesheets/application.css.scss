@@ -54,7 +54,17 @@ nav a {
 }
 
 section#search {
-  text-align: center;
+  dd, dt {
+    display: inline-block;
+  }
+
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    width: 75%;
+  }
 }
 
 div#flash_msg {
