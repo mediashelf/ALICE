@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'rsolr'
+
+if ARGV[0] == 'stage'
+  solr = RSolr.connect :url => 'http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com:8080/solr-stage'
+  solr.delete_by_query('*:*')
+  solr.commit
+elsif ARGV[0] == 'production'
+  solr = RSolr.connect :url => 'http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com:8080/solr-prod'
+  solr.delete_by_query('*:*')
+  solr.commit
+elsif ARGV[0] == 'development'
+  solr = RSolr.connect :url => 'http://127.0.0.1:8983/solr'
+  solr.delete_by_query('*:*')
+  solr.commit
+else
+  puts 'Usage: script/clean_index (stage|production|development)'
+  exit 1
+end
+
