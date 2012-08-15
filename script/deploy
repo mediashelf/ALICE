@@ -20,7 +20,7 @@ solr_push() {
     echo "Uploading solrconfig.xml to $ENVIRONMENT"
     scp -i $HOME/.ssh/alice_rsa.pub support/solrconfig.xml deploy@ec2-50-112-195-52.us-west-2.compute.amazonaws.com:~/${SOLR_ENV}/conf/solrconfig.xml
     echo 'Restarting Solr services'
-    ssh -i $HOME/.ssh/alice_rsa.pub -x 'sudo service tomcat6 restart' deploy@ec2-50-112-195-52.us-west-2.compute.amazonaws.com
+    ssh -i $HOME/.ssh/alice_rsa.pub deploy@ec2-50-112-195-52.us-west-2.compute.amazonaws.com 'sudo service tomcat6 restart'
   else
     echo 'You need to put alice_rsa.pub in your ~/.ssh directory to deploy solr changes.'
     exit 1
