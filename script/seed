@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+if ARGV[1] == 'stage'
+  solr = RSolr.connect :url => 'http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com:8080/solr-stage'
+  solr.delete_by_query('*:*')
+  solr.add([{:id => 1, :topic_texts => 'Shark Week', :summary_texts => 'I love sharks'}, {:id => 2, :topic_texts => 'McRib', :summary_texts => 'The McRib is back'}])
+  solr.commit
+elsif ARGV[1] == 'production'
+  solr = RSolr.connect :url => 'http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com:8080/solr-prod'
+  solr.delete_by_query('*:*')
+  solr.add([{:id => 1, :topic_texts => 'Shark Week', :summary_texts => 'I love sharks'}, {:id => 2, :topic_texts => 'McRib', :summary_texts => 'The McRib is back'}])
+  solr.commit
+else
+  puts 'Usage: script/seed (stage|production)'
+  exit 1
+end
