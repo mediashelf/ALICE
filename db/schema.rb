@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813202946) do
+ActiveRecord::Schema.define(:version => 20120815194951) do
 
   create_table "assets", :force => true do |t|
     t.string   "policy_area"
@@ -60,9 +60,12 @@ ActiveRecord::Schema.define(:version => 20120813202946) do
   create_table "sub_areas", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "policy_area_id"
   end
+
+  add_index "sub_areas", ["policy_area_id"], :name => "index_sub_areas_on_policy_area_id"
 
   create_table "topics", :force => true do |t|
     t.string   "name"
