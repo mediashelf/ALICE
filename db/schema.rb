@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815194951) do
+ActiveRecord::Schema.define(:version => 20120815202412) do
 
   create_table "assets", :force => true do |t|
     t.string   "policy_area"
@@ -66,6 +66,14 @@ ActiveRecord::Schema.define(:version => 20120815194951) do
   end
 
   add_index "sub_areas", ["policy_area_id"], :name => "index_sub_areas_on_policy_area_id"
+
+  create_table "sub_areas_topics", :id => false, :force => true do |t|
+    t.integer "sub_area_id"
+    t.integer "topic_id"
+  end
+
+  add_index "sub_areas_topics", ["sub_area_id"], :name => "index_sub_areas_topics_on_sub_area_id"
+  add_index "sub_areas_topics", ["topic_id"], :name => "index_sub_areas_topics_on_topic_id"
 
   create_table "topics", :force => true do |t|
     t.string   "name"
