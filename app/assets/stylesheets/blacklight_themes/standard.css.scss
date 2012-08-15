@@ -5,40 +5,39 @@
 
 /* Grid parameters */
 /* changing total cols is not recommended unless you're going to redo blacklight/_layout.css.sass */
-// $total-cols: 24;
+ $total-cols: 24;
 
 /* But the widths are changeable to px, em. */
-// $col-width: 2.5em;
-// $gutter-width: .5em;
-// $side-gutter-width: 2em;
+ $col-width: 2.5em;
+ $gutter-width: .5em;
+ $side-gutter-width: 2em;
 
-/*@import 'blacklight/grids/susy_grid';*/
+@import 'blacklight/grids/susy_grid';
 
-// $background_image: 'blacklight/bg.png';
+$background_image: none;
  /*$logo_image: 'alice-medium.png';*/
 
 /* Various elements of search customization share these colors */
 
-// $search_ui_border_color: #AAAAAA;
-// $search_ui_bg_color: #F0F0F0;
+ $search_ui_border_color: #AAAAAA;
+ $search_ui_bg_color: #F0F0F0;
 
 /* separates documents, facets */
-// $dotted_border_color: #CCC;
+ $dotted_border_color: #CCC;
 
 /* background color of page */
-// $page_bg_color: #2E4F81;
+ $page_bg_color: #2E4F81;
 
 
 /* label (field names) */
-// $field_name_color: #888;
-
+ $field_name_color: #888;
 
 /* constraint (you searched for:) details: */
 
-// $constraint_bg_color: #E2EDFE;
+ $constraint_bg_color: #E2EDFE;
 
-// $constraint_border_color: #C4DAFE;
-// $constraint_border_active_color: #FFD27A;
+ $constraint_border_color: #C4DAFE;
+ $constraint_border_active_color: #FFD27A;
 
 /* dialog that pops up when you pick more on facets */
 // $facet_extended_button_bg_color: #F6F6F6;
@@ -53,7 +52,7 @@
 // $marc_item_separator: 1px solid #CCC;
 
 // Currently unused, but this import handles mixins common to blacklight
-/*@import 'blacklight/mixins';*/
+@import 'blacklight/mixins';
 
 // And then this imports the base blacklight stylesheet.
 @import 'blacklight/blacklight_base';
