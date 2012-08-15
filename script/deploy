@@ -11,16 +11,41 @@ if [ "$ENVIRONMENT" != "production" ]; then
   fi
 fi
 
+solr_push() {
+  ENVIRONMENT=$1
+  SOLR_ENV=$2
+  if [ -f $HOME/.ssh/alice_rsa.pub ]; then
+    echo "Uploading schema.xml to $ENVIRONMENT"
+    scp -i $HOME/.ssh/alice_rsa.pub support/schema.xml deploy@ec2-50-112-195-52.us-west-2.compute.amazonaws.com:~/${SOLR_ENV}/conf/schema.xml
+    echo "Uploading solrconfig.xml to $ENVIRONMENT"
+    scp -i $HOME/.ssh/alice_rsa.pub support/solrconfig.xml deploy@ec2-50-112-195-52.us-west-2.compute.amazonaws.com:~/${SOLR_ENV}/conf/solrconfig.xml
+    echo 'Restarting Solr services'
+    ssh -i $HOME/.ssh/alice_rsa.pub -x 'sudo service tomcat6 restart' deploy@ec2-50-112-195-52.us-west-2.compute.amazonaws.com
+  else
+    echo 'You need to put alice_rsa.pub in your ~/.ssh directory to deploy solr changes.'
+    exit 1
+  fi
+}
+
 echo "Switching to ${ENVIRONMENT} heroku remote"
 if [ "$ENVIRONMENT" == "staging" ]; then
   APP_NAME=alicelaw-staging
+  SOURCE_BRANCH=develop
+
   heroku maintenance:on --app $APP_NAME
-  git push -f git@heroku.com:alicelaw-staging.git develop:master
+  git push -f git@heroku.com:${APP_NAME}.git ${SOURCE_BRANCH}:master
+
+  solr_push $ENVIRONMENT solr-stage
 else
   APP_NAME=alicelaw-production
+  SOURCE_BRANCH=master
+
   heroku maintenance:on --app $APP_NAME
-  git push git@heroku.com:alicelaw-production.git master:master
+  git push git@heroku.com:${APP_NAME}.git ${SOURCE_BRANCH}:master
+
+  solr_push $ENVIRONMENT solr-prod
 fi
+
 
 echo "Running heroku run rake db:migrate for ${APP_NAME}"
 heroku run rake db:migrate --app $APP_NAME
