@@ -26,12 +26,23 @@ class CatalogController < ApplicationController
 
     # solr field configuration for search results/index views
     config.index.show_link = 'topic_texts'
-    config.add_index_field 'summary_texts', label: 'Summary:'
+    config.add_index_field 'summary_texts', label: ''
     #onfig.index.record_display_type = 'format'
 
     # solr field configuration for document/show views
-    #config.show.html_title = 'title_display'
-    #config.show.heading = 'title_display'
+    config.show.html_title = 'topic_texts'
+    config.show.heading = 'title_texts'
+    config.add_show_field 'sub_area_texts', label: 'Sub-Area:'
+    config.add_show_field 'topic_texts', label: 'Topic:'
+    config.add_show_field 'asset_texts', label: 'Asset:'
+    config.add_show_field 'source_texts', label: 'Source:'
+    config.add_show_field 'state_texts', label: 'State:'
+    config.add_show_field 'format_texts', label: 'Format:'
+    config.add_show_field 'level_texts', label: 'Level:'
+    config.add_show_field 'type_of_texts', label: 'Type:'
+    config.add_show_field 'keywords_texts', label: 'Keywords:'
+    config.add_show_field 'summary_texts', label: 'Summary:'
+
     #config.show.display_type = 'format'
 
     # solr fields that will be treated as facets by the blacklight application
@@ -170,7 +181,4 @@ class CatalogController < ApplicationController
     # mean") suggestion is offered.
     config.spell_max = 5
   end
-
-
-
 end

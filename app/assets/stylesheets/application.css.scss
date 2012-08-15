@@ -19,6 +19,10 @@
  *= require_tree .
  */
 
+body {
+  background: none;
+}
+
 a {
   color: #40409e;
   text-decoration: none;
@@ -53,9 +57,19 @@ nav a {
   font-size: 1.5em;
 }
 
-section#search {
-  text-align: center;
-}
+/*section#search {*/
+  /*dd, dt {*/
+    /*display: inline-block;*/
+  /*}*/
+
+  /*dt {*/
+    /*font-weight: bold;*/
+  /*}*/
+
+  /*dd {*/
+    /*width: 75%;*/
+  /*}*/
+/*}*/
 
 div#flash_msg {
 }

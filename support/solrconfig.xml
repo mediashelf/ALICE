@@ -446,6 +446,16 @@
       <str name="qf">
         topic_texts
         summary_texts
+        asset_texts
+        format_texts
+        keywords_texts
+        level_texts
+        source_texts
+        state_texts
+        sub_area_texts
+        title_texts
+        type_of_texts
+        year_is
       </str>
     </lst>
   </requestHandler>
