@@ -13,11 +13,13 @@ fi
 
 echo "Switching to ${ENVIRONMENT} heroku remote"
 if [ "$ENVIRONMENT" == "staging" ]; then
-  git push -f git@heroku.com:alicelaw-staging.git develop:master
   APP_NAME=alicelaw-staging
+  heroku maintenance:on --app $APP_NAME
+  git push -f git@heroku.com:alicelaw-staging.git develop:master
 else
-  git push git@heroku.com:alicelaw-production.git master:master
   APP_NAME=alicelaw-production
+  heroku maintenance:on --app $APP_NAME
+  git push git@heroku.com:alicelaw-production.git master:master
 fi
 
 echo "Running heroku run rake db:migrate for ${APP_NAME}"
@@ -25,6 +27,8 @@ heroku run rake db:migrate --app $APP_NAME
 
 echo "Running heroku restart for ${APP_NAME}"
 heroku restart --app $APP_NAME
+
+heroku maintenance:off --app $APP_NAME
 
 echo "Grabbing website to wake up heroku"
 curl "http://${APP_NAME}.herokuapp.com" &> /dev/null &
