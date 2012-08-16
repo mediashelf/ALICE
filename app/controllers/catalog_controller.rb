@@ -42,6 +42,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'type_of_texts', label: 'Type:'
     config.add_show_field 'keywords_texts', label: 'Keywords:'
     config.add_show_field 'summary_texts', label: 'Summary:'
+    config.add_show_field 'year_is', label: 'Year:'
 
     #config.show.display_type = 'format'
 

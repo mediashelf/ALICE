@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815202412) do
+ActiveRecord::Schema.define(:version => 20120816155303) do
 
   create_table "assets", :force => true do |t|
     t.string   "policy_area"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20120815202412) do
     t.string   "level"
     t.string   "type_of"
     t.string   "keywords"
-    t.string   "summary"
+    t.text     "summary"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
