@@ -20,9 +20,6 @@ end
 
 def load_assets_from_csv
   CSV.foreach("#{Rails.root}/support/website_assets_civil_rights_clean.csv", {:headers => true, :header_converters => :symbol}) do |row|
-    puts row.inspect
-    puts
-
     Asset.create!(format: row[:format],
                   level: row[:level],
                   policy_area: row[:policy_area],
