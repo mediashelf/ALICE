@@ -27,3 +27,11 @@ end
 Then /^I should not see "(.*?)"$/ do |undesired_text|
   page.should_not have_content(undesired_text)
 end
+
+When /^I fill in the following:$/ do |field_table|
+  field_table.hashes.each do |hash|
+    field_name = hash['Field']
+    value = hash['Value']
+    step %Q(I fill in "#{field_name}" with "#{value}")
+  end
+end

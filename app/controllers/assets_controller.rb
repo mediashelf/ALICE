@@ -22,7 +22,7 @@ class AssetsController < ApplicationController
     if @asset.save
       redirect_to @asset
     else
-      render new
+      render :new
     end
   end
 

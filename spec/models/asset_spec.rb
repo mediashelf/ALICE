@@ -4,6 +4,10 @@ describe Asset do
   let(:shark_asset) { FactoryGirl.build :asset, topic: 'Shark Week', summary: 'I love sharks' }
   let(:solr) { RSolr.connect(url: 'http://localhost:8983/solr') }
 
+  it { should validate_presence_of(:topic) }
+  it { should validate_presence_of(:summary) }
+  it { should validate_presence_of(:title) }
+
   before do
     solr.delete_by_query('*:*')
     solr.commit

@@ -8,10 +8,27 @@ Feature: Editor enters asset metadata
       And I am logged out
     Then I should not be allowed access the new asset page
 
-  @pending
+    @javascript
   Scenario: Editor enters metadata
     Given I am logged in
     Then I should be on the homepage
-    # And I should see a link to "Create New Asset"
-    # When I go to the new asset page
-    # Then I should be on the new asset page
+    When I follow "New Asset"
+    Then I should be on the new asset page
+    When I fill in the following:
+      | Field       | Value                                                        |
+      | Policy area | Immigration                                                  |
+      | Sub area    | Extradition                                                  |
+      | Topic       | Right to a hearing                                           |
+      | Asset       | Right to a hearing law                                       |
+      | Title       | Wisconsin right to hearing before extradition law            |
+      | Year        | 2011                                                         |
+      | Source      | Wisconsin Senate                                             |
+      | State       | WI                                                           |
+      | Format      | Examplary                                                    |
+      | Level       | State                                                        |
+      | Type of     | Law                                                          |
+      | Keywords    | Immigration, Deportation                                     |
+      | Summary     | Wisconsin right to hearing before extradition law - Nuf Said |
+
+      And I press "Save"
+    Then I should see "Right to a hearing law"
