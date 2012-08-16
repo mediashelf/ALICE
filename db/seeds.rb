@@ -4,6 +4,12 @@ require 'rsolr'
 # Use this to seed a development, or staging database for playing around.
 # NOT intended for starting a real, production database
 
+def create_admin
+  unless User.find_by_email('admin@example.com')
+    User.create! email: 'admin@example.com', password: 'password'
+  end
+end
+
 def clear_assets_and_index!
   Asset.delete_all
 
@@ -31,5 +37,6 @@ def load_assets_from_csv
   end
 end
 
+create_admin
 clear_assets_and_index!
 load_assets_from_csv
