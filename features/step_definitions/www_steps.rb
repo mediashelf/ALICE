@@ -39,3 +39,7 @@ end
 When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"$/ do |file_name, field|
   attach_file(field, File.expand_path(File.join(Rails.root, "support", file_name)))
 end
+
+Then /^I should get a pdf download$/ do
+  page.response_headers['Content-Type'].should == 'application/pdf'
+end

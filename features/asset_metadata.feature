@@ -33,6 +33,8 @@ Feature: Asset metadata
       And I attach the file "fake.pdf" to "File"
       And I press "Save"
     Then I should see "Right to a hearing law"
+    When I follow "Download"
+    Then I should get a pdf download
 
   Scenario: Missing Required Field
     Given I am logged in

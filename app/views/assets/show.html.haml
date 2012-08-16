@@ -40,6 +40,10 @@
   %b Summary:
   = @asset.summary
 
+%p
+  %b File:
+  = link_to 'Download', @asset.asset_file.url
+
 = link_to 'Edit', edit_asset_path(@asset)
 \|
 = link_to 'Back', assets_path
