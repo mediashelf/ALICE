@@ -1,4 +1,4 @@
-Feature: Editor enters asset metadata
+Feature: Asset metadata
   In order to add new searchable assets
   As an editor
   I want a form to enter metadata for an asset
@@ -8,12 +8,12 @@ Feature: Editor enters asset metadata
       And I am logged out
     Then I should not be allowed access the new asset page
 
-    @javascript
   Scenario: Editor enters metadata
     Given I am logged in
     Then I should be on the homepage
     When I follow "New Asset"
     Then I should be on the new asset page
+
     When I fill in the following:
       | Field       | Value                                                        |
       | Policy area | Immigration                                                  |
@@ -32,3 +32,11 @@ Feature: Editor enters asset metadata
 
       And I press "Save"
     Then I should see "Right to a hearing law"
+
+  Scenario: Missing Required Field
+    Given I am logged in
+    When I follow "New Asset"
+      And I press "Save"
+    Then I should see "Topic can't be blank"
+      And I should see "Title can't be blank"
+      And I should see "Summary can't be blank"
