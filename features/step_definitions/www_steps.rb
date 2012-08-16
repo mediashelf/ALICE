@@ -35,3 +35,7 @@ When /^I fill in the following:$/ do |field_table|
     step %Q(I fill in "#{field_name}" with "#{value}")
   end
 end
+
+When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"$/ do |file_name, field|
+  attach_file(field, File.expand_path(File.join(Rails.root, "support", file_name)))
+end

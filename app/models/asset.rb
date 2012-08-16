@@ -1,5 +1,7 @@
 class Asset < ActiveRecord::Base
-  attr_accessible :asset, :format, :keywords, :level, :policy_area, :source, :state, :sub_area, :summary, :title, :topic, :type_of, :year
+  mount_uploader :asset_file, AssetUploader
+
+  attr_accessible :asset, :asset_file, :format, :keywords, :level, :policy_area, :source, :state, :sub_area, :summary, :title, :topic, :type_of, :year
 
   validates_presence_of :title, :topic, :summary
   after_save :index_record

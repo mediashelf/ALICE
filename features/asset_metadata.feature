@@ -30,6 +30,7 @@ Feature: Asset metadata
       | Keywords    | Immigration, Deportation                                     |
       | Summary     | Wisconsin right to hearing before extradition law - Nuf Said |
 
+      And I attach the file "fake.pdf" to "File"
       And I press "Save"
     Then I should see "Right to a hearing law"
 

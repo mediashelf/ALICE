@@ -45,5 +45,8 @@
   .field
     = f.label :summary
     = f.text_field :summary
+  .field
+    = f.label :asset_file, 'File'
+    = f.file_field :asset_file
   .actions
     = f.submit 'Save'
