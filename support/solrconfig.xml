@@ -452,6 +452,7 @@
         level_texts
         source_texts
         state_texts
+        policy_area_texts
         sub_area_texts
         title_texts
         type_of_texts

@@ -17,6 +17,7 @@ class Asset < ActiveRecord::Base
       'level_texts' => level,
       'source_texts' => source,
       'state_texts' => state,
+      'policy_area_texts' => policy_area,
       'sub_area_texts' => sub_area,
       'title_texts' => title,
       'type_of_texts' => type_of,
