@@ -4,6 +4,7 @@ class Asset < ActiveRecord::Base
   attr_accessible :asset, :asset_file, :format, :keywords, :level, :policy_area, :source, :state, :sub_area, :summary, :title, :topic, :type_of, :year
 
   validates_presence_of :title, :topic, :summary
+
   after_save :index_record
   before_destroy :remove_from_index
 
