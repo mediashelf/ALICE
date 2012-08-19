@@ -8,6 +8,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.0.1)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
       mail (~> 2.4.4)
@@ -208,6 +209,9 @@ GEM
     newrelic_rpm (3.4.0.1)
     nokogiri (1.5.5)
     orm_adapter (0.4.0)
+    pdf-reader (1.1.1)
+      Ascii85 (~> 1.0.0)
+      ruby-rc4
     pg (0.14.0)
     polyglot (0.3.3)
     pry (0.9.10)
@@ -267,6 +271,7 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     ruby-hmac (0.4.0)
+    ruby-rc4 (0.1.5)
     ruby_parser (2.3.1)
       sexp_processor (~> 3.0)
     rubyzip (0.9.9)
@@ -347,6 +352,7 @@ DEPENDENCIES
   hpricot
   jquery-rails
   newrelic_rpm
+  pdf-reader
   pg
   pry-rails
   rails (= 3.2.8)

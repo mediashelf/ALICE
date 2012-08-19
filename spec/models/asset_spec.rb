@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Asset do
-  let(:shark_asset) { FactoryGirl.build :asset, topic: 'Shark Week', summary: 'I love sharks' }
+  let(:shark_asset) { FactoryGirl.build :asset, topic: 'Shark Week',
+                      summary: 'I love sharks', asset_file: asset_file }
+  let(:asset_file) { nil }
   let(:solr) { RSolr.connect(url: 'http://localhost:8983/solr') }
 
   it { should validate_presence_of(:topic) }
@@ -27,10 +29,17 @@ describe Asset do
     it 'should be indexed by Solr' do
       search_returns_results_for?('sharks').should be_true
     end
+    context 'with attached PDF' do
+      let(:asset_file) { File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.pdf'))) }
+      let(:string_only_in_pdf) { 'truthfulness' }
+
+      it 'should store text version of PDF contents to content field' do
+        search_returns_results_for?(string_only_in_pdf).should be_true
+      end
+    end
   end
 
   def search_returns_results_for? search_text
-    resp = solr.get('select')['response']
-    resp['docs'].count > 0
+    solr.get('select', params: {q: search_text, qt: 'standard'})['response']['numFound'] > 0
   end
 end

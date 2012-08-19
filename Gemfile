@@ -21,6 +21,7 @@ gem 'formtastic'
 gem 'haml'
 gem 'jquery-rails'
 gem 'newrelic_rpm'
+gem 'pdf-reader'
 gem 'sendgrid'
 gem 'underscore-rails'
 

@@ -1,10 +1,11 @@
 class Asset < ActiveRecord::Base
   mount_uploader :asset_file, AssetUploader
 
-  attr_accessible :asset, :asset_file, :format, :keywords, :level, :policy_area, :source, :state, :sub_area, :summary, :title, :topic, :type_of, :year
+  attr_accessible :asset, :asset_file, :content, :format, :keywords, :level, :policy_area, :source, :state, :sub_area, :summary, :title, :topic, :type_of, :year
 
   validates_presence_of :title, :topic, :summary
 
+  before_save :extract_content_from_asset_file
   after_save :index_record
   before_destroy :remove_from_index
 
@@ -22,7 +23,8 @@ class Asset < ActiveRecord::Base
       'sub_area_texts' => sub_area,
       'title_texts' => title,
       'type_of_texts' => type_of,
-      'year_is' => year }
+      'year_is' => year,
+      'content_texts' => content }
   end
 
 private
@@ -35,5 +37,16 @@ private
   def remove_from_index
     SolrService.delete_by_id(self.id)
     SolrService.commit
+  end
+
+  def extract_content_from_asset_file
+    if asset_file.present? && content.nil?
+      self.content = ''
+      PDF::Reader.open(asset_file.path) do |reader|
+        reader.pages.each do |page|
+          self.content << page.text
+        end
+      end
+    end
   end
 end
