@@ -1,3 +1,6 @@
+# credentials
+/config/initializers/aws_credentials.rb
+
 # bundler state
 /.bundle
 /vendor/bundle/
