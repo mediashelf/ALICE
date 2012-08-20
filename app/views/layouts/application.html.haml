@@ -13,12 +13,11 @@
   %body
     #container
       %header
+        = link_to image_tag('alicelogo.png'), root_path
         %nav
           = render partial: '/user_util_links'
         - if ((params[:controller] == 'catalog') and params[:id]) # was !params[:id]
-          = content_tag(:span, t('blacklight.search.search_results'), id: 'results_text')
-        - else
-          = ''
+          = content_tag(:span, 'Search Results', id: 'results_text')
       %div#content
         #flash_msg= render partial: '/flash_msg'
         = yield

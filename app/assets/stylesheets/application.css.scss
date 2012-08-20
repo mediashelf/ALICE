@@ -13,17 +13,27 @@ body {
 
 header {
   background-color: #D3D3D3;
-  background-image: url("alicelogo.png");
   background-repeat: no-repeat;
   height: 92px;
   width: 100%;
   position: fixed;
 }
 
+:link, :visited {
+  text-decoration: none;
+  color: #939598;
+}
+
+:link:hover, :visited:hover {
+  color: #58595B;
+}
+
 nav {
+  float: right;
   margin: 0px;
   padding-top: 0.5em;
   padding-right: 2em;
+  padding-left: 2em;
   padding-bottom: 0.5em;
   text-align: right;
   height: 2em;
@@ -32,19 +42,9 @@ nav {
 }
 
 nav a {
-  font-size: .8em;
-  color: #939598;
-  margin-right: 50px;
   margin-top: 10px;
-  text-decoration: none;
-}
-
-nav a:hover {
- color: #58595B;
-}
-
-a {
-  color: #40409e;
+  margin-right: 50px;
+  font-size: .8em;
   text-decoration: none;
 }
 
