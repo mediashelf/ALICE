@@ -36,12 +36,37 @@ nav a {
   color: #939598;
   margin-right: 50px;
   margin-top: 10px;
+  text-decoration: none;
 }
 
+nav a:hover {
+ color: #58595B;
+}
 
 a {
   color: #40409e;
   text-decoration: none;
+}
+
+.mainbutton {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  color: white;
+  text-transform: uppercase;
+  background-image: linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+  background-image: -o-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+  background-image: -moz-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+  background-image: -webkit-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+  background-image: -ms-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+
+  background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0.48, rgb(128,9,9)),
+      color-stop(1, rgb(250,60,60))
+      );
 }
 
 /*section#search {*/
