@@ -1,0 +1,14 @@
+<%# default partial to display solr document fields in catalog show view -%>
+<dl class="defList">
+  <% document_show_fields.each do |solr_fname, field| -%>
+    <% if document.has? solr_fname %>
+	    <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_label :field => solr_fname %></dt>
+	    <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_value :document => document, :field => solr_fname %></dd>
+    <% end -%>
+  <% end -%>
+  <% associated_file = Asset.find(document[:id].to_i).asset_file -%>
+  <% if associated_file.present? %>
+    <dt class='blacklight-asset_file_link'>File:</dt>
+    <dd class='blacklight-asset_file_link'><%= link_to('Download', associated_file.url) %></dd>
+  <% end -%>
+</dl>
