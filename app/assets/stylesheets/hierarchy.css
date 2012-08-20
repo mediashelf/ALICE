@@ -1,0 +1,150 @@
+/*
+  THE HIERARCHY DIV
+*/
+div#hierarchy {
+  position: relative;
+  top: 93px;
+  width:260px;
+  height: 100%;
+  font-family: helvetica, arial, sans-serif;
+  border: thin solid #d0d0d0;
+}
+
+/*
+  THE CAPTION DIV
+*/
+div.caption {
+  font-size: 12px;
+  /* right padding prevents overlap with controls div */
+  padding: 8px 75px 8px 12px;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: #ffffff;
+  /* making this eligible for serving as a container for non-flow positioning
+   of internal stuff. do NOT set right, left, top, bottom. */
+  position: relative;
+}
+
+div.caption a {
+  color: inherit;
+}
+
+/* the controls div (containing links and controls 
+  within a caption */
+div.controls {
+   position: absolute;
+   display: none;
+   top: 50%;
+   margin-top: -9px;
+   right: 10px;
+   width: 75px;
+   height: 18px;
+   text-align: right;
+}
+
+div.caption:hover > div.controls {
+  display: block;
+}
+
+div.controls > input[type=checkbox] {
+  position: relative;
+  top: -3px;
+  margin-left: 3px;
+  margin-right: 0px;
+}
+
+div.controls img {
+  margin: 0px;
+}
+
+/* EXPAND AND COLLAPSE BEHAVIOR
+  This mechanism works from the following nested div structure:
+
+    <div class='lvlX [hidechildren/showchildren] [selected/nonsel]'>
+
+      <div class='caption'>
+
+      [zero or more child divs of class lvlX]
+
+   "lvlX" is denominated as lvl0 (Policy Area), lvl1(Sub Area), lvl2 (Topic).
+
+   The mechanism of expansion and collapse is done by controlling the visibility of the
+   caption divs, which (with their enclosed content) are the only visible parts
+   of the hierarchy.
+
+   Expanding and collapsing child divs is controlled by the hidechildren/showchildren
+   class of the lvlX parent, and secondarily by the selection status of the caption.
+
+   N.B: lvl2 Topic divs never have child elements. lvl0 and lvl1 typically do. However,
+   IF the hierarchy were contextually restricted to show no Topics, the lvl1 divs
+   would have no children.
+ */
+
+/*  do not show caption divs when they have been collapsed from above */
+div.hidechildren > div div.caption {
+  display: none;
+}
+
+/* ensure that selected topics are never hidden */
+div.hidechildren div.selected > div.caption {
+  display: block;
+}
+
+/* prevent top-level captions from being hidden under any circumstances
+  (this should never happen, but it's worth keeping as a safety measure) */
+div.lvl0.hidechildren > div.caption {
+  display: block;
+}
+
+
+/*
+  COLORS OF CAPTIONS
+*/
+
+/* colors displayed for different levels */
+div.lvl0 > div.caption {
+  color: #ffffff;
+  background-color: #144680;
+}
+
+div.lvl0 > div.caption:hover {
+  background-color: #0078af;
+}
+
+/* colors displayed for LVL1 SUB-AREA captions */
+div.lvl1 > div.caption {
+  color: #606060;
+  background-color: #d1d2d4;
+  padding-left: 2em;
+}
+div.lvl1 > div.caption:hover {
+  background-color: #bfc0c3;
+}
+
+/* colors displayed for LVL2 TOPIC captions */
+div.lvl2 > div.caption {
+  color: #606060;
+  background-color: #f3f3f4;
+  padding-left: 3em;
+}
+
+/* colors displayed for SELECTED captions */
+div.selected > div.caption, div.selected > div.caption:hover {
+  color: #ffffff;
+  background-color: #c51a26;
+}
+
+
+
+
+/* NOT PERMANENT - DEMO CONTENT ONLY */
+div#show_selected_items {
+  position: fixed;
+  left: 500px;
+  top: 200px;
+  width: 600px;
+  height: 400px;
+  border: thin solid black;
+
+  padding: 20px 30px;
+}
