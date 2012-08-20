@@ -11,17 +11,15 @@
     = raw(render_head_content)
   - onload_text = "$('input#q').focus();" if params[:q].to_s.empty? and params[:f].to_s.empty? and params[:id].nil?
   %body
-    -#{:class => render_body_class.html_safe, :onload => onload_text}
-    %nav
-      = render partial: '/user_util_links'
     #container
       %header
-        = link_to image_tag('alice-medium.png'), root_path
+        %nav
+          = render partial: '/user_util_links'
         - if ((params[:controller] == 'catalog') and params[:id]) # was !params[:id]
           = content_tag(:span, t('blacklight.search.search_results'), id: 'results_text')
         - else
           = ''
-      %section#search
+      %div#content
         #flash_msg= render partial: '/flash_msg'
         = yield
       -#%aside= sidebar_items.join('').html_safe
