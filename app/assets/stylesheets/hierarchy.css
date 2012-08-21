@@ -1,13 +1,22 @@
 /*
   THE HIERARCHY DIV
 */
-div#hierarchy {
-  position: relative;
+div#hierarchy, div#hierarchy_disable {
+  position: absolute;
+  z-index: 100;
   top: 93px;
-  width:260px;
+  width:280px;
   height: 100%;
   font-family: helvetica, arial, sans-serif;
   border: thin solid #d0d0d0;
+}
+
+div#hierarchy_disable {
+  z-index: 300;
+  background-color: #d0d0d0;
+  opacity: 0.5;
+  /* for obsolete browsers: */
+  filter: alpha(opacity=50);
 }
 
 /*
@@ -25,6 +34,10 @@ div.caption {
   position: relative;
 }
 
+div.headcaption {
+  padding-top: 16px;
+}
+
 div.caption a {
   color: inherit;
 }
@@ -37,7 +50,7 @@ div.controls {
    top: 50%;
    margin-top: -9px;
    right: 10px;
-   width: 75px;
+   width: 80px;
    height: 18px;
    text-align: right;
 }
@@ -54,7 +67,7 @@ div.controls > input[type=checkbox] {
 }
 
 div.controls img {
-  margin: 0px;
+  margin: 0px -4px 0px 0px;
 }
 
 /* EXPAND AND COLLAPSE BEHAVIOR
