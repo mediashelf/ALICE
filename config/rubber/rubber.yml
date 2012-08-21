@@ -29,7 +29,7 @@ domain: alicelaw.com
 # also be pushed to remote host at Rubber.root/config/rubber/rubber-secret.yml
 #
 # rubber_secret: "#{File.expand_path('~') + '/.ec2' + (Rubber.env == 'production' ? '' : '_dev') + '/rubber-secret.yml' rescue ''}"
-rubber_secret: '~/.ec2/rubber-secret.yml'
+rubber_secret: "#{File.expand_path('~/.ec2/rubber-secret.yml')}"
 
 
 # REQUIRED All known cloud providers with the settings needed to configure them
@@ -80,7 +80,7 @@ cloud_providers:
     # Ubuntu 12.04 Precise instance-store 64-bit: ami-3c994355
     #
     # m1.small or m1.large or m1.xlarge
-    image_type: m1.small
+    image_type: m1.medium
     image_id: ami-3c994355
 
     # OPTIONAL: EC2 spot instance request support.
