@@ -231,6 +231,6 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = "/my_engine/users/auth"
 end
 
-class Devise::SessionsController < DeviseController
-  skip_before_filter :show_hierarchy
-end
+# class Devise::SessionsController < DeviseController
+#   skip_before_filter :show_hierarchy
+# end
