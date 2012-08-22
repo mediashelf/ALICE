@@ -78,6 +78,8 @@ end
 # capistrano's deploy:cleanup doesn't play well with FILTER
 after "deploy", "cleanup"
 after "deploy:migrations", "cleanup"
+after "cleanup", "symlink_uploads_dir"
+
 task :cleanup, :except => { :no_release => true } do
   count = fetch(:keep_releases, 5).to_i
 
@@ -97,4 +99,10 @@ if Rubber::Util.has_asset_pipeline?
   callbacks[:before].delete_if {|c| c.source == "deploy:assets:symlink"}
   before "deploy:assets:precompile", "deploy:assets:symlink"
   after "rubber:config", "deploy:assets:precompile"
+end
+
+task :symlink_uploads_dir, :except => { no_release: true } do
+  rsudo("rm -fr #{current_path}/public/uploads;")
+  rsudo("ln -s /mnt/alicelaw-#{Rubber.env}/shared/uploads #{current_path}/public/uploads;")
+  rsudo("chown app:app /mnt/alicelaw-#{Rubber.env}/shared/uploads;")
 end

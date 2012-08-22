@@ -40,5 +40,5 @@ echo "deploy> Deploying to EC2 ${ENVIRONMENT}"
 solr_push $ENVIRONMENT
 cap deploy
 
-echo "Grabbing website to wake up heroku"
+echo 'Does it curl?'
 curl "http://${ENVIRONMENT}.alicelaw.com" &> /dev/null &
