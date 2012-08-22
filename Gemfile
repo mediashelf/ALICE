@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.8'
 gem 'pg'
@@ -6,6 +6,8 @@ gem 'pg'
 group :assets do
   gem 'coffee-rails'
   gem 'sass-rails'
+  gem 'therubyracer', '0.11.0beta5'
+    gem 'libv8', '~> 3.11.8'
   gem 'uglifier'
   gem 'compass-rails', '~> 1.0.0'
   gem 'compass-susy-plugin', '~> 0.9.0'
@@ -61,3 +63,8 @@ group :production, :staging do
   gem 'unicorn'
 end
 
+gem 'rubber'
+  gem 'open4'
+  gem 'gelf'
+  gem 'graylog2_exceptions', :git => 'git://github.com/wr0ngway/graylog2_exceptions.git'
+  gem 'graylog2-resque'
