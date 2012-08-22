@@ -8,7 +8,7 @@
     = stylesheet_link_tag('application', media: 'all')
     = stylesheet_link_tag('hierarchy', media: 'all') if @show_hierarchy
     = javascript_include_tag('application')
-    = javascript_include_tag('hierarchy.js')
+    = javascript_include_tag('hierarchy')
     = csrf_meta_tags
     = raw(render_head_content)
   - onload_text = "$('input#q').focus();" if params[:q].to_s.empty? and params[:f].to_s.empty? and params[:id].nil?
