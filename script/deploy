@@ -3,6 +3,7 @@
 set -e
 ENVIRONMENT=$1
 export RAILS_ENV=$1
+export RUBBER_ENV=$1
 
 if [ "$ENVIRONMENT" != "production" ]; then
   if [ "$ENVIRONMENT" != "staging" ]; then
@@ -13,7 +14,13 @@ fi
 
 solr_push() {
   ENVIRONMENT=$1
-  SOLR_ENV=$2
+  case $ENVIRONMENT in
+    staging )
+      SOLR_ENV=solr-stage ;;
+    production )
+      SOLR_ENV=solr-prod ;;
+  esac
+
   if [ -f $HOME/.ssh/alice_rsa.pub ]; then
     echo "Uploading schema.xml to $ENVIRONMENT"
     scp -i $HOME/.ssh/alice_rsa.pub support/schema.xml deploy@ec2-50-112-195-52.us-west-2.compute.amazonaws.com:~/${SOLR_ENV}/conf/schema.xml
@@ -22,38 +29,16 @@ solr_push() {
     echo 'Restarting Solr services'
     ssh -i $HOME/.ssh/alice_rsa.pub deploy@ec2-50-112-195-52.us-west-2.compute.amazonaws.com 'sudo service tomcat6 restart'
   else
-    echo 'You need to put alice_rsa.pub in your ~/.ssh directory to deploy solr changes.'
+    echo
+    echo 'deploy> ERROR: You need to put alice_rsa.pub in your ~/.ssh directory to deploy solr changes.'
+    echo
     exit 1
   fi
 }
 
-echo "Switching to ${ENVIRONMENT} heroku remote"
-if [ "$ENVIRONMENT" == "staging" ]; then
-  APP_NAME=alicelaw-staging
-  SOURCE_BRANCH=develop
-
-  heroku maintenance:on --app $APP_NAME
-  git push -f git@heroku.com:${APP_NAME}.git ${SOURCE_BRANCH}:master
-
-  solr_push $ENVIRONMENT solr-stage
-else
-  APP_NAME=alicelaw-production
-  SOURCE_BRANCH=master
-
-  heroku maintenance:on --app $APP_NAME
-  git push git@heroku.com:${APP_NAME}.git ${SOURCE_BRANCH}:master
-
-  solr_push $ENVIRONMENT solr-prod
-fi
-
-
-echo "Running heroku run rake db:migrate for ${APP_NAME}"
-heroku run rake db:migrate --app $APP_NAME
-
-echo "Running heroku restart for ${APP_NAME}"
-heroku restart --app $APP_NAME
-
-heroku maintenance:off --app $APP_NAME
+echo "deploy> Deploying to EC2 ${ENVIRONMENT}"
+solr_push $ENVIRONMENT
+cap deploy
 
 echo "Grabbing website to wake up heroku"
-curl "http://${APP_NAME}.herokuapp.com" &> /dev/null &
+curl "http://${ENVIRONMENT}.alicelaw.com" &> /dev/null &
