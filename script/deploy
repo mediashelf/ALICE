@@ -40,5 +40,5 @@ echo "deploy> Deploying to EC2 ${ENVIRONMENT}"
 solr_push $ENVIRONMENT
 cap deploy
 
-echo 'Does it curl?'
+echo 'deploy> Warm up request to application'
 curl "http://${ENVIRONMENT}.alicelaw.com" &> /dev/null &
