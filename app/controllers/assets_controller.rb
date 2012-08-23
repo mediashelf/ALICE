@@ -20,7 +20,7 @@ class AssetsController < ApplicationController
   def create
     @asset = Asset.new(params[:asset])
     if @asset.save
-      redirect_to @asset
+      redirect_to @asset, notice: 'Asset was successfully created.'
     else
       render :new
     end
@@ -28,7 +28,11 @@ class AssetsController < ApplicationController
 
   def update
     @asset = Asset.find(params[:id])
-    redirect_to @asset
+    if @asset.update_attributes(params[:topic])
+      redirect_to @asset, notice: 'Topic was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def destroy
