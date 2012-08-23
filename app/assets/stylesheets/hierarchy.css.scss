@@ -1,6 +1,3 @@
-/*
-  THE HIERARCHY DIV
-*/
 div#hierarchy, div#hierarchy_disable {
   position: absolute;
   z-index: 100;
@@ -15,13 +12,9 @@ div#hierarchy_disable {
   z-index: 300;
   background-color: #d0d0d0;
   opacity: 0.5;
-  /* for obsolete browsers: */
   filter: alpha(opacity=50);
 }
 
-/*
-  THE CAPTION DIV
-*/
 div.caption {
   font-size: 12px;
   /* right padding prevents overlap with controls div */
@@ -70,49 +63,18 @@ div.controls img {
   margin: 0px -4px 0px 0px;
 }
 
-/* EXPAND AND COLLAPSE BEHAVIOR
-  This mechanism works from the following nested div structure:
-
-    <div class='lvlX [hidechildren/showchildren] [selected/nonsel]'>
-
-      <div class='caption'>
-
-      [zero or more child divs of class lvlX]
-
-   "lvlX" is denominated as lvl0 (Policy Area), lvl1(Sub Area), lvl2 (Topic).
-
-   The mechanism of expansion and collapse is done by controlling the visibility of the
-   caption divs, which (with their enclosed content) are the only visible parts
-   of the hierarchy.
-
-   Expanding and collapsing child divs is controlled by the hidechildren/showchildren
-   class of the lvlX parent, and secondarily by the selection status of the caption.
-
-   N.B: lvl2 Topic divs never have child elements. lvl0 and lvl1 typically do. However,
-   IF the hierarchy were contextually restricted to show no Topics, the lvl1 divs
-   would have no children.
- */
-
-/*  do not show caption divs when they have been collapsed from above */
 div.hidechildren > div div.caption {
   display: none;
 }
 
-/* ensure that selected topics are never hidden */
 div.hidechildren div.selected > div.caption {
   display: block;
 }
 
-/* prevent top-level captions from being hidden under any circumstances
-  (this should never happen, but it's worth keeping as a safety measure) */
 div.lvl0.hidechildren > div.caption {
   display: block;
 }
 
-
-/*
-  COLORS OF CAPTIONS
-*/
 
 /* colors displayed for different levels */
 div.lvl0 > div.caption {
@@ -147,6 +109,22 @@ div.selected > div.caption, div.selected > div.caption:hover {
   background-color: #c51a26;
 }
 
+li.selected {
+  color: #ffffff;
+  background-color: #c51a26;
+}
+
+ol {
+  padding: 0;
+  margin: 0;
+}
+li {
+  padding: 0;
+  margin: 0;
+}
+.nav_links, .policy_area_links, .sub_area_links, .topic_links {
+  list-style: none;
+}
 
 
 
