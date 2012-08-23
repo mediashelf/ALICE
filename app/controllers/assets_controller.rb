@@ -28,10 +28,12 @@ class AssetsController < ApplicationController
 
   def update
     @asset = Asset.find(params[:id])
+    redirect_to @asset
   end
 
   def destroy
     @asset = Asset.find(params[:id])
     @asset.destroy
+    redirect_to :assets
   end
 end
