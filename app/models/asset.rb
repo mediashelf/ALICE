@@ -41,7 +41,7 @@ private
 
   def extract_content_from_asset_file
     if asset_file.present? && content.nil?
-      self.content = `pdftotext #{File.expand_path(asset_file.path)} -`.force_encoding('ISO-8859-1').encode('utf-8', replace: nil).gsub('\n', ' ')
+      self.content = `pdftotext #{File.expand_path(asset_file.path)} -`.force_encoding('ISO-8859-1').encode('utf-8', replace: nil).gsub("\n", ' ')
     end
   end
 end
