@@ -3,77 +3,74 @@
   %form#hierarchy_form
     #create_new_policy_area.lvl0
       .caption.headcaption
-        = link_to '>> Create new Policy Area <<', '/policy_areas/new'
+        %strong
+          = link_to 'Create new Policy Area', '/policy_areas/new'
+    %ol.policy_area_links
+      %li.policy_area
+        %h3.expandable_nav_link Civil Rights
+        = link_to image_tag('whiteplus.png'), 'javascript:createNewChild(0, 0);'
+        = link_to image_tag('whitequestionmark.png'), 'javascript:describeItem(0, 0);'
+        = link_to image_tag('whiteedit.png'), 'javascript:editItem(0, 0);'
+        %input.sub_category_checkbox{:type => "checkbox"}/
+        %ol.sub_area_links
+          %li.subarea
+            %h4.expandable_nav_link LGBTQ Rights
+            %ol.topic_links
+              %li.topic_link Marriage Equality
+      %li.policy_area
+        %h3.expandable_nav_link Immigrant Rights
+
     #0.lvl0.hidechildren.notsel
       .caption
-        %a{:href => "javascript: toggleVisibility(0);"} Civil Rights
+        %a{href: '#'} Civil Rights
         .controls
           = link_to image_tag('whiteplus.png'), 'javascript:createNewChild(0, 0);'
           = link_to image_tag('whitequestionmark.png'), 'javascript:describeItem(0, 0);'
           = link_to image_tag('whiteedit.png'), 'javascript:editItem(0, 0);'
           %input#cb_0{:onchange => "javascript:setSelect(\"cb_0\");", :type => "checkbox"}/
-        / closing controls 0
-      / closing caption 0
       #1.lvl1.hidechildren.notsel
         .caption
-          %a{:href => "javascript: toggleVisibility(1);"} LGBTQ Rights
+          %a{href: '#'} LGBTQ Rights
           .controls
             = link_to image_tag('greyplus.png'), 'javascript:createNewChild(1, 1);'
             = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(1, 1);'
             = link_to image_tag('greyedit.png'), 'javascript:editItem(1, 1);'
             %input#cb_1{:onchange => "javascript:setSelect(\"cb_1\");", :type => "checkbox"}/
-          / closing controls 1
-        / closing caption 1
-        #2.lvl2.notsel
+        #2.lvl2.notsel.expandable_nav_link
           .caption
             Marriage equality
             .controls
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(2, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(2, 2);'
               %input#cb_2{:onchange => "javascript:setSelect(\"cb_2\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
-        #3.lvl2.notsel
+        #3.lvl2.notsel.expandable_nav_link
           .caption
             Civil unions
             .controls
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(3, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(3, 2);'
               %input#cb_3{:onchange => "javascript:setSelect(\"cb_3\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
-        #4.lvl2.notsel
+        #4.lvl2.notsel.expandable_nav_link
           .caption
             Domestic Partnership
             .controls
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(4, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(4, 2);'
               %input#cb_4{:onchange => "javascript:setSelect(\"cb_4\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
-        #5.lvl2.notsel
+        #5.lvl2.notsel.expandable_nav_link
           .caption
             Second Parent Adoption Laws
             .controls
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(5, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(5, 2);'
               %input#cb_5{:onchange => "javascript:setSelect(\"cb_5\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
-        #6.lvl2.notsel
+        #6.lvl2.notsel.expandable_nav_link
           .caption
             Anti-discrimination statute for LGBTindividuals
             .controls
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(6, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(6, 2);'
               %input#cb_6{:onchange => "javascript:setSelect(\"cb_6\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
         #7.lvl2.notsel
           .caption
             Prosecuting hate crimes
@@ -81,9 +78,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(7, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(7, 2);'
               %input#cb_7{:onchange => "javascript:setSelect(\"cb_7\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
         #8.lvl2.notsel
           .caption
             Civil union dissolution
@@ -91,9 +85,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(8, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(8, 2);'
               %input#cb_8{:onchange => "javascript:setSelect(\"cb_8\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
         #9.lvl2.notsel
           .caption
             Prohibiting public contracts to discriminating contractors
@@ -101,10 +92,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(9, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(9, 2);'
               %input#cb_9{:onchange => "javascript:setSelect(\"cb_9\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
-      / wla le -1
       #10.lvl1.hidechildren.notsel
         .caption
           %a{:href => "javascript: toggleVisibility(10);"} People of Color Rights
@@ -113,8 +100,6 @@
             = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(10, 1);'
             = link_to image_tag('greyedit.png'), 'javascript:editItem(10, 1);'
             %input#cb_10{:onchange => "javascript:setSelect(\"cb_10\");", :type => "checkbox"}/
-          / closing controls 1
-        / closing caption 1
         #11.lvl2.notsel
           .caption
             Preventing hate crimes
@@ -122,10 +107,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(11, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(11, 2);'
               %input#cb_11{:onchange => "javascript:setSelect(\"cb_11\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
-      / wla le -1
       #12.lvl1.hidechildren.notsel
         .caption
           %a{:href => "javascript: toggleVisibility(12);"} Municipal Civil Rights Enabling Statute
@@ -134,8 +115,6 @@
             = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(12, 1);'
             = link_to image_tag('greyedit.png'), 'javascript:editItem(12, 1);'
             %input#cb_12{:onchange => "javascript:setSelect(\"cb_12\");", :type => "checkbox"}/
-          / closing controls 1
-        / closing caption 1
         #13.lvl2.notsel
           .caption
             State Statue Enabling Municipalities to Enact Anti Discrimination Laws
@@ -143,10 +122,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(13, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(13, 2);'
               %input#cb_13{:onchange => "javascript:setSelect(\"cb_13\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
-      / wla le -1
       #14.lvl1.hidechildren.notsel
         .caption
           %a{:href => "javascript: toggleVisibility(14);"} Eliminate Racial Bias in Criminal Justice System
@@ -155,8 +130,6 @@
             = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(14, 1);'
             = link_to image_tag('greyedit.png'), 'javascript:editItem(14, 1);'
             %input#cb_14{:onchange => "javascript:setSelect(\"cb_14\");", :type => "checkbox"}/
-          / closing controls 1
-        / closing caption 1
         #15.lvl2.notsel
           .caption
             Stop Racial Profiling by Police
@@ -164,9 +137,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(15, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(15, 2);'
               %input#cb_15{:onchange => "javascript:setSelect(\"cb_15\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
         #16.lvl2.notsel
           .caption
             Require racial impact statements for all legislation that affects sentencing, probation or parole policies
@@ -174,9 +144,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(16, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(16, 2);'
               %input#cb_16{:onchange => "javascript:setSelect(\"cb_16\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
         #17.lvl2.notsel
           .caption
             Address racial disparity in death penalty sentencing
@@ -184,10 +151,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(17, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(17, 2);'
               %input#cb_17{:onchange => "javascript:setSelect(\"cb_17\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
-      / wla le -1
       #18.lvl1.hidechildren.notsel
         .caption
           %a{:href => "javascript: toggleVisibility(18);"} Civil Liberties
@@ -196,8 +159,6 @@
             = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(18, 1);'
             = link_to image_tag('greyedit.png'), 'javascript:editItem(18, 1);'
             %input#cb_18{:onchange => "javascript:setSelect(\"cb_18\");", :type => "checkbox"}/
-          / closing controls 1
-        / closing caption 1
         #19.lvl2.notsel
           .caption
             Anti-USA Patriot Act
@@ -205,9 +166,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(19, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(19, 2);'
               %input#cb_19{:onchange => "javascript:setSelect(\"cb_19\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
         #20.lvl2.notsel
           .caption
             Free Speech
@@ -215,9 +173,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(20, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(20, 2);'
               %input#cb_20{:onchange => "javascript:setSelect(\"cb_20\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
         #21.lvl2.notsel
           .caption
             Anti-SLAPP
@@ -225,11 +180,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(21, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(21, 2);'
               %input#cb_21{:onchange => "javascript:setSelect(\"cb_21\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
-      / wla le -1
-    / wla eq -2
     #22.lvl0.hidechildren.notsel
       .caption
         %a{:href => "javascript: toggleVisibility(22);"} Immigrant Rights
@@ -238,8 +188,6 @@
           = link_to image_tag('whitequestionmark.png'), 'javascript:describeItem(22, 0);'
           = link_to image_tag('whiteedit.png'), 'javascript:editItem(22, 0);'
           %input#cb_22{:onchange => "javascript:setSelect(\"cb_22\");", :type => "checkbox"}/
-        / closing controls 0
-      / closing caption 0
       #23.lvl1.hidechildren.notsel
         .caption
           %a{:href => "javascript: toggleVisibility(23);"} post-secondary education
@@ -248,8 +196,6 @@
             = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(23, 1);'
             = link_to image_tag('greyedit.png'), 'javascript:editItem(23, 1);'
             %input#cb_23{:onchange => "javascript:setSelect(\"cb_23\");", :type => "checkbox"}/
-          / closing controls 1
-        / closing caption 1
         #24.lvl2.notsel
           .caption
             In-state Tuition & Aid for Qualified Undocumented Students
@@ -257,10 +203,6 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(24, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(24, 2);'
               %input#cb_24{:onchange => "javascript:setSelect(\"cb_24\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
-      / wla le -1
       #25.lvl1.hidechildren.notsel
         .caption
           %a{:href => "javascript: toggleVisibility(25);"} Health Care
@@ -269,8 +211,6 @@
             = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(25, 1);'
             = link_to image_tag('greyedit.png'), 'javascript:editItem(25, 1);'
             %input#cb_25{:onchange => "javascript:setSelect(\"cb_25\");", :type => "checkbox"}/
-          / closing controls 1
-        / closing caption 1
         #26.lvl2.notsel
           .caption
             prenatal care for women regardless of immigration status
@@ -278,8 +218,3 @@
               = link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(26, 2);'
               = link_to image_tag('greyedit.png'), 'javascript:editItem(26, 2);'
               %input#cb_26{:onchange => "javascript:setSelect(\"cb_26\");", :type => "checkbox"}/
-            / closing controls 2
-          / closing caption 2
-        / wla le 0
-      / wla le -1
-
