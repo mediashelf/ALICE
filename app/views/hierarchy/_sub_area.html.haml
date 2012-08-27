@@ -1,5 +1,6 @@
 %li.sub_area
   %h4.expandable_nav_link= sub_area.name
-  = sub_area.editor_links
+  .controls
+    = sub_area.editor_links
   %ol.topic_links
     = render partial: 'hierarchy/topic', collection: sub_area.topics
