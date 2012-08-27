@@ -25,6 +25,10 @@ Given /^an "(.*?)" sub area within "(.*?)"$/ do |sub_area_name, policy_area_name
   FactoryGirl.create :sub_area, name: sub_area_name, policy_area: policy_area
 end
 
+Given /^an? "([^"]*?)" sub area under a policy area$/ do |name|
+  FactoryGirl.create :sub_area, :with_policy_area, name: name
+end
+
 Then /^"(.*?)" should appear in the hierarchy$/ do |target_text|
   within('#hierarchy') do
     page.should have_xpath("//li[@class='policy_area show_sub_areas']//h4[text()='#{target_text}']")
@@ -39,4 +43,14 @@ end
 
 When /^I click on policy area "(.*?)"$/ do |target|
   page.find('h3', text: target).click
+end
+
+Given /^an? "([^"]*?)" sub area$/ do |name|
+  FactoryGirl.create :sub_area, name: name
+end
+
+When /^I add a topic to the "([^"]*?)" sub area$/ do |name|
+  within('.sub_area') do
+    page.find('.plus_button').click
+  end
 end
