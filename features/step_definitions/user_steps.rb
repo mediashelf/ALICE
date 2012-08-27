@@ -6,7 +6,7 @@ Given /^I am logged out$/ do
   page.should have_content('Login')
 end
 
-Given /^I log in as "(.*?)"$/ do |email|
+Given /^I log in as "([^"]*?)"$/ do |email|
   step %Q(there is a user named "#{email}")
   step %Q(I am on the sign in page)
   step %Q(I fill in "Email" with "#{email}")
@@ -14,11 +14,11 @@ Given /^I log in as "(.*?)"$/ do |email|
   step %Q(I press "Sign in")
 end
 
-Given /^there is a user named "(.*?)"$/ do |username|
+Given /^there is a user named "([^"]*?)"$/ do |username|
   @user = FactoryGirl.create(:user, email: username)
 end
 
-Given /^I fill in "(.*?)" with "(.*?)"$/ do |field, value|
+Given /^I fill in "([^"]*?)" with "([^"]*?)"$/ do |field, value|
   fill_in(field, with: value)
 end
 

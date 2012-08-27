@@ -12,7 +12,7 @@ Then /^I should be on the (.*?)(?: ?page)$/ do |page_name|
   end
 end
 
-Given /^I press "(.*?)"$/ do |button_name|
+Given /^I press "([^"]*?)"$/ do |button_name|
   click_button(button_name)
 end
 
@@ -20,7 +20,7 @@ Given /^I follow "([^"]*?)"$/ do |link_name|
   click_link(link_name)
 end
 
-Given /^I follow "(.*?)" within "(.*?)"$/ do |link_name, wrapper_element|
+Given /^I follow "([^"]*?)" within "([^"]*?)"$/ do |link_name, wrapper_element|
   within(wrapper_element) do
     click_link(link_name)
   end
@@ -30,14 +30,26 @@ Then /^I should see "([^"]*?)"$/ do |expected_text|
   page.should have_content(expected_text)
 end
 
-Then /^I should see "(.*?)" within "(.*?)"$/ do |expected_text, wrapper_element|
+Then /^I should see "([^"]*?)" within "([^"]*?)"$/ do |expected_text, wrapper_element|
   within(wrapper_element) do
     page.should have_content(expected_text)
   end
 end
 
-Then /^I should not see "(.*?)"$/ do |undesired_text|
+Then /^I should not see "([^"]*?)"$/ do |undesired_text|
   page.should_not have_content(undesired_text)
+end
+
+Then /^I should not see the "([^"]*?)" element within "([^"]*?)"$/ do |selector, wrapper_element|
+  within(wrapper_element) do
+    page.should_not have_selector(selector)
+  end
+end
+
+Then /^I should not see "([^"]*?)" within "([^"]*?)"$/ do |text, wrapper_element|
+  within(wrapper_element) do
+    page.should_not have_content(text)
+  end
 end
 
 When /^I fill in the following:$/ do |field_table|

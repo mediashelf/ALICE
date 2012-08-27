@@ -21,7 +21,8 @@ class SubAreasController < ApplicationController
     @sub_area = SubArea.new(params[:sub_area])
 
     if @sub_area.save
-      redirect_to @sub_area, notice: 'Sub area was successfully created.'
+      redirect_to policy_area_sub_area_path(@sub_area.policy_area, @sub_area),
+        notice: 'Sub area was successfully created.'
     else
       render :new
     end
