@@ -1,7 +1,7 @@
 %li.policy_area.hide_sub_areas
-  %h3.expandable_nav_link
-    = policy_area.name
-    = link_to image_tag('whiteplus.png'), new_sub_area_path, id: 'plus_button', params: {policy_area_id: policy_area.id}
+  %h3.expandable_nav_link= policy_area.name
+  = policy_area.editor_links
+
   -#= link_to image_tag('whitequestionmark.png'), 'javascript:describeItem(0, 0);'
   -#= link_to image_tag('whiteedit.png'), 'javascript:editItem(0, 0);'
   -#%input.sub_category_checkbox{:type => "checkbox"}/

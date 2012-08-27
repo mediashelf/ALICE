@@ -7,3 +7,7 @@ Given /^I pry$/ do
   binding.pry
   true
 end
+
+When /^show me the page$/ do
+  save_and_open_page
+end

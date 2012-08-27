@@ -15,7 +15,7 @@ Feature: Sub Areas
       Then I should see "Sub Area Description"
 
   Scenario: anonymous user cannot create sub area
-    Given I am on the sub areas page
+    Given an "Immigration" policy area
+      And I am on the homepage
       And I am logged out
-    When I follow "New Sub Area"
-    Then I should be on the sign in page
+    Then I should not see the "#plus_button" element within ".policy_area"

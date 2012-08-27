@@ -16,7 +16,7 @@ Then /^Verify hierarchy presence as follows:$/ do |assertion_table|
   end
 end
 
-Given /^an? "(.*?)" policy area$/ do |name|
+Given /^an? "([^"]*?)" policy area$/ do |name|
   FactoryGirl.create :policy_area, name: name
 end
 

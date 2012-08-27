@@ -5,6 +5,6 @@
   %b Description:
   = @sub_area.description
 
-= link_to 'Edit', edit_sub_area_path(@sub_area)
+= link_to 'Edit', edit_policy_area_sub_area_path(@sub_area.policy_area, @sub_area)
 \|
-= link_to 'Back', sub_areas_path
+= link_to 'Back', policy_area_sub_areas_path(@sub_area.policy_area)
