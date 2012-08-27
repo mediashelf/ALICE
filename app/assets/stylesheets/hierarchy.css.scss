@@ -145,3 +145,14 @@ div#show_selected_items {
 li.hide_sub_areas > ol {
   display: none;
 }
+
+a.plus_button {
+  position: relative;
+  top: -1.2em;
+  left: 14em;
+}
+
+ol, ul {
+  list-style: none;
+  padding-left: 1em;
+}
