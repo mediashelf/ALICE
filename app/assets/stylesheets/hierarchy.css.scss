@@ -3,7 +3,7 @@ div#hierarchy, div#hierarchy_disable {
   z-index: 100;
   top: 93px;
   width:280px;
-  height: 100%;
+  height: 93%;
   font-family: helvetica, arial, sans-serif;
   border: thin solid #d0d0d0;
 }
@@ -138,4 +138,21 @@ div#show_selected_items {
   border: thin solid black;
 
   padding: 20px 30px;
+}
+
+/* NEW HIERARCHY STYLES */
+
+li.hide_sub_areas > ol {
+  display: none;
+}
+
+a.plus_button {
+  position: relative;
+  top: -1.2em;
+  left: 14em;
+}
+
+ol, ul {
+  list-style: none;
+  padding-left: 1em;
 }

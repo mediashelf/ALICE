@@ -6,7 +6,7 @@ Feature: Sub Areas
   Scenario: editor creates sub area
     Given an "Immigration" policy area
       And I am logged in
-    When I add a sub area to the "Immigration" policy area
+    When I follow "Add Sub Area" within ".policy_area"
     Then I should be on the new sub area page
     When I fill in "Name" with "Test Sub Area"
       And I fill in "Description" with "Sub Area Description"
