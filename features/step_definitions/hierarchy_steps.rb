@@ -19,3 +19,23 @@ end
 Given /^an? "([^"]*?)" policy area$/ do |name|
   FactoryGirl.create :policy_area, name: name
 end
+
+Given /^an? "([^"]*?)" sub area$/ do |name|
+  FactoryGirl.create :sub_area, name: name
+end
+
+Given /^an? "([^"]*?)" sub area under a policy area$/ do |name|
+  FactoryGirl.create :sub_area, :with_policy_area, name: name
+end
+
+When /^I add a sub area to the "([^"]*?)" policy area$/ do |name|
+  within('.policy_area') do
+    page.find('.plus_button').click
+  end
+end
+
+When /^I add a topic to the "([^"]*?)" sub area$/ do |name|
+  within('.sub_area') do
+    page.find('.plus_button').click
+  end
+end

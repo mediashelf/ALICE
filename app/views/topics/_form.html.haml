@@ -6,6 +6,9 @@
         - @topic.errors.full_messages.each do |msg|
           %li= msg
 
+  -#.field
+    -#= f.hidden_field :sub_area_id
+
   .field
     = f.label :name
     = f.text_field :name
