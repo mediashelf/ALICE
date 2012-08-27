@@ -4,6 +4,11 @@
 %p
   %b Description:
   = @topic.description
+%p
+  %b Sub Areas:
+  %ul
+    - @topic.sub_areas.each do |sub_area|
+      %li= sub_area.name
 
 = link_to 'Edit', edit_topic_path(@topic)
 \|

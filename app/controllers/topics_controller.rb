@@ -11,6 +11,8 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
+    @policy_area_id = params[:policy_area_id]
+    @sub_area_id = params[:sub_area_id]
   end
 
   def edit

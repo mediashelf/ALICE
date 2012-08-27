@@ -1,7 +1,9 @@
 Alice::Application.routes.draw do
 
   resources :policy_areas do
-    resources :sub_areas
+    resources :sub_areas do
+      resources :topics
+    end
   end
 
   resources :topics
