@@ -16,8 +16,14 @@ Given /^I press "(.*?)"$/ do |button_name|
   click_button(button_name)
 end
 
-Given /^I follow "(.*?)"$/ do |link_name|
+Given /^I follow "([^"]*?)"$/ do |link_name|
   click_link(link_name)
+end
+
+Given /^I follow "(.*?)" within "(.*?)"$/ do |link_name, wrapper_element|
+  within(wrapper_element) do
+    click_link(link_name)
+  end
 end
 
 Then /^I should see "([^"]*?)"$/ do |expected_text|

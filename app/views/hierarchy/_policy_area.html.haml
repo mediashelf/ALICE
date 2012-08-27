@@ -1,0 +1,8 @@
+%li.policy_area
+  %h3.expandable_nav_link= policy_area.name
+  = link_to image_tag('whiteplus.png'), new_sub_area_path, id: 'plus_button', params: {policy_area_id: policy_area.id}
+  -#= link_to image_tag('whitequestionmark.png'), 'javascript:describeItem(0, 0);'
+  -#= link_to image_tag('whiteedit.png'), 'javascript:editItem(0, 0);'
+  -#%input.sub_category_checkbox{:type => "checkbox"}/
+  %ol.sub_area_links
+    = render partial: 'hierarchy/sub_area', collection: policy_area.sub_areas

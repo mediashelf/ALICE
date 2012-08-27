@@ -10,7 +10,7 @@ class SubAreasController < ApplicationController
   end
 
   def new
-    @sub_area = SubArea.new
+    @sub_area = SubArea.new(policy_area_id: params[:policy_area_id])
   end
 
   def edit
