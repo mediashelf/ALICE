@@ -20,8 +20,14 @@ Given /^I follow "(.*?)"$/ do |link_name|
   click_link(link_name)
 end
 
-Then /^I should see "(.*?)"$/ do |expected_text|
+Then /^I should see "([^"]*?)"$/ do |expected_text|
   page.should have_content(expected_text)
+end
+
+Then /^I should see "(.*?)" within "(.*?)"$/ do |expected_text, wrapper_element|
+  within(wrapper_element) do
+    page.should have_content(expected_text)
+  end
 end
 
 Then /^I should not see "(.*?)"$/ do |undesired_text|
@@ -36,6 +42,6 @@ When /^I fill in the following:$/ do |field_table|
   end
 end
 
-When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"$/ do |file_name, field|
+When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |file_name, field|
   attach_file(field, File.expand_path(File.join(Rails.root, "support", file_name)))
 end
