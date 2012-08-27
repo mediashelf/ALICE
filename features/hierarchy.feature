@@ -1,8 +1,19 @@
-#@pending
-#Feature: Hierarchy
-  #In order to use the topics hierarchy when it makes sense
-  #As a user
-  #I want the hierarchy to appear and disappear based on context
+Feature: Hierarchy
+  In order to visualize topic groupings of assets
+  As a user
+  I want a dynamic hierarch on the left side
+
+  @javascript
+  Scenario: Expand and Contract Policy Areas
+    Given an "H1B" sub area within "Immigration"
+      And I am on the home page
+    Then "H1B" should not appear in the hierarchy
+
+    When I click on policy area "Immigration"
+    Then "H1B" should appear in the hierarchy
+
+    When I click on policy area "Immigration"
+    Then "H1B" should not appear in the hierarchy
 
   #@pending
   #Scenario: hierarchy is context dependent

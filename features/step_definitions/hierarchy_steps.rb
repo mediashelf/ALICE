@@ -19,3 +19,24 @@ end
 Given /^an? "(.*?)" policy area$/ do |name|
   FactoryGirl.create :policy_area, name: name
 end
+
+Given /^an "(.*?)" sub area within "(.*?)"$/ do |sub_area_name, policy_area_name|
+  policy_area = FactoryGirl.create :policy_area, name: policy_area_name
+  FactoryGirl.create :sub_area, name: sub_area_name, policy_area: policy_area
+end
+
+Then /^"(.*?)" should appear in the hierarchy$/ do |target_text|
+  within('#hierarchy') do
+    page.should have_xpath("//li[@class='policy_area show_sub_areas']//h4[text()='#{target_text}']")
+  end
+end
+
+Then /^"(.*?)" should not appear in the hierarchy$/ do |target_text|
+  within('#hierarchy') do
+    page.should have_xpath("//li[@class='policy_area hide_sub_areas']//h4[text()='#{target_text}']")
+  end
+end
+
+When /^I click on policy area "(.*?)"$/ do |target|
+  page.find('h3', text: target).click
+end

@@ -139,3 +139,9 @@ div#show_selected_items {
 
   padding: 20px 30px;
 }
+
+/* NEW HIERARCHY STYLES */
+
+li.hide_sub_areas > ol {
+  display: none;
+}
