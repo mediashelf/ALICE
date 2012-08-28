@@ -49,13 +49,13 @@ end
 
 Then /^topic "(.*?)" should appear in the hierarchy$/ do |target_text|
   within('#hierarchy') do
-    page.should have_xpath("//li[@class='sub_area show_topics']//li[@class='topic'][text()='#{target_text}']")
+    page.should have_xpath("//li[@class='sub_area show_topics']//li[@class='topic']//div[text()='#{target_text}']")
   end
 end
 
 Then /^topic "(.*?)" should not appear in the hierarchy$/ do |target_text|
   within('#hierarchy') do
-    page.should have_xpath("//li[@class='sub_area hide_topics']//li[@class='topic'][text()='#{target_text}']")
+    page.should have_xpath("//li[@class='sub_area hide_topics']//li[@class='topic']//div[text()='#{target_text}']")
   end
 end
 
@@ -64,7 +64,7 @@ When /^I click on policy area "(.*?)"$/ do |target|
 end
 
 When /^I click on sub area "(.*?)"$/ do |target|
-  page.find('li.sub_area > h4', text: target).click
+  page.find('h4', text: target).click
 end
 
 
