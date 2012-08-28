@@ -1,6 +1,6 @@
-%li.sub_area
-  %h4.expandable_nav_link= sub_area.name
+%li.sub_area.hide_topics
+  %h4.expandable_nav= sub_area.name
   .controls
     = sub_area.editor_links
-  %ol.topic_links
+  %ol.topics
     = render partial: 'hierarchy/topic', collection: sub_area.topics

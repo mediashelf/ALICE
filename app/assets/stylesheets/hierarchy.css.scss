@@ -80,8 +80,12 @@ ol li {
 
 /* NEW HIERARCHY STYLES */
 
-li.hide_sub_areas > ol {
+li.hide_sub_areas > ol, li.hide_topics > ol {
   display: none;
+}
+
+.expandable_nav:hover {
+  cursor: pointer;
 }
 
 a.plus_button {
