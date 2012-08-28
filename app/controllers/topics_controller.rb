@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :find_parents, except: [:index, :show]
 
   def index
     @topics = Topic.all
@@ -11,8 +12,6 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
-    @policy_area_id = params[:policy_area_id]
-    @sub_area_id = params[:sub_area_id]
   end
 
   def edit
@@ -23,7 +22,7 @@ class TopicsController < ApplicationController
     @topic = Topic.new(params[:topic])
 
     if @topic.save
-      redirect_to @topic, notice: 'Topic was successfully created.'
+      redirect_to url_for([@policy_area, @sub_area, @topic]), notice: 'Topic was successfully created.'
     else
       render :new
     end
@@ -33,7 +32,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
 
     if @topic.update_attributes(params[:topic])
-      redirect_to @topic, notice: 'Topic was successfully updated.'
+      redirect_to url_for([@policy_area, @sub_area, @topic]), notice: 'Topic was successfully updated.'
     else
       render :edit
     end
@@ -42,6 +41,14 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.find(params[:id])
     @topic.destroy
-    redirect_to topics_url
+    redirect_to policy_area_sub_area_topics_path(@policy_area, @sub_area)
   end
+
+  private
+
+  def find_parents
+    @policy_area = PolicyArea.find(params[:policy_area_id])
+    @sub_area = SubArea.find(params[:sub_area_id])
+  end
+
 end
