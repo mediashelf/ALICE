@@ -13,6 +13,7 @@ Feature: Sub Areas
       And I press "Save"
     Then I should see "Test Sub Area" within "#hierarchy"
       And I should see "Sub Area Description"
+      And sub area "Test Sub Area" should belong to policy area "Immigration"
 
   Scenario: anonymous user cannot create sub area
     Given an "Immigration" policy area
