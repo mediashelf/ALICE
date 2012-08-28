@@ -11,13 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120819192109) do
+ActiveRecord::Schema.define(:version => 20120828145133) do
 
   create_table "assets", :force => true do |t|
     t.string   "policy_area"
     t.string   "sub_area"
     t.string   "topic"
-    t.string   "asset"
     t.string   "title"
     t.integer  "year"
     t.string   "source"
