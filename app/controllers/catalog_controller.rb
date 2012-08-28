@@ -31,7 +31,8 @@ class CatalogController < ApplicationController
 
     # solr field configuration for document/show views
     config.show.html_title = 'topic_texts'
-    config.show.heading = 'title_texts'
+    #config.show.heading = 'title_texts'
+    config.show.heading = 'title_display'
     config.add_show_field 'policy_area_texts', label: 'Policy Area:'
     config.add_show_field 'sub_area_texts', label: 'Sub-Area:'
     config.add_show_field 'topic_texts', label: 'Topic:'

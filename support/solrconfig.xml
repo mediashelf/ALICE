@@ -444,20 +444,29 @@
        <str name="version">2.1</str>
         -->
       <str name="qf">
-        topic_texts
-        summary_texts
+        alternative_terms_texts
+        bill_number_texts
+        content_texts
         format_texts
-        keywords_texts
         level_texts
+        policy_area_texts
+        short_title_texts
         source_texts
         state_texts
-        policy_area_texts
         sub_area_texts
+        summary_texts
         title_texts
+        topic_texts
         type_of_texts
         year_is
-        content_texts
       </str>
+
+       <str name="spellcheck">true</str>
+       <str name="spellcheck.dictionary">default</str>
+       <str name="spellcheck.onlyMorePopular">true</str>
+       <str name="spellcheck.extendedResults">true</str>
+       <str name="spellcheck.collate">false</str>
+       <str name="spellcheck.count">5</str>
     </lst>
   </requestHandler>
 

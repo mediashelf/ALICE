@@ -1,16 +1,30 @@
+include ActionDispatch::TestProcess
+
 FactoryGirl.define do
   factory :asset do
-    policy_area "MyString"
-    sub_area "MyString"
-    topic "MyString"
-    title "MyString"
-    year 1
-    source "MyString"
-    state "MyString"
-    format "MyString"
-    level "MyString"
-    type_of ""
-    keywords "MyString"
-    summary "MyString"
+    alternative_terms 'Asset'
+    asset_file { fixture_file_upload("#{Rails.root}/support/fake.pdf", 'application/pdf') }
+    bill_number 'Asset'
+    content 'Asset'
+    external_link_to_asset 'Asset'
+    format 'Asset'
+    legislative_history 'Asset'
+    level 'Asset'
+    notes 'Asset'
+    policy_area 'Asset'
+    short_title 'Asset'
+    source 'Asset'
+    source_website 'Asset'
+    state 'Asset'
+    sub_area 'Asset'
+    summary 'Asset'
+    title 'Asset'
+    topic 'Asset'
+    type_of 'Asset'
+    web_folder_link_to_asset_pdf 'Asset'
+    web_folder_link_to_asset_word_doc  'Asset'
+    web_folder_link_to_bill_pdf 'Asset'
+    web_folder_link_to_bill_word_doc 'Asset'
+    year 2012
   end
 end

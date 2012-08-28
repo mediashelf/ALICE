@@ -29,15 +29,46 @@
   %b Type:
   = @asset.type_of
 %p
-  %b Keywords:
-  = @asset.keywords
-%p
   %b Summary:
   = @asset.summary
-
 %p
-  %b File:
-  = link_to 'Download', @asset.asset_file.url
+  %b Bill number:
+  = @asset.bill_number
+%p
+  %b External link to asset:
+  = @asset.external_link_to_asset
+%p
+  %b Short title:
+  = @asset.short_title
+%p
+  %b Source website:
+  = @asset.source_website
+%p
+  %b Web folder link to asset PDF:
+  = @asset.web_folder_link_to_asset_pdf
+%p
+  %b Web folder link to asset Word document:
+  = @asset.web_folder_link_to_asset_word_doc
+%p
+  %b Web folder link to bill PDF:
+  = @asset.web_folder_link_to_bill_pdf
+%p
+  %b Web folder link to bill Word document:
+  = @asset.web_folder_link_to_bill_word_doc
+%p
+  %b Alternative terms:
+  = @asset.alternative_terms
+%p
+  %b Legislative history:
+  = @asset.legislative_history
+%p
+  %b Notes:
+  = @asset.notes
+
+- if @asset.asset_file?
+  %p
+    %b PDF Asset:
+    = link_to 'Download', @asset.asset_file.url
 
 = link_to 'Edit', edit_asset_path(@asset)
 \|

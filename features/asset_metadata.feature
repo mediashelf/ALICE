@@ -16,21 +16,31 @@ Feature: Asset metadata
     Then I should be on the new asset page
 
     When I fill in the following:
-      | Field       | Value                                                        |
-      | Policy area | Immigration                                                  |
-      | Sub area    | Extradition                                                  |
-      | Topic       | Right to a hearing                                           |
-      | Title       | Wisconsin right to hearing before extradition law            |
-      | Year        | 2011                                                         |
-      | Source      | Wisconsin Senate                                             |
-      | State       | WI                                                           |
-      | Format      | Examplary                                                    |
-      | Level       | State                                                        |
-      | Type of     | Law                                                          |
-      | Keywords    | Immigration, Deportation                                     |
-      | Summary     | Wisconsin right to hearing before extradition law - Nuf Said |
+      | Field                                  | Value                                                        |
+      | Policy area                            | Immigration                                                  |
+      | Sub area                               | Extradition                                                  |
+      | Topic                                  | Right to a hearing                                           |
+      | Title                                  | Wisconsin right to hearing before extradition law            |
+      | Year                                   | 2011                                                         |
+      | Source                                 | Wisconsin Senate                                             |
+      | State                                  | WI                                                           |
+      | Format                                 | Examplary                                                    |
+      | Level                                  | State                                                        |
+      | Type of                                | Law                                                          |
+      | Summary                                | Wisconsin right to hearing before extradition law - Nuf Said |
+      | Alternative terms                      | some, more, terms                                            |
+      | Bill number                            | 89.9 FM                                                      |
+      | External link to asset                 | http://www.google.com                                        |
+      | Legislative history                    | Beautiful history                                            |
+      | Notes                                  | These are notes.                                             |
+      | Short title                            | Right to Hearing Before Extradition                          |
+      | Source website                         | http://www.wikipedia.org                                     |
+      | Web folder link to asset PDF           | http://www.wikipedia.org                                     |
+      | Web folder link to asset Word document | http://www.wikipedia.org                                     |
+      | Web folder link to bill PDF            | http://www.wikipedia.org                                     |
+      | Web folder link to bill Word document  | http://www.wikipedia.org                                     |
 
-      And I attach the file "fake.pdf" to "File"
+      And I attach the file "fake.pdf" to "PDF Asset"
       And I press "Save"
     Then I should see "Right to a hearing"
     When I follow "Download"
@@ -39,6 +49,4 @@ Feature: Asset metadata
     Given I am logged in
     When I follow "New Asset"
       And I press "Save"
-    Then I should see "Topic can't be blank"
-      And I should see "Title can't be blank"
-      And I should see "Summary can't be blank"
+    Then I should see "can't be blank"

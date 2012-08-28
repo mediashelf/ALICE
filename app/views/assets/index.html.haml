@@ -7,13 +7,10 @@
     %th Topic
     %th Title
     %th Year
-    %th Source
     %th State
     %th Format
     %th Level
     %th Type
-    %th Keywords
-    %th Summary
     %th
     %th
     %th
@@ -25,13 +22,10 @@
       %td= asset.topic
       %td= asset.title
       %td= asset.year
-      %td= asset.source
       %td= asset.state
       %td= asset.format
       %td= asset.level
       %td= asset.type_of
-      %td= asset.keywords
-      %td= asset.summary
       %td= link_to 'Show', asset
       %td= link_to 'Edit', edit_asset_path(asset)
       %td= link_to 'Destroy', asset, :confirm => 'Are you sure?', :method => :delete
