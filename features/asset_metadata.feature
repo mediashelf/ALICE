@@ -35,7 +35,6 @@ Feature: Asset metadata
       And I press "Save"
     Then I should see "Right to a hearing law"
     When I follow "Download"
-    # Can't follow link & verify as a PDF in @javascript
 
   Scenario: Missing Required Field
     Given I am logged in
