@@ -7,7 +7,6 @@ Alice::Application.routes.draw do
   end
 
   resources :topics
-
   resources :assets
 
   root :to => "catalog#index"

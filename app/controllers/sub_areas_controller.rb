@@ -2,7 +2,7 @@ class SubAreasController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
 
   def index
-    @sub_areas = SubArea.all
+    @sub_areas = SubAreaDecorator.decorate(SubArea.all)
   end
 
   def show
@@ -32,7 +32,7 @@ class SubAreasController < ApplicationController
     @sub_area = SubArea.find(params[:id])
 
     if @sub_area.update_attributes(params[:sub_area])
-      redirect_to @sub_area, notice: 'Sub area was successfully updated.'
+      redirect_to policy_area_sub_areas_url(@sub_area.policy_area), notice: 'Sub area was successfully updated.'
     else
       render :edit
     end
@@ -41,6 +41,6 @@ class SubAreasController < ApplicationController
   def destroy
     @sub_area = SubArea.find(params[:id])
     @sub_area.destroy
-    redirect_to sub_areas_url
+    redirect_to policy_area_sub_areas_url(@sub_area.policy_area)
   end
 end

@@ -1,4 +1,4 @@
-= form_for @sub_area, url: policy_area_sub_areas_path do |f|
+= form_for [@sub_area.policy_area, @sub_area] do |f|
   -if @sub_area.errors.any?
     #error_explanation
       %h2= "#{pluralize(@sub_area.errors.count, "error")} prohibited this sub_area from being saved:"

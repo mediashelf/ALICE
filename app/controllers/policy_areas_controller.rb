@@ -2,7 +2,7 @@ class PolicyAreasController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
 
   def index
-    @policy_areas = PolicyArea.all
+    @policy_areas = PolicyAreaDecorator.decorate(PolicyArea.all)
   end
 
   def show
