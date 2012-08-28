@@ -39,7 +39,7 @@ private
   end
 
   def extract_content_from_asset_file
-    if asset_file.present? && content.nil?
+    if asset_file.present?
       self.content = `pdftotext #{File.expand_path(asset_file.path)} -`
                        .force_encoding('ISO-8859-1')
                        .encode('utf-8', replace: nil)
