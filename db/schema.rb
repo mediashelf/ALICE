@@ -26,10 +26,21 @@ ActiveRecord::Schema.define(:version => 20120828145133) do
     t.string   "type_of"
     t.string   "keywords"
     t.text     "summary"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "asset_file"
     t.text     "content"
+    t.string   "bill_number"
+    t.string   "external_link_to_asset"
+    t.string   "short_title"
+    t.string   "source_website"
+    t.string   "web_folder_link_to_asset_pdf"
+    t.string   "web_folder_link_to_asset_word_doc"
+    t.string   "web_folder_link_to_bill_pdf"
+    t.string   "web_folder_link_to_bill_word_doc"
+    t.text     "alternative_terms"
+    t.text     "legislative_history"
+    t.text     "notes"
   end
 
   create_table "bookmarks", :force => true do |t|

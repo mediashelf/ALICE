@@ -13,7 +13,6 @@ class Asset < ActiveRecord::Base
     { 'id' => id,
       'topic_texts' => topic,
       'summary_texts' => summary,
-      'asset_texts' => asset,
       'format_texts' => format,
       'keywords_texts' => keywords,
       'level_texts' => level,

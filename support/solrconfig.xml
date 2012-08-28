@@ -446,7 +446,6 @@
       <str name="qf">
         topic_texts
         summary_texts
-        asset_texts
         format_texts
         keywords_texts
         level_texts

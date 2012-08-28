@@ -20,7 +20,6 @@ Feature: Asset metadata
       | Policy area | Immigration                                                  |
       | Sub area    | Extradition                                                  |
       | Topic       | Right to a hearing                                           |
-      | Asset       | Right to a hearing law                                       |
       | Title       | Wisconsin right to hearing before extradition law            |
       | Year        | 2011                                                         |
       | Source      | Wisconsin Senate                                             |
@@ -33,7 +32,7 @@ Feature: Asset metadata
 
       And I attach the file "fake.pdf" to "File"
       And I press "Save"
-    Then I should see "Right to a hearing law"
+    Then I should see "Right to a hearing"
     When I follow "Download"
 
   Scenario: Missing Required Field
