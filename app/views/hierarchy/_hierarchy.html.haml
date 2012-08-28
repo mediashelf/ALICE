@@ -5,7 +5,7 @@
       %h2
         = link_to 'Create new Policy Area', '/policy_areas/new'
 
-    %ol.policy_area_links
+    %ol.policy_areas
       = render partial: 'hierarchy/policy_area', collection: @policy_areas
 
     -##0.lvl0.hidechildren.notsel
@@ -24,35 +24,35 @@
             -#= link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(1, 1);'
             -#= link_to image_tag('greyedit.png'), 'javascript:editItem(1, 1);'
             -#%input#cb_1{:onchange => "javascript:setSelect(\"cb_1\");", :type => "checkbox"}/
-        -##2.lvl2.notsel.expandable_nav_link
+        -##2.lvl2.notsel.expandable_nav
           -#.caption
             -#Marriage equality
             -#.controls
               -#= link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(2, 2);'
               -#= link_to image_tag('greyedit.png'), 'javascript:editItem(2, 2);'
               -#%input#cb_2{:onchange => "javascript:setSelect(\"cb_2\");", :type => "checkbox"}/
-        -##3.lvl2.notsel.expandable_nav_link
+        -##3.lvl2.notsel.expandable_nav
           -#.caption
             -#Civil unions
             -#.controls
               -#= link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(3, 2);'
               -#= link_to image_tag('greyedit.png'), 'javascript:editItem(3, 2);'
               -#%input#cb_3{:onchange => "javascript:setSelect(\"cb_3\");", :type => "checkbox"}/
-        -##4.lvl2.notsel.expandable_nav_link
+        -##4.lvl2.notsel.expandable_nav
           -#.caption
             -#Domestic Partnership
             -#.controls
               -#= link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(4, 2);'
               -#= link_to image_tag('greyedit.png'), 'javascript:editItem(4, 2);'
               -#%input#cb_4{:onchange => "javascript:setSelect(\"cb_4\");", :type => "checkbox"}/
-        -##5.lvl2.notsel.expandable_nav_link
+        -##5.lvl2.notsel.expandable_nav
           -#.caption
             -#Second Parent Adoption Laws
             -#.controls
               -#= link_to image_tag('greyquestionmark.png'), 'javascript:describeItem(5, 2);'
               -#= link_to image_tag('greyedit.png'), 'javascript:editItem(5, 2);'
               -#%input#cb_5{:onchange => "javascript:setSelect(\"cb_5\");", :type => "checkbox"}/
-        -##6.lvl2.notsel.expandable_nav_link
+        -##6.lvl2.notsel.expandable_nav
           -#.caption
             -#Anti-discrimination statute for LGBTindividuals
             -#.controls

@@ -25,25 +25,48 @@ Given /^an "(.*?)" sub area within "(.*?)"$/ do |sub_area_name, policy_area_name
   FactoryGirl.create :sub_area, name: sub_area_name, policy_area: policy_area
 end
 
+Given /^topic "(.*?)" under sub area "(.*?)"$/ do |topic_name, sub_area_name|
+  sub_area = SubArea.find_by_name sub_area_name
+  topic = FactoryGirl.create :topic, name: topic_name
+  topic.sub_areas << sub_area
+end
+
 Given /^an? "([^"]*?)" sub area under a policy area$/ do |name|
   FactoryGirl.create :sub_area, :with_policy_area, name: name
 end
 
-Then /^"(.*?)" should appear in the hierarchy$/ do |target_text|
+Then /^sub area "(.*?)" should appear in the hierarchy$/ do |target_text|
   within('#hierarchy') do
     page.should have_xpath("//li[@class='policy_area show_sub_areas']//h4[text()='#{target_text}']")
   end
 end
 
-Then /^"(.*?)" should not appear in the hierarchy$/ do |target_text|
+Then /^sub area "(.*?)" should not appear in the hierarchy$/ do |target_text|
   within('#hierarchy') do
     page.should have_xpath("//li[@class='policy_area hide_sub_areas']//h4[text()='#{target_text}']")
+  end
+end
+
+Then /^topic "(.*?)" should appear in the hierarchy$/ do |target_text|
+  within('#hierarchy') do
+    page.should have_xpath("//li[@class='sub_area show_topics']//li[@class='topic'][text()='#{target_text}']")
+  end
+end
+
+Then /^topic "(.*?)" should not appear in the hierarchy$/ do |target_text|
+  within('#hierarchy') do
+    page.should have_xpath("//li[@class='sub_area hide_topics']//li[@class='topic'][text()='#{target_text}']")
   end
 end
 
 When /^I click on policy area "(.*?)"$/ do |target|
   page.find('h3', text: target).click
 end
+
+When /^I click on sub area "(.*?)"$/ do |target|
+  page.find('li.sub_area > h4', text: target).click
+end
+
 
 Given /^an? "([^"]*?)" sub area$/ do |name|
   FactoryGirl.create :sub_area, name: name
