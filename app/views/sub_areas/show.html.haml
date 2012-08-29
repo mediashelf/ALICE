@@ -1,8 +1,8 @@
 %p
   %b Name:
-  = @sub_area.name
+  = sub_area.name
 %p
   %b Description:
-  = @sub_area.description
+  = sub_area.description
 
-= link_to 'List', policy_area_sub_areas_path(@sub_area.policy_area)
+= link_to 'List', policy_area_sub_areas_path(sub_area.policy_area)

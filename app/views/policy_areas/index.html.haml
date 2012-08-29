@@ -1,13 +1,11 @@
-%h1 Listing policy_areas
+%h1 Listing Policy Areas
 
 %table
   %tr
     %th Name
     %th Description
-    %th
 
-  - @policy_areas.each do |policy_area|
+  - policy_areas.each do |policy_area|
     %tr
-      %td= policy_area.name
+      %td= link_to policy_area.name, policy_area
       %td= policy_area.description
-      %td= link_to 'Show', policy_area
