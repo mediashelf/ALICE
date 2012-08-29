@@ -46,6 +46,17 @@ class CatalogController < ApplicationController
     config.add_show_field 'summary_texts', label: 'Summary:'
     config.add_show_field 'year_is', label: 'Year:'
 
+    # Stored fields which are not indexed
+    config.add_show_field 'source_website_display', label: 'Source Website:'
+    config.add_show_field 'external_link_to_asset_display', label: 'External Link to Asset:'
+    config.add_show_field 'legislative_history_display', label: 'Legislative History:'
+    config.add_show_field 'notes_display', label: 'Notes:'
+
+    # Questionable fields
+    config.add_show_field 'web_folder_link_to_asset_pdf_display', label: 'Web folder link to asset (PDF):'
+    config.add_show_field 'web_folder_link_to_asset_word_doc_display', label: 'Web folder link to asset (Word):'
+    config.add_show_field 'web_folder_link_to_bill_pdf_display', label: 'Web folder link to bill (PDF):'
+    config.add_show_field 'web_folder_link_to_bill_word_doc_display', label: 'Web folder link to bill (Word):'
     #config.show.display_type = 'format'
 
     # solr fields that will be treated as facets by the blacklight application
