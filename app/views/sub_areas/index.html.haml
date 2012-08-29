@@ -4,18 +4,10 @@
   %tr
     %th Name
     %th Description
-    %th
-    %th
-    %th
 
-  - @sub_areas.each do |sub_area|
+  - sub_areas.each do |sub_area|
     %tr
-      %td= sub_area.name
+      %td= link_to sub_area.name, policy_area_sub_area_path(sub_area.policy_area, sub_area)
       %td= sub_area.description
-      %td= link_to 'Show', sub_area
-      %td= link_to 'Edit', edit_sub_area_path(sub_area)
-      %td= link_to 'Destroy', sub_area, :confirm => 'Are you sure?', :method => :delete
 
-%br
-
-= link_to 'New Sub Area', new_sub_area_path
+= link_to 'List', policy_areas_path(sub_area.policy_area)

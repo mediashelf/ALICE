@@ -1,9 +1,11 @@
-include ActionDispatch::TestProcess
+class Fixtures
+  include ActionDispatch::TestProcess
+end
 
 FactoryGirl.define do
   factory :asset do
     alternative_terms 'Asset'
-    asset_file { fixture_file_upload("#{Rails.root}/support/fake.pdf", 'application/pdf') }
+    asset_file { Fixtures.new.fixture_file_upload("#{Rails.root}/support/fake.pdf", 'application/pdf') }
     bill_number 'Asset'
     external_link_to_asset 'Asset'
     format 'Asset'

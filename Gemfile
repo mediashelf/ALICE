@@ -13,13 +13,15 @@ group :assets do
   gem 'compass-susy-plugin', '~> 0.9.0'
 end
 
+gem 'activeadmin'
+  gem "meta_search", '>= 1.1.0.pre'
+
 gem 'blacklight'
 gem 'carrierwave'
   gem 'fog', '~> 1.4.0'
 gem 'decent_exposure', github: 'voxdolo/decent_exposure', ref: 'fc344d80dfbd0b7295f58c2d1a21c923332e7743'
 gem 'devise'
-gem 'draper'
-gem 'formtastic'
+gem 'formtastic', '~> 2.1.1'
 gem 'haml'
 gem 'jquery-rails'
 gem 'newrelic_rpm'
@@ -47,13 +49,13 @@ group :test do
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
 end
 
 group :development, :test do
   gem 'capybara'
   gem 'cucumber-rails', require: false
   gem 'debugger'
-  gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'thin'

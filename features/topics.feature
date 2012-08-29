@@ -3,6 +3,7 @@ Feature: Topics
   As an editor
   I want to create and maintain topics
 
+  @wip
   Scenario: editor creates topic from hierarchy
     Given an "Immigration Rights" sub area under a policy area
       And I am logged in

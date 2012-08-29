@@ -5,11 +5,11 @@ Then /^Verify hierarchy presence as follows:$/ do |assertion_table|
 
     step %Q(I am on the #{page_name} page)
     if present == 'yes'
-      unless page.has_content?("Create new Policy Area")
+      unless page.has_selector?("#hierarchy")
         fail "Missing hierarchy on #{page_name} page"
       end
     else
-      if page.has_content?("Create new Policy Area")
+      if page.has_selector?("#hierarchy")
         fail "Hierarchy forbidden on #{page_name} page"
       end
     end

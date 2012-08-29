@@ -3,6 +3,7 @@ Feature: Sub Areas
   As an editor
   I want to create and maintain sub areas
 
+  @wip
   Scenario: editor creates sub area
     Given an "Immigration" policy area
       And I am logged in

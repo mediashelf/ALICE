@@ -1,8 +1,4 @@
 #hierarchy
   %form#hierarchy_form
-    #create_new_policy_area
-      %h2.caption
-        = link_to 'Create new Policy Area', '/policy_areas/new'
-
     %ol.policy_areas
-      = render partial: 'hierarchy/policy_area', collection: @policy_areas
+      = render partial: 'hierarchy/policy_area', collection: @hierarchy_policy_areas

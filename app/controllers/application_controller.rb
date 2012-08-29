@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
 
   def show_hierarchy
     @show_hierarchy = true
-    @policy_areas = PolicyAreaDecorator.decorate(PolicyArea.all)
+    @hierarchy_policy_areas = PolicyArea.all
   end
 end
