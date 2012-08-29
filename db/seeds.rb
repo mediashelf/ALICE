@@ -27,7 +27,8 @@ end
 def load_assets_from_csv
   opts = {:headers => true, :header_converters => :symbol}
   CSV.foreach("#{Rails.root}/support/website_assets_civil_rights_clean.csv", opts) do |row|
-    Asset.create!(format: row[:format],
+    Asset.create!(asset_file: File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.doc'))) ,
+                  format: row[:format],
                   level: row[:level],
                   policy_area: row[:policy_area],
                   source: row[:source],
@@ -36,7 +37,7 @@ def load_assets_from_csv
                   summary: row[:summary],
                   title: row[:title],
                   topic: row[:topic],
-                  type_of: row[:type_of],
+                  type_of: row[:type],
                   year: row[:year])
   end
 end
