@@ -8,6 +8,12 @@ Feature: Admin pages
     When I follow "Dashboard"
     Then I should be on the dashboard page
 
+  Scenario: Editor returns to home page
+    Given I am logged in
+      And I am on the dashboard page
+    When I follow "Alice"
+    Then I am on the home page
+
   Scenario: Public does not see dashboard link
     Given I am on the home page
     When I am on the home page
