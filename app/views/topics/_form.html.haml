@@ -1,4 +1,4 @@
-= form_for @topic, url: policy_area_sub_area_topics_path(@policy_area_id, @sub_area_id) do |f|
+= form_for @topic, url: policy_area_sub_area_topics_path(@policy_area, @sub_area) do |f|
   -if @topic.errors.any?
     #error_explanation
       %h2= "#{pluralize(@topic.errors.count, "error")} prohibited this topic from being saved:"
@@ -7,7 +7,7 @@
           %li= msg
 
   .field
-    = f.hidden_field 'sub_area_ids][', value: @sub_area_id
+    = f.hidden_field 'sub_area_ids][', value: @sub_area.id
 
   .field
     = f.label :name

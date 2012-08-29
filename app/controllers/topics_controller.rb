@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :find_parents, except: [:index, :show]
+  before_filter :find_parents, except: :index
 
   def index
     @topics = Topic.all
