@@ -26,6 +26,9 @@ class CatalogController < ApplicationController
 
     # solr field configuration for search results/index views
     config.index.show_link = 'topic_texts'
+    config.add_index_field 'title_texts', label: ''
+    config.add_index_field 'year_is', label: ''
+    config.add_index_field 'source_texts', label: ''
     config.add_index_field 'summary_texts', label: ''
     #config.index.record_display_type = 'format'
 
