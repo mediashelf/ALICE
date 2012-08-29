@@ -1,9 +1,13 @@
-#search.search
-  = form_tag url_for(:action=>'index'), :method => :get do
-    = text_field_tag :q, params[:q], :class => "q"
-    - unless search_fields.empty?
-      = label_tag(:search_field, " #{t('blacklight.search.form.search_field.label')} ")
-      = select_tag(:search_field, options_for_select(search_fields, h(params[:search_field])), :title => t('blacklight.search.form.search_field.title'), :class=>"search_field")
+#searchbar
+  = form_tag '/', :method => :get do
+    = text_field_tag :q, params[:q],
+      name: 'q',
+      class: 'criteria',
+      placeholder: 'Keywords, Policies, Names, and Laws'
+    -# - unless search_fields.empty?
+    -#   = label_tag(:search_field, " #{t('blacklight.search.form.search_field.label')} ")
+    -#   = select_tag(:search_field, options_for_select(search_fields, h(params[:search_field])), :title => t('blacklight.search.form.search_field.title'), :class=>"search_field")
     = search_as_hidden_fields(:omit_keys => [:q, :search_field, :qt, :page]).html_safe
-    = submit_tag 'Search', :class=>'submit mainbutton'
-  %hr/
+    = submit_tag 'Search'
+  #advanced_search
+    = link_to 'Advanced Search'

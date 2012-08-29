@@ -1,0 +1,79 @@
+#searchbar {
+    position: absolute;
+    height: 50px;
+    bottom: -20px;
+    background-color: #f1f2f2;
+    width: 825px;
+    left: 30%;
+    -moz-box-shadow:    1px 1px 2px 2px #999999;
+    -webkit-box-shadow: 1px 1px 2px 2px #999999;
+    box-shadow:         1px 1px 2px 2px #999999;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+
+  .criteria {
+    position: absolute;
+    width: 500px;
+    height: 30px;
+    top: 50%;
+    left: 10px;
+    margin-top: -17px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+
+  input[type='submit'] {
+    position: absolute;
+    left: 535px;
+    height: 35px;
+    width: 115px;
+    top: 50%;
+    margin-top: -18px;
+    padding: .6em 2em .5em 2.2em;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    color: white;
+    text-transform: uppercase;
+    background-image: linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+    background-image: -o-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+    background-image: -moz-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+    background-image: -ms-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.48, rgb(128,9,9)),
+        color-stop(1, rgb(250,60,60))
+        );
+  }
+
+  input {
+    padding: 0 0 0 10px;
+    font-size: .8em;
+  }
+
+  #advanced_search {
+    position: absolute;
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-left-color: #939598;
+    left: 670px;
+    top: 5px;
+    font-size: .8em;
+    height: 28px;
+    padding: 12px 0 0 10px;
+  }
+
+  #advanced_search a {
+    text-decoration: none;
+    color: #939598;
+  }
+
+  #advanced_search a:hover {
+    color: #666666;
+  }
+}
