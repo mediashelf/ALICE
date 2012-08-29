@@ -38,7 +38,7 @@ solr_push() {
 
 echo "deploy> Deploying to EC2 ${ENVIRONMENT}"
 solr_push $ENVIRONMENT
-cap deploy
+cap deploy:migrations
 
 echo 'deploy> Warm up request to application'
 curl "http://${ENVIRONMENT}.alicelaw.com" &> /dev/null &
