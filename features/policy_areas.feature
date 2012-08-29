@@ -16,5 +16,4 @@ Feature: Policy Areas
   Scenario: anonymous user cannot create policy area
     Given I am on the policy areas page
       And I am logged out
-    When I follow "New Policy Area"
-    Then I should be on the sign in page
+    Then I should not see "New Policy Area"

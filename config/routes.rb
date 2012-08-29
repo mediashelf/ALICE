@@ -1,13 +1,11 @@
 Alice::Application.routes.draw do
   ActiveAdmin.routes(self)
 
-  resources :policy_areas do
-    resources :sub_areas do
-      resources :topics
-    end
+  resources :policy_areas, only: [:index, :show] do
+    resources :sub_areas, only: [:index, :show]
   end
 
-  resources :topics
+  resources :topics, only: [:index, :show]
 
   resources :assets
 
