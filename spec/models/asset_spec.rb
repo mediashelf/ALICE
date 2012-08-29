@@ -1,11 +1,20 @@
 require 'spec_helper'
 
 describe Asset do
-  let(:shark_asset) { FactoryGirl.build :asset, topic: 'Shark Week',
-                      summary: 'I love sharks', asset_file: asset_file }
-  let(:asset_file) { nil }
+  let(:shark_asset) { FactoryGirl.build :asset,
+                        topic: 'Shark Week',
+                        summary: 'I love sharks' }
   let(:solr) { RSolr.connect(url: 'http://localhost:8983/solr') }
 
+  it { should validate_presence_of(:policy_area) }
+  it { should validate_presence_of(:sub_area) }
+  it { should validate_presence_of(:source) }
+  it { should validate_presence_of(:year) }
+  it { should validate_presence_of(:state) }
+  it { should validate_presence_of(:format) }
+  it { should validate_presence_of(:level) }
+  it { should validate_presence_of(:type_of) }
+  it { should validate_presence_of(:asset_file) }
   it { should validate_presence_of(:topic) }
   it { should validate_presence_of(:summary) }
   it { should validate_presence_of(:title) }
