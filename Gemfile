@@ -13,6 +13,7 @@ group :assets do
   gem 'compass-susy-plugin', '~> 0.9.0'
 end
 
+gem 'activeadmin'
 gem 'blacklight'
 gem 'carrierwave'
   gem 'fog', '~> 1.4.0'
