@@ -1,9 +1,14 @@
+-# The hierarchy_disable div should be activated whenever the topics hierarchy needs to be
+-# disabled. It's semitransparent and shares all position info with the 
+-# hierarchy div - except that it has a higher z-index (but lower than the header.)
 -#hierarchy_disable
 #hierarchy
   %form#hierarchy_form
     #create_new_policy_area.lvl0
       .caption.headcaption
         = link_to '>> Create new Policy Area <<', '/policy_areas/new'
+    -# BEGIN STATIC SAMPLE DATA. This all gets thrown away and replaced by content
+    -# from the data base. When that is ready.
     #0.lvl0.hidechildren.notsel
       .caption
         %a{:href => "javascript: toggleVisibility(0);"} Civil Rights

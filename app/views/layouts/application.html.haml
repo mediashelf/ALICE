@@ -20,6 +20,12 @@
           = render partial: '/user_util_links'
         - if ((params[:controller] == 'catalog') and params[:id]) # was !params[:id]
           = content_tag(:span, 'Search Results', id: 'results_text')
+        #searchbar
+          %form#search_form{:action => '/', :method => 'get'}
+            %input#search_criteria{:type => 'text', :name => 'q', :placeholder => 'Keywords, Policies, Names, and Laws'}
+            %input#search_button.mainbutton{:type => 'submit', :value => 'search'}
+            #advanced_search
+              = link_to 'Advanced Search', '#'
       = render 'hierarchy/hierarchy' if @show_hierarchy
       %div#content
         #flash_msg= render partial: '/flash_msg'
