@@ -1,24 +1,11 @@
 body {
-  background-color: #FFF;
-  margin: 0px;
-  padding: 0px;
   font-family: 'Carme', Helvetica, sans-serif;
 }
 
-/* div#container {
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-} */
-
 header.top {
-  position: fixed;
   background-color: #D3D3D3;
-  background-repeat: no-repeat;
-  height: 92px;
   width: 100%;
-  position: fixed;
-  z-index: 600;
+  height: 92px;
 }
 
 :link, :visited {
@@ -32,22 +19,14 @@ header.top {
 
 nav {
   float: right;
-  margin: 0px;
-  padding-top: 0.5em;
-  padding-right: 2em;
-  padding-left: 2em;
-  padding-bottom: 0.5em;
-  text-align: right;
-  height: 2em;
-  background-color: transparent;
+  padding: 0.5em 2em;
   text-transform: uppercase;
-}
 
-nav a {
-  margin-top: 10px;
-  margin-right: 50px;
-  font-size: .8em;
-  text-decoration: none;
+  a {
+    margin-top: 10px;
+    margin-right: 50px;
+    font-size: .8em;
+  }
 }
 
 .mainbutton {
@@ -72,37 +51,10 @@ nav a {
       );
 }
 
-/*section#search {*/
-  /*dd, dt {*/
-    /*display: inline-block;*/
-  /*}*/
-
-  /*dt {*/
-    /*font-weight: bold;*/
-  /*}*/
-
-  /*dd {*/
-    /*width: 75%;*/
-  /*}*/
-/*}*/
-
-div#sortAndPerPage {
-  padding: 1.66em;
-}
-
 div#content {
   position: absolute;
   top: 93px;
   left: 290px;
   right:10px;
   padding: 20px;
-}
-
-div#flash_msg {
-}
-
-aside {
-}
-
-footer {
 }
