@@ -2,6 +2,12 @@ body {
   font-family: 'Carme', Helvetica, sans-serif;
 }
 
+#content {
+  padding-top: 20px;
+  float: right;
+  width: 80%;
+}
+
 header.top {
   background-color: #D3D3D3;
   width: 100%;
@@ -49,12 +55,4 @@ nav {
       color-stop(0.48, rgb(128,9,9)),
       color-stop(1, rgb(250,60,60))
       );
-}
-
-div#content {
-  position: absolute;
-  top: 93px;
-  left: 290px;
-  right:10px;
-  padding: 20px;
 }

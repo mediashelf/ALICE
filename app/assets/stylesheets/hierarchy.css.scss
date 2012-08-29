@@ -55,10 +55,8 @@ $topic_light_gray: #F3F3F4;
 }
 
 #hierarchy {
-  position: absolute;
-  top: 93px;
-  width: 280px;
-  background: #d0d0d0;
+  float: left;
+  width: 20%;
 
   h2, h3, h4, li.topic, .controls {
     font-weight: normal;
