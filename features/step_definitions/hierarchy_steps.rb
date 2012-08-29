@@ -72,8 +72,14 @@ Given /^an? "([^"]*?)" sub area$/ do |name|
   FactoryGirl.create :sub_area, name: name
 end
 
-When /^I add a topic to the "([^"]*?)" sub area$/ do |name|
+When /^I click the new topic button through the hierarchy$/ do
   within('.sub_area') do
     page.find('.plus_button').click
+  end
+end
+
+When /^I click to edit a topic in the hierarchy$/ do
+  within('.topic') do
+    page.find('.edit_button').click
   end
 end

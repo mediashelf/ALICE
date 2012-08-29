@@ -4,4 +4,4 @@
     .controls
       = sub_area.editor_links
   %ol.topics
-    = render partial: 'hierarchy/topic', collection: sub_area.topics
+    = render partial: 'hierarchy/topic', collection: TopicDecorator.decorate(sub_area.topics)
