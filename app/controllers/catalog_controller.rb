@@ -25,26 +25,26 @@ class CatalogController < ApplicationController
     #}
 
     # solr field configuration for search results/index views
-    config.index.show_link = 'topic_texts'
+    config.index.show_link = 'topic_ss'
     config.add_index_field 'title_texts', label: ''
     config.add_index_field 'year_is', label: ''
-    config.add_index_field 'source_texts', label: ''
+    config.add_index_field 'source_ss', label: ''
     config.add_index_field 'summary_texts', label: ''
     #config.index.record_display_type = 'format'
 
     # solr field configuration for document/show views
-    config.show.html_title = 'topic_texts'
+    config.show.html_title = 'topic_ss'
     #config.show.heading = 'title_texts'
     config.show.heading = 'title_display'
-    config.add_show_field 'policy_area_texts', label: 'Policy Area:'
-    config.add_show_field 'sub_area_texts', label: 'Sub-Area:'
-    config.add_show_field 'topic_texts', label: 'Topic:'
+    config.add_show_field 'policy_area_ss', label: 'Policy Area:'
+    config.add_show_field 'sub_area_ss', label: 'Sub-Area:'
+    config.add_show_field 'topic_ss', label: 'Topic:'
     config.add_show_field 'asset_texts', label: 'Asset:'
-    config.add_show_field 'source_texts', label: 'Source:'
-    config.add_show_field 'state_texts', label: 'State:'
-    config.add_show_field 'format_texts', label: 'Format:'
-    config.add_show_field 'level_texts', label: 'Level:'
-    config.add_show_field 'type_of_texts', label: 'Type:'
+    config.add_show_field 'source_ss', label: 'Source:'
+    config.add_show_field 'state_ss', label: 'State:'
+    config.add_show_field 'format_ss', label: 'Format:'
+    config.add_show_field 'level_ss', label: 'Level:'
+    config.add_show_field 'type_of_ss', label: 'Type:'
     config.add_show_field 'keywords_texts', label: 'Keywords:'
     config.add_show_field 'summary_texts', label: 'Summary:'
     config.add_show_field 'year_is', label: 'Year:'
@@ -81,14 +81,18 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
-    config.add_facet_field 'state_texts', label: 'State'
+    config.add_facet_field 'policy_area_ss', label: 'Policy Area'
+    config.add_facet_field 'sub_area_ss', label: 'Sub Area'
+    config.add_facet_field 'topic_ss', label: 'Topic'
+    config.add_facet_field 'year_is', label: 'Year'
+    config.add_facet_field 'source_ss', label: 'Source'
+    config.add_facet_field 'state_ss', label: 'State'
+    config.add_facet_field 'format_ss', label: 'Format'
+    config.add_facet_field 'level_ss', label: 'Level'
+    config.add_facet_field 'type_of_ss', label: 'Type'
     #config.add_facet_field 'format', :label => 'Format'
-    #config.add_facet_field 'pub_date', :label => 'Publication Year'
     #config.add_facet_field 'subject_topic_facet', :label => 'Topic', :limit => 20
     #config.add_facet_field 'language_facet', :label => 'Language', :limit => true
-    #config.add_facet_field 'lc_1letter_facet', :label => 'Call Number'
-    #config.add_facet_field 'subject_geo_facet', :label => 'Region'
-    #config.add_facet_field 'subject_era_facet', :label => 'Era'
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request

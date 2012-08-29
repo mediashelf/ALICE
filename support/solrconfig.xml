@@ -447,25 +447,32 @@
         alternative_terms_texts
         bill_number_texts
         content_texts
-        format_texts
-        level_texts
-        policy_area_texts
+        format_ss
+        level_ss
+        policy_area_ss
         short_title_texts
-        source_texts
-        state_texts
-        sub_area_texts
+        source_ss
+        state_ss
+        sub_area_ss
         summary_texts
         title_texts
-        topic_texts
-        type_of_texts
+        topic_ss
+        type_of_ss
         year_is
       </str>
 
        <str name="facet">true</str>
        <str name="facet.mincount">1</str>
        <str name="facet.limit">10</str>
-       <str name="facet.field">format</str>
-       <str name="facet.field">state_texts</str>
+       <str name="facet.field">policy_area_ss</str>
+       <str name="facet.field">sub_area_ss</str>
+       <str name="facet.field">topic_ss</str>
+       <str name="facet.field">year_is</str>
+       <str name="facet.field">source_ss</str>
+       <str name="facet.field">state_ss</str>
+       <str name="facet.field">format_ss</str>
+       <str name="facet.field">level_ss</str>
+       <str name="facet.field">type_of_ss</str>
 
        <str name="spellcheck">true</str>
        <str name="spellcheck.dictionary">default</str>
