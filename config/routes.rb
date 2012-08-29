@@ -1,4 +1,5 @@
 Alice::Application.routes.draw do
+  ActiveAdmin.routes(self)
 
   resources :policy_areas do
     resources :sub_areas do

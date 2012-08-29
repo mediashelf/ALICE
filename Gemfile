@@ -14,12 +14,14 @@ group :assets do
 end
 
 gem 'activeadmin'
+  gem "meta_search", '>= 1.1.0.pre'
+
 gem 'blacklight'
 gem 'carrierwave'
   gem 'fog', '~> 1.4.0'
 gem 'decent_exposure', github: 'voxdolo/decent_exposure', ref: 'fc344d80dfbd0b7295f58c2d1a21c923332e7743'
 gem 'devise'
-gem 'formtastic'
+gem 'formtastic', '~> 2.1.1'
 gem 'haml'
 gem 'jquery-rails'
 gem 'newrelic_rpm'

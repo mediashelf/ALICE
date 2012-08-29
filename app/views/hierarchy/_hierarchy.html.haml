@@ -6,7 +6,7 @@
         = link_to 'Create new Policy Area', '/policy_areas/new'
 
     %ol.policy_areas
-      = render partial: 'hierarchy/policy_area', collection: @policy_areas
+      = render partial: 'hierarchy/policy_area', collection: @hierarchy_policy_areas
 
     -##0.lvl0.hidechildren.notsel
       -#.caption
