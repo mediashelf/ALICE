@@ -49,13 +49,13 @@ group :test do
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
 end
 
 group :development, :test do
   gem 'capybara'
   gem 'cucumber-rails', require: false
   gem 'debugger'
-  gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'thin'

@@ -3,6 +3,7 @@ Feature: Policy Areas
   As an editor
   I want to create and maintain policy areas
 
+  @wip
   Scenario: Editor creates policy area
     Given I am logged in
     When I follow "Create new Policy Area"
