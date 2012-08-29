@@ -19,9 +19,11 @@
           = render partial: '/user_util_links'
         - if ((params[:controller] == 'catalog') and params[:id]) # was !params[:id]
           = content_tag(:span, 'Search Results', id: 'results_text')
-      = render 'hierarchy/hierarchy' if @show_hierarchy
-      %div#content
-        #flash_msg= render partial: '/flash_msg'
-        = yield
+      #sidebar
+        = render 'hierarchy/hierarchy' if @show_hierarchy
+      #main
+        #content
+          #flash_msg= render partial: '/flash_msg'
+          = yield
       -#%aside= sidebar_items.join('').html_safe
       -#%footer= raw(@footer)

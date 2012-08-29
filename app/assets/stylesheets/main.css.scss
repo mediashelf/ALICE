@@ -2,10 +2,18 @@ body {
   font-family: 'Carme', Helvetica, sans-serif;
 }
 
-#content {
-  padding-top: 20px;
-  float: right;
+#main {
   width: 80%;
+  float: right;
+}
+
+#sidebar {
+  width: 20%;
+  float: left;
+}
+
+#content {
+  padding: 20px;
 }
 
 header.top {
