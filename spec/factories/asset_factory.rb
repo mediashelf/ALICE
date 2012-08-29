@@ -7,7 +7,6 @@ FactoryGirl.define do
     alternative_terms 'Asset'
     asset_file { Fixtures.new.fixture_file_upload("#{Rails.root}/support/fake.pdf", 'application/pdf') }
     bill_number 'Asset'
-    content 'Asset'
     external_link_to_asset 'Asset'
     format 'Asset'
     legislative_history 'Asset'

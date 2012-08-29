@@ -40,7 +40,7 @@ Feature: Asset metadata
       | Web folder link to bill PDF            | http://www.wikipedia.org                                     |
       | Web folder link to bill Word document  | http://www.wikipedia.org                                     |
 
-      And I attach the file "fake.pdf" to "PDF Asset"
+      And I attach the file "fake.pdf" to "Asset File"
       And I press "Save"
     Then I should see "Right to a hearing"
     When I follow "Download"
