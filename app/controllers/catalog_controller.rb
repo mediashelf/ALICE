@@ -81,6 +81,7 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
+    config.add_facet_field 'state_texts', label: 'State'
     #config.add_facet_field 'format', :label => 'Format'
     #config.add_facet_field 'pub_date', :label => 'Publication Year'
     #config.add_facet_field 'subject_topic_facet', :label => 'Topic', :limit => 20
@@ -92,39 +93,9 @@ class CatalogController < ApplicationController
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.
-    # config.default_solr_params[:'facet.field'] = config.facet_fields.keys
+    config.default_solr_params[:'facet.field'] = config.facet_fields.keys
     #use this instead if you don't want to query facets marked :show=>false
-    #config.default_solr_params[:'facet.field'] = config.facet_fields.select{ |k, v| v[:show] != false}.keys
-
-
-    # solr fields to be displayed in the index (search results) view
-    #   The ordering of the field names is the order of the display
-    #config.add_index_field 'title_display', :label => 'Title:'
-    #config.add_index_field 'title_vern_display', :label => 'Title:'
-    #config.add_index_field 'author_display', :label => 'Author:'
-    #config.add_index_field 'author_vern_display', :label => 'Author:'
-    #config.add_index_field 'format', :label => 'Format:'
-    #config.add_index_field 'language_facet', :label => 'Language:'
-    #config.add_index_field 'published_display', :label => 'Published:'
-    #config.add_index_field 'published_vern_display', :label => 'Published:'
-    #config.add_index_field 'lc_callnum_display', :label => 'Call number:'
-
-    # solr fields to be displayed in the show (single result) view
-    #   The ordering of the field names is the order of the display
-    #config.add_show_field 'title_display', :label => 'Title:'
-    #config.add_show_field 'title_vern_display', :label => 'Title:'
-    #config.add_show_field 'subtitle_display', :label => 'Subtitle:'
-    #config.add_show_field 'subtitle_vern_display', :label => 'Subtitle:'
-    #config.add_show_field 'author_display', :label => 'Author:'
-    #config.add_show_field 'author_vern_display', :label => 'Author:'
-    #config.add_show_field 'format', :label => 'Format:'
-    #config.add_show_field 'url_fulltext_display', :label => 'URL:'
-    #config.add_show_field 'url_suppl_display', :label => 'More Information:'
-    #config.add_show_field 'language_facet', :label => 'Language:'
-    #config.add_show_field 'published_display', :label => 'Published:'
-    #config.add_show_field 'published_vern_display', :label => 'Published:'
-    #config.add_show_field 'lc_callnum_display', :label => 'Call number:'
-    #config.add_show_field 'isbn_t', :label => 'ISBN:'
+    config.default_solr_params[:'facet.field'] = config.facet_fields.select{ |k, v| v[:show] != false}.keys
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

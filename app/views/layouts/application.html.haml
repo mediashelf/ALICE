@@ -23,5 +23,5 @@
       %div#content
         #flash_msg= render partial: '/flash_msg'
         = yield
-      -#%aside= sidebar_items.join('').html_safe
+      %aside= sidebar_items.join('').html_safe
       -#%footer= raw(@footer)

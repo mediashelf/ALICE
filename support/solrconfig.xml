@@ -461,6 +461,12 @@
         year_is
       </str>
 
+       <str name="facet">true</str>
+       <str name="facet.mincount">1</str>
+       <str name="facet.limit">10</str>
+       <str name="facet.field">format</str>
+       <str name="facet.field">state_texts</str>
+
        <str name="spellcheck">true</str>
        <str name="spellcheck.dictionary">default</str>
        <str name="spellcheck.onlyMorePopular">true</str>
