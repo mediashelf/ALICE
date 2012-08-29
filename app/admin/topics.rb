@@ -1,4 +1,10 @@
 ActiveAdmin.register Topic do
+  show title: :name do |topic|
+    attributes_table do
+      row :name
+      row :description
+    end
+  end
 
   form do |f|
     f.inputs do
