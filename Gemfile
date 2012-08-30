@@ -11,6 +11,7 @@ group :assets do
   gem 'uglifier'
   gem 'compass-rails', '~> 1.0.0'
   gem 'compass-susy-plugin', '~> 0.9.0'
+  gem 'fancy-buttons'
 end
 
 gem 'activeadmin'
