@@ -81,8 +81,7 @@ ActiveAdmin.register Asset do
         f.input :asset_file, label: 'Upload asset:'
       end
 
-      #f.input :content, disabled: true
-      f.input :content
+      f.input :content, disabled: true
     end
     f.buttons
   end
