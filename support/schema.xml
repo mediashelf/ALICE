@@ -84,7 +84,15 @@
     <fieldType name="tfloat" class="solr.TrieFloatField" omitNorms="true"/>
     <!-- *** This fieldType is used by Sunspot! *** -->
     <fieldType name="tdate" class="solr.TrieDateField" omitNorms="true"/>
-  </types>
+
+    <!-- *** ALICE ALICE ALICE *** -->
+    <fieldType name="facet" class="solr.TextField" positionIncrementGap="100">
+       <analyzer>
+         <tokenizer class="solr.KeywordTokenizerFactory"/>
+       </analyzer>
+    </fieldType>
+</types>
+
   <fields>
     <!-- Valid attributes for fields:
      name: mandatory - the name for the field
@@ -130,6 +138,7 @@
     <field name="lng" stored="true" type="tdouble" multiValued="false" indexed="true"/>
 
     <!-- ALICE -->
+    <dynamicField name="*_facet" stored="true" type="facet" multiValued="true" indexed="true"/>
     <dynamicField name="*_display" stored="true" type="text" multiValued="false" indexed="false"/>
     <!-- END OF ALICE -->
 

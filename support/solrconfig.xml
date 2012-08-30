@@ -456,7 +456,8 @@
         sub_area_ss
         summary_texts
         title_texts
-        topic_ss
+        <!--topic_ss-->
+        topic_texts
         type_of_ss
         year_is
       </str>
@@ -466,7 +467,9 @@
        <str name="facet.limit">10</str>
        <str name="facet.field">policy_area_ss</str>
        <str name="facet.field">sub_area_ss</str>
-       <str name="facet.field">topic_ss</str>
+       <!--<str name="facet.field">topic_ss</str>-->
+       <!--<str name="facet.field">topic_texts</str>-->
+       <str name="facet.field">topic_facet</str>
        <str name="facet.field">year_is</str>
        <str name="facet.field">source_ss</str>
        <str name="facet.field">state_ss</str>

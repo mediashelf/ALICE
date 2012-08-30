@@ -25,7 +25,7 @@ class CatalogController < ApplicationController
     #}
 
     # solr field configuration for search results/index views
-    config.index.show_link = 'topic_ss'
+    config.index.show_link = 'topic_texts'
     config.add_index_field 'title_texts', label: ''
     config.add_index_field 'year_is', label: ''
     config.add_index_field 'source_ss', label: ''
@@ -38,7 +38,7 @@ class CatalogController < ApplicationController
     config.show.heading = 'title_display'
     config.add_show_field 'policy_area_ss', label: 'Policy Area:'
     config.add_show_field 'sub_area_ss', label: 'Sub-Area:'
-    config.add_show_field 'topic_ss', label: 'Topic:'
+    config.add_show_field 'topic_texts', label: 'Topic:'
     config.add_show_field 'asset_texts', label: 'Asset:'
     config.add_show_field 'source_ss', label: 'Source:'
     config.add_show_field 'state_ss', label: 'State:'
@@ -83,7 +83,7 @@ class CatalogController < ApplicationController
     # facet bar
     config.add_facet_field 'policy_area_ss', label: 'Policy Area'
     config.add_facet_field 'sub_area_ss', label: 'Sub Area'
-    config.add_facet_field 'topic_ss', label: 'Topic'
+    config.add_facet_field 'topic_facet', label: 'Topic'
     config.add_facet_field 'year_is', label: 'Year'
     config.add_facet_field 'source_ss', label: 'Source'
     config.add_facet_field 'state_ss', label: 'State'

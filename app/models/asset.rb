@@ -29,7 +29,8 @@ class Asset < ActiveRecord::Base
       'sub_area_ss' => sub_area,
       'summary_texts' => summary,
       'title_texts' => title,
-      'topic_ss' => topic,
+      'topic_texts' => topic,
+      'topic_facet' => indexed_topics,
       'type_of_ss' => type_of,
       'year_is' => year,
 
@@ -45,6 +46,10 @@ class Asset < ActiveRecord::Base
       'web_folder_link_to_asset_word_doc_display' => web_folder_link_to_asset_word_doc,
       'web_folder_link_to_bill_pdf_display' => web_folder_link_to_bill_pdf,
       'web_folder_link_to_bill_word_doc_display' => web_folder_link_to_bill_word_doc }
+  end
+
+  def indexed_topics
+    ['Foo Bar', 'Popsicle']
   end
 
 private
