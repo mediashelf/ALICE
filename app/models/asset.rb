@@ -3,7 +3,7 @@ class Asset < ActiveRecord::Base
 
   has_and_belongs_to_many :topics
 
-  attr_accessible :alternative_terms, :asset_file, :bill_number, :content, :external_link_to_asset, :format, :legislative_history, :level, :notes, :policy_area, :short_title, :source, :source_website, :state, :sub_area, :summary, :title, :topic, :type_of, :year
+  attr_accessible :alternative_terms, :asset_file, :bill_number, :content, :external_link_to_asset, :format, :legislative_history, :level, :notes, :policy_area, :short_title, :source, :source_website, :state, :sub_area, :summary, :title, :topic, :type_of, :year, :topic_ids
 
   # Questionable fields
   attr_accessible :web_folder_link_to_asset_pdf, :web_folder_link_to_asset_word_doc, :web_folder_link_to_bill_pdf, :web_folder_link_to_bill_word_doc
