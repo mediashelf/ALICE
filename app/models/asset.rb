@@ -58,7 +58,7 @@ private
   end
 
   def extract_content_from_asset_file
-    if asset_file.present? && (asset_file.filename.split(".").last == 'pdf')
+    if asset_file.present? && (asset_file.path.split(".").last == 'pdf')
       self.content = `pdftotext #{File.expand_path(asset_file.path)} -`
                        .force_encoding('ISO-8859-1')
                        .encode('utf-8', replace: nil)
