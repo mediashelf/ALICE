@@ -31,11 +31,12 @@ class CatalogController < ApplicationController
     config.add_index_field 'year_is', label: ''
     config.add_index_field 'source_ss', label: ''
     config.add_index_field 'summary_texts', label: ''
-    #config.index.record_display_type = 'format'
+
+    # Future field for use with browsing functionality
+    # config.index.record_display_type = 'format'
 
     # solr field configuration for document/show views
     config.show.html_title = 'topic_ss'
-    #config.show.heading = 'title_texts'
     config.show.heading = 'title_display'
     config.add_show_field 'policy_area_ss', label: 'Policy Area:'
     config.add_show_field 'sub_area_ss', label: 'Sub-Area:'
@@ -61,7 +62,9 @@ class CatalogController < ApplicationController
     config.add_show_field 'web_folder_link_to_asset_word_doc_display', label: 'Web folder link to asset (Word):'
     config.add_show_field 'web_folder_link_to_bill_pdf_display', label: 'Web folder link to bill (PDF):'
     config.add_show_field 'web_folder_link_to_bill_word_doc_display', label: 'Web folder link to bill (Word):'
-    #config.show.display_type = 'format'
+
+    # Future field for use with browsing functionality
+    # config.show.display_type = 'format'
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
@@ -91,7 +94,11 @@ class CatalogController < ApplicationController
     config.add_facet_field 'format_ss', label: 'Format'
     config.add_facet_field 'level_ss', label: 'Level'
     config.add_facet_field 'type_of_ss', label: 'Type'
+
+    # Future field for use with browsing functionality
     #config.add_facet_field 'format', :label => 'Format'
+
+    # Additional facet_field options
     #config.add_facet_field 'subject_topic_facet', :label => 'Topic', :limit => 20
     #config.add_facet_field 'language_facet', :label => 'Language', :limit => true
 
@@ -100,7 +107,7 @@ class CatalogController < ApplicationController
     # handler defaults, or have no facets.
     config.default_solr_params[:'facet.field'] = config.facet_fields.keys
     #use this instead if you don't want to query facets marked :show=>false
-    config.default_solr_params[:'facet.field'] = config.facet_fields.select{ |k, v| v[:show] != false}.keys
+    #config.default_solr_params[:'facet.field'] = config.facet_fields.select{ |k, v| v[:show] != false}.keys
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
