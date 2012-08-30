@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829113240) do
+ActiveRecord::Schema.define(:version => 20120830165505) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -56,6 +56,14 @@ ActiveRecord::Schema.define(:version => 20120829113240) do
     t.text     "legislative_history"
     t.text     "notes"
   end
+
+  create_table "assets_topics", :id => false, :force => true do |t|
+    t.integer "asset_id"
+    t.integer "topic_id"
+  end
+
+  add_index "assets_topics", ["asset_id", "topic_id"], :name => "index_assets_topics_on_asset_id_and_topic_id"
+  add_index "assets_topics", ["topic_id", "asset_id"], :name => "index_assets_topics_on_topic_id_and_asset_id"
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false

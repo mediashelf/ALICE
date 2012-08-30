@@ -1,6 +1,8 @@
 class Asset < ActiveRecord::Base
   mount_uploader :asset_file, AssetUploader
 
+  has_and_belongs_to_many :topics
+
   attr_accessible :alternative_terms, :asset_file, :bill_number, :content, :external_link_to_asset, :format, :legislative_history, :level, :notes, :policy_area, :short_title, :source, :source_website, :state, :sub_area, :summary, :title, :topic, :type_of, :year
 
   # Questionable fields
