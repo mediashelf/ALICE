@@ -1,6 +1,10 @@
 // Imports -------------------------------------------------------------------
 @import 'blueprint/reset';
 
+// CSS3
+@import 'compass/css3/';
+$default_border_radius: 10px;
+
 @import "base";
 @import 'main';
 @import 'hierarchy';
