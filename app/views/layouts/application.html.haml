@@ -12,15 +12,15 @@
     = raw(render_head_content)
   - onload_text = "$('input#q').focus();" if params[:q].to_s.empty? && params[:f].to_s.empty? && params[:id].nil?
   %body
-    #container
+    .container
       %header.top
         = link_to image_tag('alicelogo.png'), root_path
         %nav
           = render partial: '/user_util_links'
         - if params[:controller] == 'catalog' && params[:id]
           = content_tag(:span, 'Search Results', id: 'results_text')
-      #sidebar= sidebar_items.join('').html_safe
-      #main
-        #content
-          #flash_msg= render partial: '/flash_msg'
+      .sidebar= sidebar_items.join('').html_safe
+      .main
+        .content
+          .flash_msg= render partial: '/flash_msg'
           = yield
