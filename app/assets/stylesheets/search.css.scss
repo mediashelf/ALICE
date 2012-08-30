@@ -1,11 +1,10 @@
 #searchbar {
-  form {
-    float: left;
-  }
-
-  height: 50px;
-  background-color: #f1f2f2;
-  width: 825px;
+  margin-left: 2em;
+  position: relative;
+  top: -1.5em;
+  line-height: 3em;
+  background-color: #F3F3F4;
+  width: 680px;
   -moz-box-shadow:    1px 1px 2px 2px #999999;
   -webkit-box-shadow: 1px 1px 2px 2px #999999;
   box-shadow:         1px 1px 2px 2px #999999;
@@ -13,53 +12,53 @@
   -webkit-border-radius: 10px;
   border-radius: 10px;
 
-  .criteria {
-    width: 500px;
-    height: 30px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-  }
-
-  input[type='submit'] {
-    height: 35px;
-    width: 115px;
-    padding: .6em 2em .5em 2.2em;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    color: white;
-    text-transform: uppercase;
-    background-image: linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
-    background-image: -o-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
-    background-image: -moz-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
-    background-image: -webkit-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
-    background-image: -ms-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
-    background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.48, rgb(128,9,9)),
-        color-stop(1, rgb(250,60,60))
-        );
-  }
-
   input {
     padding: 0 0 0 10px;
-    font-size: .8em;
+    font-size: 0.8em;
+
+    &[type='text'] {
+      margin: 0.5em;
+      width: 400px;
+      padding: 0.6em;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+    }
+
+    &[type='submit'] {
+      margin-right: 0.5em;
+      padding: .6em 2em .5em 2.2em;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      color: white;
+      text-transform: uppercase;
+      background-image: linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+      background-image: -o-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+      background-image: -moz-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+      background-image: -webkit-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+      background-image: -ms-linear-gradient(bottom, rgb(128,9,9) 48%, rgb(250,60,60) 100%);
+      background-image: -webkit-gradient(
+          linear,
+          left bottom,
+          left top,
+          color-stop(0.48, rgb(128,9,9)),
+          color-stop(1, rgb(250,60,60))
+          );
+    }
+
   }
 
   #advanced_search {
-    float: right;
-    border-left: 2px solid #939598;
-    font-size: .8em;
-    height: 28px;
-    padding: 12px 0 0 10px;
+    text-transform: uppercase;
+    display: inline;
+    font-size: 0.6em;
+    border-left: 1px solid #D1D2D4;
+    padding: 1em;
 
     a {
       text-decoration: none;
       color: #939598;
-
       &:hover { color: #666; }
     }
   }
