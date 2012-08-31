@@ -5,8 +5,10 @@
 // Grid ----------------------------------------------------------------------
 
 $total-cols             : 12;
-$col-width              : 7%;
-$gutter-width           : 1%;
-$side-gutter-width      : 2.5%;
+$col-width              : 4em;
+$gutter-width           : 1em;
 
-$show-grid-backgrounds  : false;
+$container-width        : 100%;
+$grid-padding           : 0;
+
+$show-grid-backgrounds  : true;
