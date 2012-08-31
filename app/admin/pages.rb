@@ -6,6 +6,14 @@ ActiveAdmin.register Page do
     div do
       page.body
     end
+    div do
+      strong do
+        'Position in navigation'
+      end
+      div do
+        page.position
+      end
+    end
     panel 'Children' do
       table_for page.children do
         column :name do |sub_page|
@@ -19,6 +27,7 @@ ActiveAdmin.register Page do
     f.inputs do
       f.input :title
       f.input :parent
+      f.input :position, label: 'Position in navigation'
       f.input :body, input_html: {class: 'wysiwyg_editor'}
     end
     f.actions
