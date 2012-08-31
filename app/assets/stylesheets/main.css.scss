@@ -1,4 +1,6 @@
+html { height: 100%; }
 body {
+  height: 100%;
   font-family: 'Carme', Helvetica, sans-serif;
   font-size: 16px;
 }
@@ -8,10 +10,8 @@ body {
 }
 
 .sidebar {
+  height: 100%;
   @include span-columns(2, 12)
-}
-
-.content {
 }
 
 header.top {

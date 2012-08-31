@@ -15,6 +15,7 @@ $default_border_radius: 10px;
 /* Layout ------------------------------------------------------------------*/
 
 .container {
+  height: 100%;
   @include container;
   @include susy-grid-background;
 }
