@@ -32,8 +32,6 @@ gem 'sendgrid'
 gem 'underscore-rails'
 
 group :development do
-  gem 'faker'
-
   gem 'haml-rails'
     gem 'hpricot'
     gem 'ruby_parser'
@@ -56,6 +54,10 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'thin'
+end
+
+group :development, :test, :staging do
+  gem 'faker'
 end
 
 group :production, :staging do
