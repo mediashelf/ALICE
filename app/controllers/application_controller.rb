@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include Blacklight::Controller
-  before_filter :show_hierarchy
+  before_filter :prepare_nav_links
 
   protect_from_forgery
 
@@ -8,8 +8,7 @@ class ApplicationController < ActionController::Base
     'application'
   end
 
-  def show_hierarchy
-    @show_hierarchy = true
-    @hierarchy_policy_areas = PolicyArea.all
+  def prepare_nav_links
+    @nav_links = Page.where(parent_id: nil)
   end
 end

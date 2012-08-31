@@ -23,6 +23,7 @@ gem 'blacklight'
 gem 'carrierwave'
   gem 'fog', '~> 1.4.0'
 
+gem 'acts_as_list'
 gem 'decent_exposure', github: 'voxdolo/decent_exposure', ref: 'fc344d80dfbd0b7295f58c2d1a21c923332e7743'
 gem 'devise'
 gem 'formtastic', '~> 2.1.1'
