@@ -44,7 +44,6 @@ group :test do
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails'
 end
 
 group :development, :test do
@@ -57,6 +56,7 @@ group :development, :test do
 end
 
 group :development, :test, :staging do
+  gem 'factory_girl_rails'
   gem 'faker'
 end
 
