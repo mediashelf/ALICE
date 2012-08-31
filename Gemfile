@@ -5,12 +5,13 @@ gem 'pg'
 
 group :assets do
   gem 'coffee-rails'
-  gem 'sass-rails'
   gem 'therubyracer', '0.11.0beta5'
     gem 'libv8', '~> 3.11.8'
   gem 'uglifier'
-  gem 'compass-rails', '~> 1.0.0'
-  gem 'compass-susy-plugin', '~> 0.9.0'
+  gem 'sass-rails'
+  gem 'compass-rails'
+  gem 'susy'
+  gem 'fancy-buttons'
 end
 
 gem 'activeadmin'
