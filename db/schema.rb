@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830165505) do
+ActiveRecord::Schema.define(:version => 20120831163103) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20120830165505) do
     t.string   "web_folder_link_to_bill_pdf"
     t.string   "web_folder_link_to_bill_word_doc"
     t.text     "alternative_terms"
-    t.text     "legislative_history"
+    t.string   "legislative_history"
     t.text     "notes"
   end
 
