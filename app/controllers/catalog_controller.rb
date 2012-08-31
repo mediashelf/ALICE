@@ -96,7 +96,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'policy_area_ss', label: 'Policy Area', limit: 20
     config.add_facet_field 'sub_area_ss', label: 'Sub Area', limit: 20
     config.add_facet_field 'topic_facet', label: 'Topic', limit: 20
-    config.add_facet_field 'year_is', label: 'Year', limit: 20
+    config.add_facet_field 'year_is', label: 'Year', limit: 20, range: true
     config.add_facet_field 'source_ss', label: 'Source', limit: 20
     config.add_facet_field 'state_ss', label: 'State', limit: 20
     config.add_facet_field 'format_ss', label: 'Format', limit: 20

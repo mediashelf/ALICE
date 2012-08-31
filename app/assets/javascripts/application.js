@@ -16,5 +16,6 @@
 // Required by Blacklight
 //= require jquery-ui
 //= require blacklight/blacklight
+//= require blacklight_range_limit
 //= require underscore
 //= require_tree .
