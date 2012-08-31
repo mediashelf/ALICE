@@ -1,5 +1,8 @@
 require 'csv'
+require 'faker'
 require 'rsolr'
+require 'factory_girl'
+Dir[Rails.root.join("spec/factories/*.rb")].each {|f| require f}
 
 # Use this to seed a development, or staging database for playing around.
 # NOT intended for starting a real, production database
@@ -22,6 +25,37 @@ def clear_hierarchy!
   PolicyArea.delete_all
   SubArea.delete_all
   Topic.delete_all
+end
+
+def build_fake_hierarchy
+  100.times do |n|
+    policy_area = FactoryGirl.create(:policy_area, name: "#{Faker::Company.name} #{n}")
+    sub_area = FactoryGirl.create(:sub_area, name: "#{Faker::Name.first_name} #{n}")
+
+    sub_area.policy_area = policy_area
+    sub_area.save!
+
+    topic = FactoryGirl.create(:topic, name: "#{Faker::Name.last_name} #{n}")
+
+    topic.sub_areas << sub_area
+    topic.save!
+
+    asset = FactoryGirl.create(:asset,
+                               title: Faker::Internet.user_name,
+                               topic_ids: [topic.id],
+                               format: Faker::Name.first_name,
+                               level: Faker::Company.catch_phrase,
+                               policy_area: Faker::Company.name,
+                               source: Faker::Company.name,
+                               state: Faker::Company.name,
+                               sub_area: Faker::Company.name,
+                               summary: Faker::Company.name,
+                               title: Faker::Company.catch_phrase,
+                               topic: Faker::Company.name,
+                               topic_ids: [topic.id],
+                               type_of: Faker::Company.name,
+                               year: rand(1..2012))
+  end
 end
 
 def load_website_hierarchy
@@ -90,5 +124,6 @@ create_admin
 clear_assets_and_index!
 clear_hierarchy!
 
+build_fake_hierarchy
 load_website_hierarchy
 load_assets_from_csv
