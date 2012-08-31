@@ -12,6 +12,7 @@ ActiveAdmin.register Asset do
       row :id
       row :policy_area
       row :sub_area
+      row :topic_ids
       row :topic
       row :title
       row :short_title
@@ -49,7 +50,7 @@ ActiveAdmin.register Asset do
 
   form do |f|
     f.inputs do
-      f.input :id
+      f.input :topics, as: :select, collection: options_from_collection_for_select(Topic.all, 'id', 'name', asset.topic_ids)
       f.input :policy_area
       f.input :sub_area
       f.input :topic
@@ -80,8 +81,7 @@ ActiveAdmin.register Asset do
         f.input :asset_file, label: 'Upload asset:'
       end
 
-      #f.input :content, disabled: true
-      f.input :content
+      f.input :content, disabled: true
     end
     f.buttons
   end

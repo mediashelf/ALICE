@@ -15,32 +15,27 @@ group :assets do
 end
 
 gem 'activeadmin'
-  gem "meta_search", '>= 1.1.0.pre'
+  gem 'meta_search', '>= 1.1.0.pre'
 
 gem 'blacklight'
+  gem 'blacklight_range_limit'
+
 gem 'carrierwave'
   gem 'fog', '~> 1.4.0'
+
 gem 'decent_exposure', github: 'voxdolo/decent_exposure', ref: 'fc344d80dfbd0b7295f58c2d1a21c923332e7743'
 gem 'devise'
 gem 'formtastic', '~> 2.1.1'
 gem 'haml'
 gem 'jquery-rails'
 gem 'newrelic_rpm'
-gem 'pdf-reader'
 gem 'sendgrid'
 gem 'underscore-rails'
 
 group :development do
-  gem 'guard'
-  gem 'guard-bundler'
-  gem 'guard-livereload'
-  gem 'guard-rspec'
-
   gem 'haml-rails'
     gem 'hpricot'
     gem 'ruby_parser'
-  gem 'heroku'
-  gem 'heroku_san'
 
   gem 'rb-fsevent'
   gem 'growl'
@@ -50,7 +45,6 @@ group :test do
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails'
 end
 
 group :development, :test do
@@ -60,6 +54,11 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'thin'
+end
+
+group :development, :test, :staging do
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :production, :staging do

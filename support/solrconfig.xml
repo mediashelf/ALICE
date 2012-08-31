@@ -456,7 +456,8 @@
         sub_area_ss
         summary_texts
         title_texts
-        topic_ss
+        <!--topic_ss-->
+        topic_texts
         type_of_ss
         year_is
       </str>
@@ -466,7 +467,9 @@
        <str name="facet.limit">10</str>
        <str name="facet.field">policy_area_ss</str>
        <str name="facet.field">sub_area_ss</str>
-       <str name="facet.field">topic_ss</str>
+       <!--<str name="facet.field">topic_ss</str>-->
+       <!--<str name="facet.field">topic_texts</str>-->
+       <str name="facet.field">topic_facet</str>
        <str name="facet.field">year_is</str>
        <str name="facet.field">source_ss</str>
        <str name="facet.field">state_ss</str>
@@ -481,6 +484,9 @@
        <str name="spellcheck.collate">false</str>
        <str name="spellcheck.count">5</str>
     </lst>
+    <arr name="last-components">
+      <str>spellcheck</str>
+    </arr>
   </requestHandler>
 
   <requestHandler name="search" class="solr.SearchHandler" default="true">
@@ -517,6 +523,9 @@
        <str name="spellcheck.collate">false</str>
        <str name="spellcheck.count">5</str>
 
+       <arr name="last-components">
+         <str>spellcheck</str>
+       </arr>
      </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
@@ -731,8 +740,9 @@
     <str name="queryAnalyzerFieldType">textSpell</str>
     <lst name="spellchecker">
       <str name="name">default</str>
-      <str name="field">name</str>
+      <str name="field">spell</str>
       <str name="spellcheckIndexDir">./spellchecker</str>
+      <str name="buildOnCommit">true</str>
     </lst>
     <!-- a spellchecker that uses a different distance measure
     <lst name="spellchecker">

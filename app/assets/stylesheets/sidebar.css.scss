@@ -1,8 +1,11 @@
 @import 'partials/colors';
 
-@mixin sidebar_item($level: 1) {
+@mixin sidebar_item {
   border-bottom: 1px solid white;
   line-height: 2em;
+}
+
+@mixin level-padding($level: 0) {
   padding-left: $level * 1.5em;
 }
 
@@ -17,7 +20,7 @@
 }
 
 @mixin facet_level_2 {
-  @include sidebar_item(2);
+  @include sidebar_item;
   background-color: $light_gray;
   color: $dark_gray;
   &:hover {
@@ -26,7 +29,7 @@
 }
 
 @mixin facet_level_3 {
-  @include sidebar_item(3);
+  @include sidebar_item;
   background-color: $white_gray;
   color: $dark_gray;
 }
@@ -40,12 +43,23 @@
 
   h3 {
     @include facet_level_1;
+    @include level-padding(1);
     &:hover {
       cursor: pointer;
     }
   }
 
-  .facet_limit li {
-    @include facet_level_2;
+  .facet_limit {
+    li {
+      @include facet_level_2;
+      @include level-padding(2);
+    }
+
+    .limit_content {
+      @include facet_level_2;
+      form {
+        margin: 0;
+      }
+    }
   }
 }

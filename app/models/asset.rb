@@ -1,7 +1,9 @@
 class Asset < ActiveRecord::Base
   mount_uploader :asset_file, AssetUploader
 
-  attr_accessible :alternative_terms, :asset_file, :bill_number, :content, :external_link_to_asset, :format, :legislative_history, :level, :notes, :policy_area, :short_title, :source, :source_website, :state, :sub_area, :summary, :title, :topic, :type_of, :year
+  has_and_belongs_to_many :topics
+
+  attr_accessible :alternative_terms, :asset_file, :bill_number, :content, :external_link_to_asset, :format, :legislative_history, :level, :notes, :policy_area, :short_title, :source, :source_website, :state, :sub_area, :summary, :title, :topic, :type_of, :year, :topic_ids
 
   # Questionable fields
   attr_accessible :web_folder_link_to_asset_pdf, :web_folder_link_to_asset_word_doc, :web_folder_link_to_bill_pdf, :web_folder_link_to_bill_word_doc
@@ -27,7 +29,8 @@ class Asset < ActiveRecord::Base
       'sub_area_ss' => sub_area,
       'summary_texts' => summary,
       'title_texts' => title,
-      'topic_ss' => topic,
+      'topic_texts' => topic,
+      'topic_facet' => indexed_topics,
       'type_of_ss' => type_of,
       'year_is' => year,
 
@@ -43,6 +46,10 @@ class Asset < ActiveRecord::Base
       'web_folder_link_to_asset_word_doc_display' => web_folder_link_to_asset_word_doc,
       'web_folder_link_to_bill_pdf_display' => web_folder_link_to_bill_pdf,
       'web_folder_link_to_bill_word_doc_display' => web_folder_link_to_bill_word_doc }
+  end
+
+  def indexed_topics
+    ['Foo Bar', 'Popsicle']
   end
 
 private

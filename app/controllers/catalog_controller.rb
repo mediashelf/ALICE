@@ -10,7 +10,16 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       :qt => 'standard',
       :rows => 10,
-      :'q.alt' => '*:*'
+      :'q.alt' => '*:*',
+      :'f.format_ss.facet.sort' => 'index',
+      :'f.level_ss.facet.sort' => 'index',
+      :'f.policy_area_ss.facet.sort' => 'index',
+      :'f.source_ss.facet.sort' => 'index',
+      :'f.state_ss.facet.sort' => 'index',
+      :'f.sub_area_ss.facet.sort' => 'index',
+      :'f.topic_facet.facet.sort' => 'index',
+      :'f.type_of_ss.facet.sort' => 'index',
+      :'f.year_is.facet.sort' => 'index'
     }
 
     ## Default parameters to send on single-document requests to Solr. These settings are the Blackligt defaults (see SolrHelper#solr_doc_params) or
@@ -25,20 +34,21 @@ class CatalogController < ApplicationController
     #}
 
     # solr field configuration for search results/index views
-    config.index.show_link = 'topic_ss'
-    config.add_index_field 'title_texts', label: ''
-    config.add_index_field 'year_is', label: ''
-    config.add_index_field 'source_ss', label: ''
-    config.add_index_field 'summary_texts', label: ''
-    #config.index.record_display_type = 'format'
+    config.index.show_link = 'title_texts'
+    config.add_index_field 'topic_texts', label: 'Topic:'
+    config.add_index_field 'year_is', label: 'Year:'
+    config.add_index_field 'source_ss', label: 'Source:'
+    config.add_index_field 'summary_texts', label: 'Summary'
+
+    # Future field for use with browsing functionality
+    # config.index.record_display_type = 'format'
 
     # solr field configuration for document/show views
     config.show.html_title = 'topic_ss'
-    #config.show.heading = 'title_texts'
     config.show.heading = 'title_display'
     config.add_show_field 'policy_area_ss', label: 'Policy Area:'
     config.add_show_field 'sub_area_ss', label: 'Sub-Area:'
-    config.add_show_field 'topic_ss', label: 'Topic:'
+    config.add_show_field 'topic_texts', label: 'Topic:'
     config.add_show_field 'asset_texts', label: 'Asset:'
     config.add_show_field 'source_ss', label: 'Source:'
     config.add_show_field 'state_ss', label: 'State:'
@@ -60,7 +70,9 @@ class CatalogController < ApplicationController
     config.add_show_field 'web_folder_link_to_asset_word_doc_display', label: 'Web folder link to asset (Word):'
     config.add_show_field 'web_folder_link_to_bill_pdf_display', label: 'Web folder link to bill (PDF):'
     config.add_show_field 'web_folder_link_to_bill_word_doc_display', label: 'Web folder link to bill (Word):'
-    #config.show.display_type = 'format'
+
+    # Future field for use with browsing functionality
+    # config.show.display_type = 'format'
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
@@ -81,16 +93,20 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
-    config.add_facet_field 'policy_area_ss', label: 'Policy Area'
-    config.add_facet_field 'sub_area_ss', label: 'Sub Area'
-    config.add_facet_field 'topic_ss', label: 'Topic'
-    config.add_facet_field 'year_is', label: 'Year'
-    config.add_facet_field 'source_ss', label: 'Source'
-    config.add_facet_field 'state_ss', label: 'State'
-    config.add_facet_field 'format_ss', label: 'Format'
-    config.add_facet_field 'level_ss', label: 'Level'
-    config.add_facet_field 'type_of_ss', label: 'Type'
+    config.add_facet_field 'policy_area_ss', label: 'Policy Area', limit: 20
+    config.add_facet_field 'sub_area_ss', label: 'Sub Area', limit: 20
+    config.add_facet_field 'topic_facet', label: 'Topic', limit: 20
+    config.add_facet_field 'year_is', label: 'Year', limit: 20, range: true
+    config.add_facet_field 'source_ss', label: 'Source', limit: 20
+    config.add_facet_field 'state_ss', label: 'State', limit: 20
+    config.add_facet_field 'format_ss', label: 'Format', limit: 20
+    config.add_facet_field 'level_ss', label: 'Level', limit: 20
+    config.add_facet_field 'type_of_ss', label: 'Type', limit: 20
+
+    # Future field for use with browsing functionality
     #config.add_facet_field 'format', :label => 'Format'
+
+    # Additional facet_field options
     #config.add_facet_field 'subject_topic_facet', :label => 'Topic', :limit => 20
     #config.add_facet_field 'language_facet', :label => 'Language', :limit => true
 
@@ -99,7 +115,7 @@ class CatalogController < ApplicationController
     # handler defaults, or have no facets.
     config.default_solr_params[:'facet.field'] = config.facet_fields.keys
     #use this instead if you don't want to query facets marked :show=>false
-    config.default_solr_params[:'facet.field'] = config.facet_fields.select{ |k, v| v[:show] != false}.keys
+    #config.default_solr_params[:'facet.field'] = config.facet_fields.select{ |k, v| v[:show] != false}.keys
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
@@ -119,7 +135,7 @@ class CatalogController < ApplicationController
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
 
-    config.add_search_field 'all_fields', :label => 'All Fields'
+    #config.add_search_field 'all_fields', :label => 'All Fields'
 
 
     # Now we see how to over-ride Solr request handler defaults, in this
