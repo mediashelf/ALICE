@@ -11,6 +11,14 @@ class CatalogController < ApplicationController
       :qt => 'standard',
       :rows => 10,
       :'q.alt' => '*:*',
+      :'f.format_ss.facet.sort' => 'index',
+      :'f.level_ss.facet.sort' => 'index',
+      :'f.policy_area_ss.facet.sort' => 'index',
+      :'f.source_ss.facet.sort' => 'index',
+      :'f.state_ss.facet.sort' => 'index',
+      :'f.sub_area_ss.facet.sort' => 'index',
+      :'f.topic_facet.facet.sort' => 'index',
+      :'f.type_of_ss.facet.sort' => 'index',
       :'f.year_is.facet.sort' => 'index'
     }
 
