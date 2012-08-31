@@ -93,15 +93,15 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
-    config.add_facet_field 'policy_area_ss', label: 'Policy Area'
-    config.add_facet_field 'sub_area_ss', label: 'Sub Area'
-    config.add_facet_field 'topic_facet', label: 'Topic'
-    config.add_facet_field 'year_is', label: 'Year'
-    config.add_facet_field 'source_ss', label: 'Source'
-    config.add_facet_field 'state_ss', label: 'State'
-    config.add_facet_field 'format_ss', label: 'Format'
-    config.add_facet_field 'level_ss', label: 'Level'
-    config.add_facet_field 'type_of_ss', label: 'Type'
+    config.add_facet_field 'policy_area_ss', label: 'Policy Area', limit: 20
+    config.add_facet_field 'sub_area_ss', label: 'Sub Area', limit: 20
+    config.add_facet_field 'topic_facet', label: 'Topic', limit: 20
+    config.add_facet_field 'year_is', label: 'Year', limit: 20
+    config.add_facet_field 'source_ss', label: 'Source', limit: 20
+    config.add_facet_field 'state_ss', label: 'State', limit: 20
+    config.add_facet_field 'format_ss', label: 'Format', limit: 20
+    config.add_facet_field 'level_ss', label: 'Level', limit: 20
+    config.add_facet_field 'type_of_ss', label: 'Type', limit: 20
 
     # Future field for use with browsing functionality
     #config.add_facet_field 'format', :label => 'Format'
