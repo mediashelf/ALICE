@@ -2,7 +2,6 @@ require 'csv'
 require 'faker'
 require 'rsolr'
 require 'factory_girl'
-Dir[Rails.root.join("spec/factories/*.rb")].each {|f| require f}
 
 # Use this to seed a development, or staging database for playing around.
 # NOT intended for starting a real, production database
