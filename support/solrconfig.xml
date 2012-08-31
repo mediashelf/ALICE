@@ -484,6 +484,9 @@
        <str name="spellcheck.collate">false</str>
        <str name="spellcheck.count">5</str>
     </lst>
+    <arr name="last-components">
+      <str>spellcheck</str>
+    </arr>
   </requestHandler>
 
   <requestHandler name="search" class="solr.SearchHandler" default="true">
@@ -520,6 +523,9 @@
        <str name="spellcheck.collate">false</str>
        <str name="spellcheck.count">5</str>
 
+       <arr name="last-components">
+         <str>spellcheck</str>
+       </arr>
      </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
@@ -734,8 +740,9 @@
     <str name="queryAnalyzerFieldType">textSpell</str>
     <lst name="spellchecker">
       <str name="name">default</str>
-      <str name="field">name</str>
+      <str name="field">spell</str>
       <str name="spellcheckIndexDir">./spellchecker</str>
+      <str name="buildOnCommit">true</str>
     </lst>
     <!-- a spellchecker that uses a different distance measure
     <lst name="spellchecker">
