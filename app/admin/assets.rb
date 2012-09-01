@@ -10,10 +10,10 @@ ActiveAdmin.register Asset do
   show title: :title do
     attributes_table do
       row :id
-      row :policy_area
-      row :sub_area
-      row :topic_ids
-      row :topic
+      #row :policy_area
+      #row :sub_area
+      #row :topic
+      #row :topic_ids
       row :title
       row :short_title
       row :year
@@ -38,12 +38,20 @@ ActiveAdmin.register Asset do
       row :asset_file do |asset|
         link_to 'Download', asset.asset_file.url
       end
+
       row :content do |asset|
         div class: 'asset_content' do
           asset.content
         end
       end
 
+      panel 'Topics' do
+        table_for asset.topics do
+          column :name do |topic|
+            link_to topic.name, admin_topic_path(topic)
+          end
+        end
+      end
     end
 
   end

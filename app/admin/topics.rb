@@ -3,7 +3,14 @@ ActiveAdmin.register Topic do
     attributes_table do
       row :name
       row :description
-      row :sub_area_ids
+    end
+
+    panel 'Sub Areas' do
+      table_for topic.sub_areas do
+        column :name do |sub_area|
+          link_to sub_area.name, admin_sub_area_path(sub_area)
+        end
+      end
     end
   end
 
