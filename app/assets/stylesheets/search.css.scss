@@ -1,10 +1,9 @@
 .search {
+  padding: 0.5em;
   position: relative;
   top: -1.5em;
-  height: 3em;
-  line-height: 3em;
   background-color: #F3F3F4;
-  @include span-columns(6, 9);
+  @include span-columns(6, 10);
   @include box-shadow(1px 1px 2px 2px #999);
   @include border-radius;
 
@@ -12,35 +11,19 @@
     @include border-radius;
 
     &[type='text'] {
+      padding: 0.5em;
       font-size: 0.8em;
-      padding: 0.6em;
-      @include span-columns(3.2, 6);
-      margin: 0.5em;
+      @include span-columns(4, 6);
+      margin: 0;
     }
 
     &[type='submit'] {
       color: white;
       text-transform: uppercase;
-      @include span-columns(1, 6);
+      @include span-columns(1.9 omega, 6);
       @include fancy-button(rgb(128, 9, 9), 0.9em, 8px);
-      margin: 0.6em 0.6em 0 0;
+      @include fancy-button-padding(0.5em, 2em);
     }
 
-  }
-
-  .advanced_search {
-    @include omega;
-    float: none;
-    text-transform: uppercase;
-    font-size: 0.8em;
-    border-left: 1px solid #D1D2D4;
-    padding: 0.7em;
-    white-space: nowrap;
-
-    a {
-      text-decoration: none;
-      color: #939598;
-      &:hover { color: #666; }
-    }
   }
 }
