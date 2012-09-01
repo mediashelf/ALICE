@@ -32,17 +32,16 @@ header.top {
   position: absolute;
   left: 0;
   @include span-columns(12);
-  background-color: #D3D3D3;
+  background-color: $light_gray;
   height: $header-height;
 }
 
 :link, :visited {
   text-decoration: none;
-  color: #939598;
-}
-
-:link:hover, :visited:hover {
-  color: #58595B;
+  color: $medium_gray;
+  &:hover {
+    color: $dark_gray;
+  }
 }
 
 nav {
