@@ -1,6 +1,6 @@
 <%- #Overridden just to provide html_safe for blacklight_range_limit, until this patch: https://github.com/projectblacklight/blacklight/commit/fb50ad7b63c52d1c92b53c4131d4c19ff1e27fc5 is in the released blacklight %>
 <%- # local params:
-    # label 
+    # label
     # value
     # options =>
     #   :remove => url for a remove constraint link
@@ -12,23 +12,22 @@
 
 <span class="appliedFilter constraint <%= options[:classes].join(" ") if options[:classes] %>">
       <%- unless label.blank? -%>
-        <span class="filterName"><%= options[:escape_label] ? h(label) : raw(label) %></span> 
+        <span class="filterName"><%= options[:escape_label] ? h(label) : raw(label) %></span>
       <%- end -%>
       <%- unless value.blank? -%>
         <span class="filterValue"><%= options[:escape_value] ? h(value) : raw(value) %></span>
       <%- end -%>
       <%- unless options[:remove].blank? -%>
-        <% accessible_remove_label =               
+        <% accessible_remove_label =
                 if label.blank?
                   t('blacklight.search.filters.remove.value', :value => (options[:escape_value] ? h(value) : value))
                 else
                   t('blacklight.search.filters.remove.label_value', :label => (options[:escape_label] ? h(label) : label), :value => (options[:escape_value] ? h(value) : value))
-                end              
-        %>                
+                end
+        %>
         <%= link_to(accessible_remove_label.html_safe,
-					options[:remove],
-					:class=>'btnRemove imgReplace',
-          :alt=>'remove'
-				) %>
+          options[:remove],
+          :class=>'btnRemove imgReplace',
+          :alt=>'remove') %>
       <%- end -%>
 </span>

@@ -7,7 +7,6 @@
     = favicon_link_tag '/favicon.ico'
     = stylesheet_link_tag('application', media: 'all')
     = javascript_include_tag('application')
-    = javascript_include_tag('hierarchy')
     = csrf_meta_tags
     = raw(render_head_content)
   - onload_text = "$('input#q').focus();" if params[:q].to_s.empty? && params[:f].to_s.empty? && params[:id].nil?
