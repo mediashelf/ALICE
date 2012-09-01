@@ -1,9 +1,20 @@
 // Imports -------------------------------------------------------------------
 @import 'blueprint/reset';
 @import 'fancy-buttons';
-@import 'base';
 
-// CSS3
+// SUSY ----------------------------------------------------------------------
+@import "susy";
+
+$total-cols             : 12;
+$col-width              : 4em;
+$gutter-width           : 1em;
+
+$container-width        : 100%;
+$grid-padding           : 0;
+
+$show-grid-backgrounds  : false;
+
+// CSS3 ----------------------------------------------------------------------
 @import 'compass/css3/';
 $default_border_radius: 10px;
 
@@ -17,8 +28,7 @@ $header-height: 92px;
 @import 'sidebar';
 @import 'search';
 
-/* Layout ------------------------------------------------------------------*/
-
+// Layout --------------------------------------------------------------------
 .container {
   height: 100%;
   @include container;
