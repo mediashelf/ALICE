@@ -7,6 +7,7 @@ body {
 }
 
 .main {
+  margin-top: $header-height;
   @include span-columns(10 omega, 12);
 }
 
@@ -17,14 +18,16 @@ body {
 }
 
 .content {
-  margin-top: 92px;
+  clear: left;
+  margin-top: 1.5em;
 }
 
 header.top {
   position: absolute;
+  left: 0;
   @include span-columns(12);
   background-color: #D3D3D3;
-  height: 92px;
+  height: $header-height;
 }
 
 :link, :visited {

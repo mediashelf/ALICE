@@ -20,6 +20,5 @@
           = content_tag(:span, 'Search Results', id: 'results_text')
       .sidebar= sidebar_items.join('').html_safe
       .main
-        .content
-          .flash_msg= render partial: '/flash_msg'
-          = yield
+        .flash_msg= render partial: '/flash_msg'
+        = yield

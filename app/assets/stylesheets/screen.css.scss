@@ -9,6 +9,10 @@ $default_border_radius: 10px;
 
 @import 'partials/colors';
 @import 'partials/fonts';
+
+// Magic Numbers :(
+$header-height: 92px;
+
 @import 'main';
 @import 'sidebar';
 @import 'search';
