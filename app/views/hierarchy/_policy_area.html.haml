@@ -1,7 +1,0 @@
-%li.policy_area.hide_sub_areas
-  %header
-    %h3.expandable_nav.caption= policy_area.name
-    .controls
-      = render partial: 'policy_areas/editor_links', locals: { policy_area: policy_area }
-  %ol.sub_areas
-    = render partial: 'hierarchy/sub_area', collection: policy_area.sub_areas
