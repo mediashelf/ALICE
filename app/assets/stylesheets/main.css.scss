@@ -10,12 +10,14 @@ body {
   @include squish(0.5, 0.5);
   margin-bottom: 1.5em;
 }
+
 .main {
   margin-top: $header-height;
   @include span-columns(10 omega, 12);
 }
 
 .sidebar {
+  white-space: nowrap;
   height: 100%;
   @include span-columns(2, 12);
   background-color: $dark_blue;
@@ -44,13 +46,18 @@ header.top {
 }
 
 nav {
-  float: right;
-  padding: 0.5em 2em;
-  text-transform: uppercase;
+  @include span-columns(5 omega, 12);
+  padding-top: 0.5em;
 
-  a {
-    margin-top: 10px;
-    margin-right: 50px;
-    font-size: .8em;
+  ul {
+    list-style: none;
+    li {
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+      @include span-columns(1, 4);
+      @include adjust-font-size-to(13px);
+      &:last-child { @include omega; }
+    }
   }
 }
