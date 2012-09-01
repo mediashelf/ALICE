@@ -6,6 +6,11 @@ body {
   font-size: 16px;
 }
 
+.flash {
+  text-align: center;
+  @include squish(0.5, 0.5);
+  margin-bottom: 1.5em;
+}
 .main {
   margin-top: $header-height;
   @include span-columns(10 omega, 12);

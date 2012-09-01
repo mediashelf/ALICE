@@ -1,6 +1,7 @@
 = render :partial => 'search_form'
 
 .content
+  = render partial: '/flash_message'
   - if has_search_parameters?
     = render :partial => 'search_results'
   - else
