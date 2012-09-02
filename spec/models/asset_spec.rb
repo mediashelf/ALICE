@@ -1,12 +1,15 @@
 require 'spec_helper'
 
 describe Asset do
-  let(:shark_topic) { FactoryGirl.create :topic, name: 'Sharks' }
+  let(:shark_policy_area) { FactoryGirl.create :policy_area, name: 'Shark Policy Area' }
+  let(:shark_sub_area) { FactoryGirl.create :sub_area, name: 'Shark Sub Area', policy_area: shark_policy_area }
+  let(:shark_topic) { FactoryGirl.create :topic, name: 'Crazy Shark Topic', sub_areas: [shark_sub_area] }
+  let(:another_shark_topic) { FactoryGirl.create :topic, name: 'Sharks Rule' }
   let(:shark_asset) { FactoryGirl.build :asset,
                         title: 'Shark Week',
                         summary: 'I love sharks',
                         asset_file: asset_file,
-                        topics: [shark_topic] }
+                        topics: [shark_topic, another_shark_topic] }
 
   let(:asset_file) { File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.pdf'))) }
   let(:solr) { RSolr.connect(url: 'http://localhost:8983/solr') }
@@ -42,6 +45,16 @@ describe Asset do
     end
     it 'should be indexed by Solr' do
       search_returns_results_for?('sharks').should be_true
+    end
+    it 'should be index multiple topics by Solr' do
+      search_returns_results_for?('Crazy Shark Topic').should be_true
+      search_returns_results_for?('Sharks Rule').should be_true
+    end
+    it 'should index by sub area' do
+      search_returns_results_for?('Shark Sub Area').should be_true
+    end
+    it 'should index by policy area' do
+      search_returns_results_for?('Shark Policy Area').should be_true
     end
     context 'with attached PDF' do
       let(:string_only_in_pdf) { 'truthfulness' }

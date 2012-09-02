@@ -13,10 +13,10 @@ class CatalogController < ApplicationController
       :'q.alt' => '*:*',
       :'f.format_ss.facet.sort' => 'index',
       :'f.level_ss.facet.sort' => 'index',
-      :'f.policy_area_ss.facet.sort' => 'index',
+      :'f.policy_area_facet.facet.sort' => 'index',
       :'f.source_ss.facet.sort' => 'index',
       :'f.state_ss.facet.sort' => 'index',
-      :'f.sub_area_ss.facet.sort' => 'index',
+      :'f.sub_area_facet.facet.sort' => 'index',
       :'f.topic_facet.facet.sort' => 'index',
       :'f.type_of_ss.facet.sort' => 'index',
       :'f.year_is.facet.sort' => 'index'
@@ -46,8 +46,8 @@ class CatalogController < ApplicationController
     # solr field configuration for document/show views
     config.show.html_title = 'topic_ss'
     config.show.heading = 'title_display'
-    config.add_show_field 'policy_area_ss', label: 'Policy Area:'
-    config.add_show_field 'sub_area_ss', label: 'Sub-Area:'
+    config.add_show_field 'policy_area_texts', label: 'Policy Area:'
+    config.add_show_field 'sub_area_texts', label: 'Sub-Area:'
     config.add_show_field 'topic_texts', label: 'Topic:'
     config.add_show_field 'asset_texts', label: 'Asset:'
     config.add_show_field 'source_ss', label: 'Source:'
@@ -64,12 +64,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'external_link_to_asset_display', label: 'External Link to Asset:'
     config.add_show_field 'legislative_history_display', label: 'Legislative History:'
     config.add_show_field 'notes_display', label: 'Notes:'
-
-    # Questionable fields
-    config.add_show_field 'web_folder_link_to_asset_pdf_display', label: 'Web folder link to asset (PDF):'
-    config.add_show_field 'web_folder_link_to_asset_word_doc_display', label: 'Web folder link to asset (Word):'
-    config.add_show_field 'web_folder_link_to_bill_pdf_display', label: 'Web folder link to bill (PDF):'
-    config.add_show_field 'web_folder_link_to_bill_word_doc_display', label: 'Web folder link to bill (Word):'
 
     # Future field for use with browsing functionality
     # config.show.display_type = 'format'
@@ -93,8 +87,8 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the
     # facet bar
-    config.add_facet_field 'policy_area_ss', label: 'Policy Area', limit: 20
-    config.add_facet_field 'sub_area_ss', label: 'Sub Area', limit: 20
+    config.add_facet_field 'policy_area_facet', label: 'Policy Area', limit: 20
+    config.add_facet_field 'sub_area_facet', label: 'Sub Area', limit: 20
     config.add_facet_field 'topic_facet', label: 'Topic', limit: 20
     config.add_facet_field 'year_is', label: 'Year', limit: 20, range: true
     config.add_facet_field 'source_ss', label: 'Source', limit: 20

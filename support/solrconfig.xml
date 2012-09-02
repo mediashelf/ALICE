@@ -449,14 +449,13 @@
         content_texts
         format_ss
         level_ss
-        policy_area_ss
+        policy_area_texts
         short_title_texts
         source_ss
         state_ss
-        sub_area_ss
+        sub_area_texts
         summary_texts
         title_texts
-        <!--topic_ss-->
         topic_texts
         type_of_ss
         year_is
@@ -465,10 +464,8 @@
        <str name="facet">true</str>
        <str name="facet.mincount">1</str>
        <str name="facet.limit">10</str>
-       <str name="facet.field">policy_area_ss</str>
-       <str name="facet.field">sub_area_ss</str>
-       <!--<str name="facet.field">topic_ss</str>-->
-       <!--<str name="facet.field">topic_texts</str>-->
+       <str name="facet.field">policy_area_facet</str>
+       <str name="facet.field">sub_area_facet</str>
        <str name="facet.field">topic_facet</str>
        <str name="facet.field">year_is</str>
        <str name="facet.field">source_ss</str>

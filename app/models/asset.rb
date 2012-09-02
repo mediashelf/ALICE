@@ -19,15 +19,14 @@ class Asset < ActiveRecord::Base
       'content_texts' => content,
       'format_ss' => format,
       'level_ss' => level,
-      #'policy_area_ss' => policy_area,
+      'policy_area_texts' => indexed_policy_areas,
       'short_title_texts' => short_title,
       'source_ss' => source,
       'state_ss' => state,
-      #'sub_area_ss' => sub_area,
+      'sub_area_texts' => indexed_sub_areas,
       'summary_texts' => summary,
       'title_texts' => title,
-      #'topic_texts' => topic,
-      'topic_facet' => indexed_topics,
+      'topic_texts' => indexed_topics,
       'type_of_ss' => type_of,
       'year_is' => year,
 
@@ -36,11 +35,26 @@ class Asset < ActiveRecord::Base
       'source_website_display' => source_website,
       'external_link_to_asset_display' => external_link_to_asset,
       'legislative_history_display' => legislative_history,
-      'notes_display' => notes }
+      'notes_display' => notes,
+
+      # Facet fields
+      'policy_area_facet' => indexed_policy_areas,
+      'sub_area_facet' => indexed_sub_areas,
+      'topic_facet' => indexed_topics }
   end
 
   def indexed_topics
-    ['Foo Bar', 'Popsicle']
+    topics.map(&:name)
+  end
+
+  def indexed_sub_areas
+    topics.map(&:sub_areas).flatten.uniq.map(&:name)
+  end
+
+  def indexed_policy_areas
+    topics.map(&:sub_areas).flatten.uniq.map do |sub_area|
+      sub_area.policy_area.name
+    end
   end
 
 private
