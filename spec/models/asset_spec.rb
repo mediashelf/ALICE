@@ -1,24 +1,28 @@
 require 'spec_helper'
 
 describe Asset do
+  let(:shark_topic) { FactoryGirl.create :topic, name: 'Sharks' }
   let(:shark_asset) { FactoryGirl.build :asset,
                         title: 'Shark Week',
                         summary: 'I love sharks',
-                        asset_file: asset_file }
+                        asset_file: asset_file,
+                        topics: [shark_topic] }
 
   let(:asset_file) { File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.pdf'))) }
   let(:solr) { RSolr.connect(url: 'http://localhost:8983/solr') }
 
   it { should have_and_belong_to_many(:topics) }
-  it { should validate_presence_of(:source) }
-  it { should validate_presence_of(:year) }
-  it { should validate_presence_of(:state) }
+
+  it { should validate_presence_of(:asset_file) }
   it { should validate_presence_of(:format) }
   it { should validate_presence_of(:level) }
-  it { should validate_presence_of(:type_of) }
-  it { should validate_presence_of(:asset_file) }
+  it { should validate_presence_of(:source) }
+  it { should validate_presence_of(:state) }
   it { should validate_presence_of(:summary) }
   it { should validate_presence_of(:title) }
+  it { should validate_presence_of(:topic_ids) }
+  it { should validate_presence_of(:type_of) }
+  it { should validate_presence_of(:year) }
 
   before do
     solr.delete_by_query('*:*')

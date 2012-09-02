@@ -5,7 +5,7 @@ class Asset < ActiveRecord::Base
 
   attr_accessible :alternative_terms, :asset_file, :bill_number, :content, :external_link_to_asset, :format, :legislative_history, :level, :notes, :short_title, :source, :source_website, :state, :summary, :title, :type_of, :year, :topic_ids
 
-  validates_presence_of :title, :summary, :source, :year, :state, :format, :level, :type_of, :asset_file
+  validates_presence_of :title, :summary, :source, :year, :state, :format, :level, :type_of, :asset_file, :topic_ids
 
   before_save :extract_content_from_asset_file
   after_save :index_record

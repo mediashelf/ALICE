@@ -20,5 +20,6 @@ FactoryGirl.define do
     title 'Asset'
     type_of 'Asset'
     year 2012
+    topics { [FactoryGirl.create(:topic, name: 'Right to a hearing')] }
   end
 end
