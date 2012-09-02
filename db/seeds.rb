@@ -54,17 +54,20 @@ def build_fake_hierarchy
   end
 end
 
-def load_website_hierarchy
+def load_website_hierarchy file_name
   opts = {:headers => true, :header_converters => :symbol}
-  CSV.foreach("#{Rails.root}/support/website_assets/hierarchy.csv", opts) do |row|
+  CSV.foreach("#{Rails.root}/support/website_assets/#{file_name}", opts) do |row|
     print '.'
     policy_area_name = row[:policy_area]
     sub_area_name = row[:sub_area]
     topic_name = row[:topic]
+    topic_description = row[:summary]
 
     policy_area = PolicyArea.find_or_create_by_name(policy_area_name) || raise("Missing Policy Area #{policy_area_name}")
     sub_area = SubArea.find_or_create_by_name(sub_area_name) || raise("Missing Sub Area #{sub_area_name}")
+
     topic = Topic.find_or_create_by_name(topic_name) || raise("Missing Topic #{topic_name}")
+    topic.update_attributes description: topic_description
 
     sub_area.policy_area = policy_area unless(sub_area.policy_area == policy_area)
     sub_area.save!
@@ -72,12 +75,15 @@ def load_website_hierarchy
   end
 end
 
-def load_assets_from_csv
+def load_assets_from_csv asset_csv_file_name
   opts = {:headers => true, :header_converters => :symbol}
 
   missing_topics = Set.new
+  failed_asset_validations = Set.new
+  failed_asset_counts = Hash.new(0)
+  imported_asset_count = 0
 
-  CSV.foreach("#{Rails.root}/support/website_assets_civil_rights_clean.csv", opts) do |row|
+  CSV.foreach("#{Rails.root}/support/website_assets/#{asset_csv_file_name}", opts) do |row|
     topic_name = row[:topic]
 
     begin
@@ -87,23 +93,29 @@ def load_assets_from_csv
     end
 
     if topic.present?
-      Asset.create!(asset_file: File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.doc'))) ,
-                    format: row[:format],
-                    level: row[:level],
-                    policy_area: row[:policy_area],
-                    source: row[:source],
-                    state: row[:state],
-                    sub_area: row[:sub_area],
-                    summary: row[:summary],
-                    title: row[:title],
-                    topic: row[:topic],
-                    topic_ids: [topic.id],
-                    type_of: row[:type],
-                    year: row[:year])
+      begin
+        Asset.create!(asset_file: File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.doc'))) ,
+                      format: row[:format],
+                      level: row[:level],
+                      source: row[:source],
+                      state: row[:state],
+                      summary: row[:summary],
+                      title: row[:title],
+                      topic_ids: [topic.id],
+                      type_of: row[:type],
+                      year: row[:year])
+        imported_asset_count += 1
+      rescue ActiveRecord::RecordInvalid => e
+        failed_asset_validations << [e.message, e.record.inspect]
+        failed_asset_counts[e.message] += 1
+      end
     end
   end
 
   report_missing_topics(missing_topics)
+  report_failed_validations(failed_asset_validations, failed_asset_counts)
+  puts
+  puts "Total number of successfully imported assets: #{imported_asset_count}"
 end
 
 def report_missing_topics(missing_topics)
@@ -115,11 +127,28 @@ def report_missing_topics(missing_topics)
   puts
 end
 
-create_admin
+def report_failed_validations(failed_validations, failed_counts)
+  puts
+  puts
+  puts "#{failed_validations.count} Failed Validations:"
+  failed_counts.each do |message, count|
+    puts "#{count}: #{message}"
+  end
+  puts
+  puts
+  puts "Failed Validations Summary:"
+  failed_validations.sort.each do |validation_info|
+    puts "-- #{validation_info[0]}"
+    puts validation_info[1]
+    puts
+  end
+  puts
+end
 
+create_admin
 clear_assets_and_index!
 clear_hierarchy!
 
-build_fake_hierarchy
-load_website_hierarchy
-load_assets_from_csv
+# build_fake_hierarchy
+load_website_hierarchy 'hierarchy.csv'
+load_assets_from_csv 'assets.csv'

@@ -17,7 +17,7 @@ describe Asset do
   it { should validate_presence_of(:format) }
   it { should validate_presence_of(:level) }
   it { should validate_presence_of(:source) }
-  it { should validate_presence_of(:state) }
+  it { should_not validate_presence_of(:state) }
   it { should validate_presence_of(:summary) }
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:topic_ids) }
