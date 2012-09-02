@@ -60,6 +60,10 @@ When /^I fill in the following:$/ do |field_table|
   end
 end
 
+When /^I select "([^"]*?)" from "([^"]*?)"$/ do |value, select_label|
+  select(value, from: select_label)
+end
+
 When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |file_name, field|
   attach_file(field, File.expand_path(File.join(Rails.root, "support", file_name)))
 end

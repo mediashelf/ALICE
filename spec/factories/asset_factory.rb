@@ -12,20 +12,13 @@ FactoryGirl.define do
     legislative_history 'Asset'
     level 'Asset'
     notes 'Asset'
-    policy_area 'Asset'
     short_title 'Asset'
     source 'Asset'
     source_website 'Asset'
     state 'Asset'
-    sub_area 'Asset'
     summary 'Asset'
     title 'Asset'
-    topic 'Asset'
     type_of 'Asset'
-    web_folder_link_to_asset_pdf 'Asset'
-    web_folder_link_to_asset_word_doc  'Asset'
-    web_folder_link_to_bill_pdf 'Asset'
-    web_folder_link_to_bill_word_doc 'Asset'
     year 2012
   end
 end

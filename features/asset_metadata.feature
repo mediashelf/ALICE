@@ -10,16 +10,16 @@ Feature: Asset metadata
 
   @javascript
   Scenario: Editor enters metadata
-    Given I am logged in
+    Given an "Immigration - H1B - Right to a hearing" hierarchy exists
+      And I am logged in
     Then I should be on the homepage
-    When I follow "New Asset"
+    When I follow "Dashboard"
+      And I follow "Assets"
+      And I follow "New Asset"
     Then I should be on the new asset page
 
     When I fill in the following:
       | Field                                  | Value                                                        |
-      | Policy area                            | Immigration                                                  |
-      | Sub area                               | Extradition                                                  |
-      | Topic                                  | Right to a hearing                                           |
       | Title                                  | Wisconsin right to hearing before extradition law            |
       | Year                                   | 2011                                                         |
       | Source                                 | Wisconsin Senate                                             |
@@ -35,18 +35,17 @@ Feature: Asset metadata
       | Notes                                  | These are notes.                                             |
       | Short title                            | Right to Hearing Before Extradition                          |
       | Source website                         | http://www.wikipedia.org                                     |
-      | Web folder link to asset PDF           | http://www.wikipedia.org                                     |
-      | Web folder link to asset Word document | http://www.wikipedia.org                                     |
-      | Web folder link to bill PDF            | http://www.wikipedia.org                                     |
-      | Web folder link to bill Word document  | http://www.wikipedia.org                                     |
 
-      And I attach the file "fake.pdf" to "Asset File"
-      And I press "Save"
+      And I select "Right to a hearing" from "Topics"
+      And I attach the file "fake.pdf" to "Upload asset"
+      And I press "Create Asset"
     Then I should see "Right to a hearing"
     When I follow "Download"
 
   Scenario: Missing Required Field
     Given I am logged in
-    When I follow "New Asset"
-      And I press "Save"
+    When I follow "Dashboard"
+      And I follow "Assets"
+      And I follow "New Asset"
+    When I press "Create Asset"
     Then I should see "can't be blank"

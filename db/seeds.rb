@@ -44,13 +44,10 @@ def build_fake_hierarchy
                                topic_ids: [topic.id],
                                format: Faker::Name.first_name,
                                level: Faker::Company.catch_phrase,
-                               policy_area: Faker::Company.name,
                                source: Faker::Company.name,
                                state: Faker::Company.name,
-                               sub_area: Faker::Company.name,
                                summary: Faker::Company.name,
                                title: Faker::Company.catch_phrase,
-                               topic: Faker::Company.name,
                                topic_ids: [topic.id],
                                type_of: Faker::Company.name,
                                year: rand(1..2012))

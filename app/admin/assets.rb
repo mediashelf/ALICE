@@ -1,8 +1,8 @@
 ActiveAdmin.register Asset do
   index do
-    column :policy_area
-    column :sub_area
-    column :topic
+    #column :policy_area
+    #column :sub_area
+    #column :topic
     column :title
     default_actions
   end
@@ -26,10 +26,10 @@ ActiveAdmin.register Asset do
       row :summary
       row :external_link_to_asset
       row :source_website
-      row :web_folder_link_to_asset_pdf
-      row :web_folder_link_to_asset_word_doc
-      row :web_folder_link_to_bill_pdf
-      row :web_folder_link_to_bill_word_doc
+      #row :web_folder_link_to_asset_pdf
+      #row :web_folder_link_to_asset_word_doc
+      #row :web_folder_link_to_bill_pdf
+      #row :web_folder_link_to_bill_word_doc
 
       row :alternative_terms
       row :legislative_history
@@ -59,9 +59,9 @@ ActiveAdmin.register Asset do
   form do |f|
     f.inputs do
       f.input :topics, as: :select, collection: options_from_collection_for_select(Topic.all, 'id', 'name', asset.topic_ids)
-      f.input :policy_area
-      f.input :sub_area
-      f.input :topic
+      #f.input :policy_area
+      #f.input :sub_area
+      #f.input :topic
       f.input :title
       f.input :short_title
       f.input :year
@@ -74,10 +74,10 @@ ActiveAdmin.register Asset do
       f.input :summary
       f.input :external_link_to_asset
       f.input :source_website
-      f.input :web_folder_link_to_asset_pdf
-      f.input :web_folder_link_to_asset_word_doc
-      f.input :web_folder_link_to_bill_pdf
-      f.input :web_folder_link_to_bill_word_doc
+      #f.input :web_folder_link_to_asset_pdf
+      #f.input :web_folder_link_to_asset_word_doc
+      #f.input :web_folder_link_to_bill_pdf
+      #f.input :web_folder_link_to_bill_word_doc
 
       f.input :alternative_terms
       f.input :legislative_history
@@ -91,6 +91,6 @@ ActiveAdmin.register Asset do
 
       f.input :content, disabled: true
     end
-    f.buttons
+    f.actions
   end
 end

@@ -1,3 +1,3 @@
-Given /^an asset with topic "([^"]*?)" and summary "([^"]*?)"$/ do |topic, summary|
-  FactoryGirl.create :asset, topic: topic, summary: summary
+Given /^an asset with title "([^"]*?)" and summary "([^"]*?)"$/ do |title, summary|
+  FactoryGirl.create :asset, title: title, summary: summary
 end

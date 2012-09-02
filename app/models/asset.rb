@@ -3,12 +3,9 @@ class Asset < ActiveRecord::Base
 
   has_and_belongs_to_many :topics
 
-  attr_accessible :alternative_terms, :asset_file, :bill_number, :content, :external_link_to_asset, :format, :legislative_history, :level, :notes, :policy_area, :short_title, :source, :source_website, :state, :sub_area, :summary, :title, :topic, :type_of, :year, :topic_ids
+  attr_accessible :alternative_terms, :asset_file, :bill_number, :content, :external_link_to_asset, :format, :legislative_history, :level, :notes, :short_title, :source, :source_website, :state, :summary, :title, :type_of, :year, :topic_ids
 
-  # Questionable fields
-  attr_accessible :web_folder_link_to_asset_pdf, :web_folder_link_to_asset_word_doc, :web_folder_link_to_bill_pdf, :web_folder_link_to_bill_word_doc
-
-  validates_presence_of :title, :topic, :summary, :policy_area, :sub_area, :source, :year, :state, :format, :level, :type_of, :asset_file
+  validates_presence_of :title, :summary, :source, :year, :state, :format, :level, :type_of, :asset_file
 
   before_save :extract_content_from_asset_file
   after_save :index_record
@@ -22,14 +19,14 @@ class Asset < ActiveRecord::Base
       'content_texts' => content,
       'format_ss' => format,
       'level_ss' => level,
-      'policy_area_ss' => policy_area,
+      #'policy_area_ss' => policy_area,
       'short_title_texts' => short_title,
       'source_ss' => source,
       'state_ss' => state,
-      'sub_area_ss' => sub_area,
+      #'sub_area_ss' => sub_area,
       'summary_texts' => summary,
       'title_texts' => title,
-      'topic_texts' => topic,
+      #'topic_texts' => topic,
       'topic_facet' => indexed_topics,
       'type_of_ss' => type_of,
       'year_is' => year,
@@ -39,13 +36,7 @@ class Asset < ActiveRecord::Base
       'source_website_display' => source_website,
       'external_link_to_asset_display' => external_link_to_asset,
       'legislative_history_display' => legislative_history,
-      'notes_display' => notes,
-
-      # Questionable fields
-      'web_folder_link_to_asset_pdf_display' => web_folder_link_to_asset_pdf,
-      'web_folder_link_to_asset_word_doc_display' => web_folder_link_to_asset_word_doc,
-      'web_folder_link_to_bill_pdf_display' => web_folder_link_to_bill_pdf,
-      'web_folder_link_to_bill_word_doc_display' => web_folder_link_to_bill_word_doc }
+      'notes_display' => notes }
   end
 
   def indexed_topics

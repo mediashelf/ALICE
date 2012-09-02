@@ -4,7 +4,7 @@ Feature: Search
   I want to search for, and find results
 
   Background:
-    Given an asset with topic "Shark Week" and summary "I love sharks"
+    Given an asset with title "Shark Week" and summary "I love sharks"
 
   Scenario: Search returns basic results
     When I search for "sharks"

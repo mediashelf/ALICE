@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120831232038) do
+ActiveRecord::Schema.define(:version => 20120902202210) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -29,9 +29,6 @@ ActiveRecord::Schema.define(:version => 20120831232038) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
   create_table "assets", :force => true do |t|
-    t.string   "policy_area"
-    t.string   "sub_area"
-    t.string   "topic"
     t.string   "title"
     t.integer  "year"
     t.string   "source"
@@ -40,18 +37,14 @@ ActiveRecord::Schema.define(:version => 20120831232038) do
     t.string   "level"
     t.string   "type_of"
     t.text     "summary"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "asset_file"
     t.text     "content"
     t.string   "bill_number"
     t.string   "external_link_to_asset"
     t.string   "short_title"
     t.string   "source_website"
-    t.string   "web_folder_link_to_asset_pdf"
-    t.string   "web_folder_link_to_asset_word_doc"
-    t.string   "web_folder_link_to_bill_pdf"
-    t.string   "web_folder_link_to_bill_word_doc"
     t.text     "alternative_terms"
     t.string   "legislative_history"
     t.text     "notes"
