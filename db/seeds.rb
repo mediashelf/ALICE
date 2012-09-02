@@ -58,10 +58,10 @@ def load_website_hierarchy file_name
   opts = {:headers => true, :header_converters => :symbol}
   CSV.foreach("#{Rails.root}/support/website_assets/#{file_name}", opts) do |row|
     print '.'
-    policy_area_name = row[:policy_area]
-    sub_area_name = row[:sub_area]
-    topic_name = row[:topic]
-    topic_description = row[:summary]
+    policy_area_name = row[:policy_area].try(:strip)
+    sub_area_name = row[:sub_area].try(:strip)
+    topic_name = row[:topic].try(:strip)
+    topic_description = row[:summary].try(:strip)
 
     policy_area = PolicyArea.find_or_create_by_name(policy_area_name) || raise("Missing Policy Area #{policy_area_name}")
     sub_area = SubArea.find_or_create_by_name(sub_area_name) || raise("Missing Sub Area #{sub_area_name}")
@@ -95,14 +95,14 @@ def load_assets_from_csv asset_csv_file_name
     if topic.present?
       begin
         Asset.create!(asset_file: File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.doc'))) ,
-                      format: row[:format],
-                      level: row[:level],
-                      source: row[:source],
-                      state: row[:state],
-                      summary: row[:summary],
-                      title: row[:title],
+                      format: row[:format].try(:strip),
+                      level: row[:level].try(:strip),
+                      source: row[:source].try(:strip),
+                      state: row[:state].try(:strip),
+                      summary: row[:summary].try(:strip),
+                      title: row[:title].try(:strip),
                       topic_ids: [topic.id],
-                      type_of: row[:type],
+                      type_of: row[:type].try(:strip),
                       year: row[:year])
         imported_asset_count += 1
       rescue ActiveRecord::RecordInvalid => e
