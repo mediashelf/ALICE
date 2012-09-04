@@ -45,18 +45,18 @@ header.top {
 }
 
 nav {
-  @include span-columns(5 omega, 12);
   padding-top: 0.5em;
+  float: right;
 
   ul {
     list-style: none;
     li {
+      float: left;
+      padding-right: 1em;
       text-transform: uppercase;
       text-align: center;
       white-space: nowrap;
-      @include span-columns(1, 4);
       @include adjust-font-size-to(13px);
-      &:last-child { @include omega; }
     }
   }
 }
