@@ -17,7 +17,6 @@ body {
 }
 
 .sidebar {
-  white-space: nowrap;
   height: 100%;
   @include span-columns(2, 12);
   background-color: $dark_blue;
@@ -26,14 +25,31 @@ body {
 .content {
   clear: left;
   margin-top: 1.5em;
-}
 
+}
 header.top {
   position: absolute;
   left: 0;
   @include span-columns(12);
   background-color: $light_gray;
   height: $header-height;
+
+  nav {
+    padding-top: 0.5em;
+    float: right;
+
+    ul {
+      list-style: none;
+      li {
+        float: left;
+        padding-right: 1em;
+        text-transform: uppercase;
+        text-align: center;
+        white-space: nowrap;
+        @include adjust-font-size-to(13px);
+      }
+    }
+  }
 }
 
 :link, :visited {
@@ -44,19 +60,3 @@ header.top {
   }
 }
 
-nav {
-  padding-top: 0.5em;
-  float: right;
-
-  ul {
-    list-style: none;
-    li {
-      float: left;
-      padding-right: 1em;
-      text-transform: uppercase;
-      text-align: center;
-      white-space: nowrap;
-      @include adjust-font-size-to(13px);
-    }
-  }
-}

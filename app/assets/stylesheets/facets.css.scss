@@ -1,0 +1,40 @@
+/* dialog that pops up when you pick more on facets */
+$facet_extended_button_bg_color: #F6F6F6 !default;
+$facet_extended_button_border_color: #CCC !default;
+$facet_extended_disabled_button_bg_color: #E2EDFE !default;
+$facet_extended_disabled_border_color: #C4DAFE !default;
+$facet_extended_button_hover_bg_color: #DADADA !default;
+$facet_extended_button_hover_border_color: #999 !default;
+$facet_extended_button_hover_color: #212121 !default;
+
+
+.facet_extended_list {
+  li {
+      list-style: none outside none;
+      margin: 0.5em 0;
+  }
+  .sort_options .az, .sort_options .numeric, .next_page,.prev_page {
+    background: $facet_extended_button_bg_color;
+    border:1px solid $facet_extended_button_border_color;
+    display:inline-block;
+    font-weight:700;
+    padding:0.2em 1em;
+  }
+  .sort_options a:hover,.facet_extended_list .prev_next_links a:hover {
+    background: $facet_extended_button_hover_bg_color;
+    border:1px solid $facet_extended_button_hover_border_color;
+    color: $facet_extended_button_hover_color;
+  }
+  .prev_next_links {
+    float: left;
+  }
+
+  .sort_options {
+    text-align: right;
+    .disabled {
+      background-color: $facet_extended_disabled_button_bg_color;
+      border:1px solid $facet_extended_disabled_border_color;
+    }
+  }
+
+}
