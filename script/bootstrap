@@ -2,9 +2,14 @@
 
 class Bootstrap
   def initialize
+    detect_xpdf
     delete_old_jetty!
     generate_jetty
     symlink_configs
+  end
+
+  def detect_xpdf
+    raise 'xpdf not detected. Please brew install it.' if `which pdftotext`.empty?
   end
 
   def delete_old_jetty!
