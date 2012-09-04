@@ -3,8 +3,6 @@ common: &common
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: plato
-  password:
 
 development:
   database: alice_development
