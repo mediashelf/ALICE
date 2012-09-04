@@ -82,40 +82,64 @@ def load_assets_from_csv asset_csv_file_name
   failed_asset_validations = Set.new
   failed_asset_counts = Hash.new(0)
   imported_asset_count = 0
+  bad_pdfs = Set.new
+  unknown_topic = Topic.find_or_create_by_name(' Unknown')
 
   CSV.foreach("#{Rails.root}/support/website_assets/#{asset_csv_file_name}", opts) do |row|
-    topic_name = row[:topic]
+    topic_name = row[:topic].try(:strip)
 
     begin
       topic = Topic.find_by_name!(topic_name)
     rescue
+      topic = unknown_topic
       missing_topics << topic_name
     end
 
     if topic.present?
       begin
-        Asset.create!(asset_file: File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.doc'))) ,
-                      format: row[:format].try(:strip),
-                      level: row[:level].try(:strip),
-                      source: row[:source].try(:strip),
-                      state: row[:state].try(:strip),
-                      summary: row[:summary].try(:strip),
-                      title: row[:title].try(:strip),
-                      topic_ids: [topic.id],
-                      type_of: row[:type].try(:strip),
-                      year: row[:year])
+        load_asset_from_csv row, topic
         imported_asset_count += 1
       rescue ActiveRecord::RecordInvalid => e
         failed_asset_validations << [e.message, e.record.inspect]
         failed_asset_counts[e.message] += 1
+      rescue ArgumentError => e
+        bad_pdfs << e.message
+        failed_asset_counts['Bad PDF'] += 1
       end
     end
   end
 
-  report_missing_topics(missing_topics)
-  report_failed_validations(failed_asset_validations, failed_asset_counts)
+  report_missing_topics missing_topics
+  report_failed_validations failed_asset_validations, failed_asset_counts
+  report_bad_pdfs bad_pdfs
   puts
   puts "Total number of successfully imported assets: #{imported_asset_count}"
+end
+
+def load_asset_from_csv row, topic
+  pdf = obtain_pdf_file row
+  Asset.create!(asset_file: pdf,
+                format: row[:format].try(:strip) || ' Unknown',
+                level: row[:level].try(:strip) || ' Unknown',
+                source: row[:source].try(:strip) || ' Unknown',
+                state: row[:state].try(:strip) || ' Unknown',
+                summary: row[:summary].try(:strip) || ' Unknown',
+                title: row[:title].try(:strip) || ' Unknown',
+                topic_ids: [topic.id],
+                type_of: row[:type].try(:strip) || ' Unknown',
+                year: row[:year] || 0)
+  `rm "#{pdf.path}"` unless pdf.path =~ /\/fake.doc$/
+end
+
+def obtain_pdf_file row
+  if row[:web_folder_link_to_asset_pdf] =~ /\.pdf$/i
+    puts "\n\n*** #{row[:web_folder_link_to_asset_pdf]} ***"
+    file_name = row[:web_folder_link_to_asset_pdf].split("/").last.gsub(/[ \(\)]/, '_')
+    if system("wget '#{row[:web_folder_link_to_asset_pdf]}' -O /tmp/#{file_name}")
+      pdf = File.new(File.expand_path("/tmp/#{file_name}"))
+    end
+  end
+  pdf || File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.doc')))
 end
 
 def report_missing_topics(missing_topics)
@@ -127,20 +151,29 @@ def report_missing_topics(missing_topics)
   puts
 end
 
+def report_bad_pdfs bad_pdfs
+  puts
+  puts
+  puts "Bad PDFs:"
+  bad_pdfs.each do |pdf|
+    puts pdf
+  end
+end
+
 def report_failed_validations(failed_validations, failed_counts)
   puts
   puts
   puts "#{failed_validations.count} Failed Validations:"
-  failed_counts.each do |message, count|
-    puts "#{count}: #{message}"
-  end
-  puts
-  puts
-  puts "Failed Validations Summary:"
   failed_validations.sort.each do |validation_info|
     puts "-- #{validation_info[0]}"
     puts validation_info[1]
     puts
+  end
+  puts
+  puts
+  puts "Failed Validations Summary:"
+  failed_counts.each do |message, count|
+    puts "#{count}: #{message}"
   end
   puts
 end
@@ -150,5 +183,12 @@ clear_assets_and_index!
 clear_hierarchy!
 
 # build_fake_hierarchy
+puts
+puts "Loading Hierarchy"
+puts
 load_website_hierarchy 'hierarchy.csv'
+
+puts
+puts "Loading Assets"
+puts
 load_assets_from_csv 'assets.csv'
