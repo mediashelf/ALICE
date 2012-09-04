@@ -1,0 +1,6 @@
+%article.page
+  %h1= page.title
+  %ul.child-nav
+    = render partial: 'pages/child_nav_link', collection: page.children
+
+  = page.body.html_safe

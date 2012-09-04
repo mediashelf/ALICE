@@ -10,6 +10,16 @@ def create_admin
   end
 end
 
+def create_home_page
+  Page.where(title: 'Who is Alice?').first_or_create(body: %Q{
+    <p><strong>ALICE is a groundbreaking resource for smart legislation.</strong></p>
+
+    <p>ALICE is the American Legislative and Issue Campaign Exchange, a national project to develop a one-stop, Web-based library of progressive model law on a wide range of issues in state and local policy. As its name may suggest, ALICE is best understood as a partial counter to ALEC (American Legislative Exchange Council), which has been in the news recently.</p>
+
+    <p>Like ALEC, ALICE will be a values-based non-profit, and offer model laws. But the similarities end there. Our values are to support, not destroy, economic fairness, environmental sustainability, and capable democratic government. Our models will be open to the public. And instead of corporate lobbyists, our work will be done by a growing network of public interest law and public policy professors, students, advocates, and practitioners. If you're interested in joining that network, or just receiving updates on it, please sign up above... we'll be going live soon!</p>
+  }).update_attribute(:is_home_page, true)
+end
+
 def clear_assets_and_index!
   `rm -rf public/uploads/asset`
   `rm -rf public/uploads/tmp`
@@ -171,6 +181,7 @@ def report_failed_validations(failed_validations, failed_counts)
 end
 
 create_admin
+create_home_page
 clear_assets_and_index!
 clear_hierarchy!
 
