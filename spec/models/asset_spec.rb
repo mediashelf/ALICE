@@ -72,6 +72,17 @@ describe Asset do
     end
   end
 
+  describe "#to_solr" do
+    it "should split state field into multiple values" do
+      subject.state = "Washington, Texas, Maryland, New Jersey, California, Connecticut"
+      subject.to_solr['state_sms'].should == ["Washington", "Texas", "Maryland", "New Jersey", "California", "Connecticut"]
+    end
+    it "should not choke on nil" do
+      subject.state = nil
+      subject.to_solr['state_sms'].should == []
+    end
+  end
+
   def search_returns_results_for? search_text
     solr.get('select', params: {q: search_text, qt: 'standard'})['response']['numFound'] > 0
   end
