@@ -470,10 +470,10 @@
        <str name="facet.field">topic_facet</str>
        <str name="facet.field">year_is</str>
        <str name="facet.field">source_ss</str>
-       <str name="facet.field">state_ss</str>
-       <str name="facet.field">format_ss</str>
-       <str name="facet.field">level_ss</str>
-       <str name="facet.field">type_of_ss</str>
+       <str name="facet.field">state_sms</str>
+       <str name="facet.field">format_sms</str>
+       <str name="facet.field">level_sms</str>
+       <str name="facet.field">type_of_sms</str>
 
        <str name="spellcheck">true</str>
        <str name="spellcheck.dictionary">default</str>
