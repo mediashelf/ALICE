@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def prepare_nav_links
-    @nav_links = Page.where(parent_id: nil) #.order(:position)
+    @nav_links = Page.top_level
   end
 end

@@ -11,6 +11,8 @@ class Page < ActiveRecord::Base
   before_validation :set_slug
   before_save :set_position
 
+  scope :top_level, where(parent_id: nil)
+
   def slug_path
     "/#{slug}"
   end
@@ -19,9 +21,9 @@ class Page < ActiveRecord::Base
   def set_slug
     self.slug ||= self.title.parameterize
   end
-  
+
   def set_position
-    self.position ||= (Page.all.map(&:position).max || 0) + 1
+    self.move_to_bottom unless self.position
   end
 
   def cannot_parent_itself
