@@ -21,6 +21,10 @@ class Page < ActiveRecord::Base
     where(is_home_page: true).first || new(body: '')
   end
 
+  def name
+    self.title
+  end
+
   private
   def set_slug
     self.slug ||= self.title.parameterize
