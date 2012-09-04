@@ -11,14 +11,14 @@ class CatalogController < ApplicationController
       :qt => 'standard',
       :rows => 10,
       :'q.alt' => '*:*',
-      :'f.format_ss.facet.sort' => 'index',
-      :'f.level_ss.facet.sort' => 'index',
+      :'f.format_sms.facet.sort' => 'index',
+      :'f.level_sms.facet.sort' => 'index',
       :'f.policy_area_facet.facet.sort' => 'index',
       :'f.source_ss.facet.sort' => 'index',
-      :'f.state_ss.facet.sort' => 'index',
+      :'f.state_sms.facet.sort' => 'index',
       :'f.sub_area_facet.facet.sort' => 'index',
       :'f.topic_facet.facet.sort' => 'index',
-      :'f.type_of_ss.facet.sort' => 'index',
+      :'f.type_of_sms.facet.sort' => 'index',
       :'f.year_is.facet.sort' => 'index'
     }
 
@@ -51,10 +51,10 @@ class CatalogController < ApplicationController
     config.add_show_field 'topic_texts', label: 'Topic:'
     config.add_show_field 'asset_texts', label: 'Asset:'
     config.add_show_field 'source_ss', label: 'Source:'
-    config.add_show_field 'state_ss', label: 'State:'
-    config.add_show_field 'format_ss', label: 'Format:'
-    config.add_show_field 'level_ss', label: 'Level:'
-    config.add_show_field 'type_of_ss', label: 'Type:'
+    config.add_show_field 'state_sms', label: 'State:'
+    config.add_show_field 'format_sms', label: 'Format:'
+    config.add_show_field 'level_sms', label: 'Level:'
+    config.add_show_field 'type_of_sms', label: 'Type:'
     config.add_show_field 'keywords_texts', label: 'Keywords:'
     config.add_show_field 'summary_texts', label: 'Summary:'
     config.add_show_field 'year_is', label: 'Year:'
@@ -93,9 +93,9 @@ class CatalogController < ApplicationController
     config.add_facet_field 'year_is', label: 'Year', limit: 20, range: true
     config.add_facet_field 'source_ss', label: 'Source', limit: 20
     config.add_facet_field 'state_sms', label: 'State', limit: 20
-    config.add_facet_field 'format_ss', label: 'Format', limit: 20
-    config.add_facet_field 'level_ss', label: 'Level', limit: 20
-    config.add_facet_field 'type_of_ss', label: 'Type', limit: 20
+    config.add_facet_field 'format_sms', label: 'Format', limit: 20
+    config.add_facet_field 'level_sms', label: 'Level', limit: 20
+    config.add_facet_field 'type_of_sms', label: 'Type', limit: 20
 
     # Future field for use with browsing functionality
     #config.add_facet_field 'format', :label => 'Format'

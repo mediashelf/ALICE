@@ -17,17 +17,17 @@ class Asset < ActiveRecord::Base
       'alternative_terms_texts' => alternative_terms,
       'bill_number_texts' => bill_number,
       'content_texts' => content,
-      'format_ss' => format,
-      'level_ss' => level,
+      'format_sms' => parse_list(format),
+      'level_sms' => parse_list(level),
       'policy_area_texts' => indexed_policy_areas,
       'short_title_texts' => short_title,
       'source_ss' => source,
-      'state_sms' => state ? state.split(/\s*,\s*/) : [],
+      'state_sms' => parse_list(state),
       'sub_area_texts' => indexed_sub_areas,
       'summary_texts' => summary,
       'title_texts' => title,
       'topic_texts' => indexed_topics,
-      'type_of_ss' => type_of,
+      'type_of_sms' => parse_list(type_of),
       'year_is' => year,
 
       # Display fields
@@ -76,5 +76,11 @@ private
                        .encode('utf-8', replace: nil)
                        .gsub("\n", ' ')
     end
+  end
+
+  private
+
+  def parse_list(text)
+    text ? text.split(/\s*,\s*/) : []
   end
 end
