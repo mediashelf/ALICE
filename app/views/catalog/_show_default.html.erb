@@ -6,9 +6,24 @@
 	    <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_value :document => document, :field => solr_fname %></dd>
     <% end -%>
   <% end -%>
-  <% associated_file = Asset.find(document[:id].to_i).asset_file -%>
-  <% if associated_file.present? %>
-    <dt class='blacklight-asset_file_link'>File:</dt>
-    <dd class='blacklight-asset_file_link'><%= link_to('Download', associated_file.url) %></dd>
+  <% associated_asset_pdf = Asset.find(document[:id].to_i).asset_file -%>
+  <% associated_asset_word = Asset.find(document[:id].to_i).asset_word -%>
+  <% associated_bill_pdf = Asset.find(document[:id].to_i).bill_pdf -%>
+  <% associated_bill_word = Asset.find(document[:id].to_i).bill_word -%>
+  <% if associated_asset_pdf.present? %>
+    <dt class='blacklight-asset_pdf_link'>Asset PDF:</dt>
+    <dd class='blacklight-asset_pdf_link'><%= link_to('Download', associated_asset_pdf.url) %></dd>
+  <% end -%>
+  <% if associated_asset_word.present? %>
+    <dt class='blacklight-asset_word_link'>Asset Word:</dt>
+    <dd class='blacklight-asset_word_link'><%= link_to('Download', associated_asset_word.url) %></dd>
+  <% end -%>
+  <% if associated_bill_pdf.present? %>
+    <dt class='blacklight-bill_pdf_link'>Bill PDF:</dt>
+    <dd class='blacklight-bill_pdf_link'><%= link_to('Download', associated_bill_pdf.url) %></dd>
+  <% end -%>
+  <% if associated_bill_word.present? %>
+    <dt class='blacklight-bill_word_link'>Bill Word:</dt>
+    <dd class='blacklight-bill_word_link'><%= link_to('Download', associated_bill_word.url) %></dd>
   <% end -%>
 </dl>

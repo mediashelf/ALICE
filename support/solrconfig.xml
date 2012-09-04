@@ -447,17 +447,18 @@
         alternative_terms_texts
         bill_number_texts
         content_texts
-        format_ss
-        level_ss
+        bill_pdf_content_texts
+        format_sms
+        level_sms
         policy_area_texts
         short_title_texts
         source_ss
-        state_ss
+        state_sms
         sub_area_texts
         summary_texts
         title_texts
         topic_texts
-        type_of_ss
+        type_of_sms
         year_is
       </str>
 
@@ -469,16 +470,16 @@
        <str name="facet.field">topic_facet</str>
        <str name="facet.field">year_is</str>
        <str name="facet.field">source_ss</str>
-       <str name="facet.field">state_ss</str>
-       <str name="facet.field">format_ss</str>
-       <str name="facet.field">level_ss</str>
-       <str name="facet.field">type_of_ss</str>
+       <str name="facet.field">state_sms</str>
+       <str name="facet.field">format_sms</str>
+       <str name="facet.field">level_sms</str>
+       <str name="facet.field">type_of_sms</str>
 
        <str name="spellcheck">true</str>
        <str name="spellcheck.dictionary">default</str>
        <str name="spellcheck.onlyMorePopular">true</str>
        <str name="spellcheck.extendedResults">true</str>
-       <str name="spellcheck.collate">false</str>
+       <str name="spellcheck.collate">true</str>
        <str name="spellcheck.count">5</str>
     </lst>
     <arr name="last-components">
@@ -517,7 +518,7 @@
        <str name="spellcheck.dictionary">default</str>
        <str name="spellcheck.onlyMorePopular">true</str>
        <str name="spellcheck.extendedResults">true</str>
-       <str name="spellcheck.collate">false</str>
+       <str name="spellcheck.collate">true</str>
        <str name="spellcheck.count">5</str>
 
        <arr name="last-components">

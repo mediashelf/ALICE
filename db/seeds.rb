@@ -1,7 +1,5 @@
 require 'csv'
-require 'faker'
 require 'rsolr'
-require 'factory_girl'
 
 # Use this to seed a development, or staging database for playing around.
 # NOT intended for starting a real, production database
@@ -23,6 +21,8 @@ def create_home_page
 end
 
 def clear_assets_and_index!
+  `rm -rf public/uploads/asset`
+  `rm -rf public/uploads/tmp`
   Asset.delete_all
 
   rsolr = RSolr.connect(url: Blacklight.solr_config[:url])
@@ -34,34 +34,6 @@ def clear_hierarchy!
   PolicyArea.delete_all
   SubArea.delete_all
   Topic.delete_all
-end
-
-def build_fake_hierarchy
-  100.times do |n|
-    policy_area = FactoryGirl.create(:policy_area, name: "#{Faker::Company.name} #{n}")
-    sub_area = FactoryGirl.create(:sub_area, name: "#{Faker::Name.first_name} #{n}")
-
-    sub_area.policy_area = policy_area
-    sub_area.save!
-
-    topic = FactoryGirl.create(:topic, name: "#{Faker::Name.last_name} #{n}")
-
-    topic.sub_areas << sub_area
-    topic.save!
-
-    asset = FactoryGirl.create(:asset,
-                               title: Faker::Internet.user_name,
-                               topic_ids: [topic.id],
-                               format: Faker::Name.first_name,
-                               level: Faker::Company.catch_phrase,
-                               source: Faker::Company.name,
-                               state: Faker::Company.name,
-                               summary: Faker::Company.name,
-                               title: Faker::Company.catch_phrase,
-                               topic_ids: [topic.id],
-                               type_of: Faker::Company.name,
-                               year: rand(1..2012))
-  end
 end
 
 def load_website_hierarchy file_name
@@ -92,40 +64,73 @@ def load_assets_from_csv asset_csv_file_name
   failed_asset_validations = Set.new
   failed_asset_counts = Hash.new(0)
   imported_asset_count = 0
+  bad_pdfs = Set.new
+  unknown_topic = Topic.find_or_create_by_name(' Unknown')
 
   CSV.foreach("#{Rails.root}/support/website_assets/#{asset_csv_file_name}", opts) do |row|
-    topic_name = row[:topic]
+    topic_name = row[:topic].try(:strip)
 
     begin
       topic = Topic.find_by_name!(topic_name)
     rescue
+      topic = unknown_topic
       missing_topics << topic_name
     end
 
     if topic.present?
       begin
-        Asset.create!(asset_file: File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.doc'))) ,
-                      format: row[:format].try(:strip),
-                      level: row[:level].try(:strip),
-                      source: row[:source].try(:strip),
-                      state: row[:state].try(:strip),
-                      summary: row[:summary].try(:strip),
-                      title: row[:title].try(:strip),
-                      topic_ids: [topic.id],
-                      type_of: row[:type].try(:strip),
-                      year: row[:year])
+        load_asset_from_csv row, topic
         imported_asset_count += 1
       rescue ActiveRecord::RecordInvalid => e
         failed_asset_validations << [e.message, e.record.inspect]
         failed_asset_counts[e.message] += 1
+      rescue ArgumentError => e
+        bad_pdfs << e.message
+        failed_asset_counts['Bad PDF'] += 1
       end
     end
   end
 
-  report_missing_topics(missing_topics)
-  report_failed_validations(failed_asset_validations, failed_asset_counts)
+  report_missing_topics missing_topics
+  report_failed_validations failed_asset_validations, failed_asset_counts
+  report_bad_pdfs bad_pdfs
   puts
   puts "Total number of successfully imported assets: #{imported_asset_count}"
+end
+
+def load_asset_from_csv row, topic
+  Asset.create!(asset_file: obtain_file(row, :web_folder_link_to_asset_pdf),
+                format: row[:format].try(:strip) || ' Unknown',
+                level: row[:level].try(:strip) || ' Unknown',
+                source: row[:source].try(:strip) || ' Unknown',
+                state: row[:state].try(:strip) || ' Unknown',
+                summary: row[:summary].try(:strip) || ' Unknown',
+                title: row[:title].try(:strip) || ' Unknown',
+                type_of: row[:type].try(:strip) || ' Unknown',
+                year: row[:year] || 0,
+                topic_ids: [topic.id],
+                alternative_terms: row[:alternative_terms].try(:strip),
+                bill_number: row[:bill_number].try(:strip),
+                legislative_history: row[:legislative_history].try(:strip),
+                notes: row[:internal_notes].try(:strip),
+                short_title: row[:short_title].try(:strip),
+                source_website: row[:source_website].try(:strip),
+                bill_word: obtain_file(row, :web_folder_link_to_bill_word_doc),
+                bill_pdf: obtain_file(row, :web_folder_link_to_bill_pdf),
+                asset_word: obtain_file(row, :web_folder_link_to_asset_word_doc),
+                external_link_to_asset: row[:external_link_to_asset].try(:strip))
+  `rm -f /tmp/*.pdf /tmp/*.doc`
+end
+
+def obtain_file row, sym
+  if row[sym] =~ /\.pdf$/i
+    puts "\n\n*** #{row[sym]} ***"
+    file_name = row[sym].split("/").last.gsub(/[ \(\)]/, '_')
+    if system("wget '#{row[sym]}' -O '/tmp/#{file_name}'")
+      pdf = File.new(File.expand_path("/tmp/#{file_name}"))
+    end
+  end
+  pdf || File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.doc')))
 end
 
 def report_missing_topics(missing_topics)
@@ -137,20 +142,29 @@ def report_missing_topics(missing_topics)
   puts
 end
 
+def report_bad_pdfs bad_pdfs
+  puts
+  puts
+  puts "Bad PDFs:"
+  bad_pdfs.each do |pdf|
+    puts pdf
+  end
+end
+
 def report_failed_validations(failed_validations, failed_counts)
   puts
   puts
   puts "#{failed_validations.count} Failed Validations:"
-  failed_counts.each do |message, count|
-    puts "#{count}: #{message}"
-  end
-  puts
-  puts
-  puts "Failed Validations Summary:"
   failed_validations.sort.each do |validation_info|
     puts "-- #{validation_info[0]}"
     puts validation_info[1]
     puts
+  end
+  puts
+  puts
+  puts "Failed Validations Summary:"
+  failed_counts.each do |message, count|
+    puts "#{count}: #{message}"
   end
   puts
 end
@@ -161,5 +175,12 @@ clear_assets_and_index!
 clear_hierarchy!
 
 # build_fake_hierarchy
+puts
+puts "Loading Hierarchy"
+puts
 load_website_hierarchy 'hierarchy.csv'
+
+puts
+puts "Loading Assets"
+puts
 load_assets_from_csv 'assets.csv'

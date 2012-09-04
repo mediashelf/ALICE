@@ -50,6 +50,9 @@
     li {
       @include facet_level_2;
       @include level-padding(2);
+      a.remove {
+        margin-left: 2px;
+      }
     }
 
     .limit_content {

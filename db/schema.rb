@@ -48,6 +48,10 @@ ActiveRecord::Schema.define(:version => 20120904201217) do
     t.text     "alternative_terms"
     t.string   "legislative_history"
     t.text     "notes"
+    t.string   "bill_pdf"
+    t.text     "bill_pdf_content"
+    t.string   "bill_word"
+    t.string   "asset_word"
   end
 
   create_table "assets_topics", :id => false, :force => true do |t|

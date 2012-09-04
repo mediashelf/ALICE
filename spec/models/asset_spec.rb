@@ -72,6 +72,38 @@ describe Asset do
     end
   end
 
+  describe "#to_solr" do
+    it "should split state field into multiple values" do
+      subject.state = "Washington, Texas, Maryland, New Jersey, California, Connecticut"
+      subject.to_solr['state_sms'].should == ["Washington", "Texas", "Maryland", "New Jersey", "California", "Connecticut"]
+    end
+    it "should split level field into multiple values" do
+      subject.level = "State, County, Municipal"
+      subject.to_solr['level_sms'].should == ["State", "County", "Municipal"]
+    end
+    it "should split format field into multiple values" do
+      subject.format = "Model, Support"
+      subject.to_solr['format_sms'].should == ["Model", "Support"]
+    end
+    it "should split type_of field into multiple values" do
+      subject.type_of = "Act/Ordinance, Report"
+      subject.to_solr['type_of_sms'].should == ["Act/Ordinance", "Report"]
+    end
+
+
+    it "should not choke on nil" do
+      subject.state = nil
+      subject.level = nil
+      subject.type_of = nil
+      subject.format = nil
+      solr_doc = subject.to_solr
+      solr_doc['state_sms'].should == []
+      solr_doc['level_sms'].should == []
+      solr_doc['type_of_sms'].should == []
+      solr_doc['format_sms'].should == []
+    end
+  end
+
   def search_returns_results_for? search_text
     solr.get('select', params: {q: search_text, qt: 'standard'})['response']['numFound'] > 0
   end

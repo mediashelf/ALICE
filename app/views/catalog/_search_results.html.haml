@@ -5,7 +5,8 @@
   = render_pagination_info @response, :entry_name => 'item'
   = link_to t('blacklight.search.start_over'), url_for(:action=>'index'), :id => "startOverLink"
 
-= render 'sort_and_per_page'
+  = render 'sort_and_per_page'
+
 = render 'results_pagination'
 = render :partial => 'document_list'
 = render 'results_pagination'
