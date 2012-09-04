@@ -5,7 +5,7 @@
   - if has_search_parameters?
     = render :partial => 'search_results'
   - else
-    = render :partial => 'home_text'
+    = render home_page
 
 - sidebar_items << capture do
   = render :partial => 'facets'

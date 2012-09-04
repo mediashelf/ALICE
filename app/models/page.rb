@@ -11,10 +11,14 @@ class Page < ActiveRecord::Base
   before_validation :set_slug
   before_save :set_position
 
-  scope :top_level, order(:title).where(parent_id: nil)
+  scope :top_level, order(:title).where(parent_id: nil, is_home_page: false)
 
   def slug_path
     "/#{slug}"
+  end
+
+  def self.default_home_page
+    where(is_home_page: true).first || new(body: '')
   end
 
   private
