@@ -1,7 +1,5 @@
 require 'csv'
-require 'faker'
 require 'rsolr'
-require 'factory_girl'
 
 # Use this to seed a development, or staging database for playing around.
 # NOT intended for starting a real, production database
@@ -13,6 +11,8 @@ def create_admin
 end
 
 def clear_assets_and_index!
+  `rm -rf public/uploads/asset`
+  `rm -rf public/uploads/tmp`
   Asset.delete_all
 
   rsolr = RSolr.connect(url: Blacklight.solr_config[:url])
@@ -24,34 +24,6 @@ def clear_hierarchy!
   PolicyArea.delete_all
   SubArea.delete_all
   Topic.delete_all
-end
-
-def build_fake_hierarchy
-  100.times do |n|
-    policy_area = FactoryGirl.create(:policy_area, name: "#{Faker::Company.name} #{n}")
-    sub_area = FactoryGirl.create(:sub_area, name: "#{Faker::Name.first_name} #{n}")
-
-    sub_area.policy_area = policy_area
-    sub_area.save!
-
-    topic = FactoryGirl.create(:topic, name: "#{Faker::Name.last_name} #{n}")
-
-    topic.sub_areas << sub_area
-    topic.save!
-
-    asset = FactoryGirl.create(:asset,
-                               title: Faker::Internet.user_name,
-                               topic_ids: [topic.id],
-                               format: Faker::Name.first_name,
-                               level: Faker::Company.catch_phrase,
-                               source: Faker::Company.name,
-                               state: Faker::Company.name,
-                               summary: Faker::Company.name,
-                               title: Faker::Company.catch_phrase,
-                               topic_ids: [topic.id],
-                               type_of: Faker::Company.name,
-                               year: rand(1..2012))
-  end
 end
 
 def load_website_hierarchy file_name
@@ -117,25 +89,34 @@ def load_assets_from_csv asset_csv_file_name
 end
 
 def load_asset_from_csv row, topic
-  pdf = obtain_pdf_file row
-  Asset.create!(asset_file: pdf,
+  Asset.create!(asset_file: obtain_file(row, :web_folder_link_to_asset_pdf),
                 format: row[:format].try(:strip) || ' Unknown',
                 level: row[:level].try(:strip) || ' Unknown',
                 source: row[:source].try(:strip) || ' Unknown',
                 state: row[:state].try(:strip) || ' Unknown',
                 summary: row[:summary].try(:strip) || ' Unknown',
                 title: row[:title].try(:strip) || ' Unknown',
-                topic_ids: [topic.id],
                 type_of: row[:type].try(:strip) || ' Unknown',
-                year: row[:year] || 0)
-  `rm "#{pdf.path}"` unless pdf.path =~ /\/fake.doc$/
+                year: row[:year] || 0,
+                topic_ids: [topic.id],
+                alternative_terms: row[:alternative_terms].try(:strip),
+                bill_number: row[:bill_number].try(:strip),
+                legislative_history: row[:legislative_history].try(:strip),
+                notes: row[:internal_notes].try(:strip),
+                short_title: row[:short_title].try(:strip),
+                source_website: row[:source_website].try(:strip),
+                bill_word: obtain_file(row, :web_folder_link_to_bill_word_doc),
+                bill_pdf: obtain_file(row, :web_folder_link_to_bill_pdf),
+                asset_word: obtain_file(row, :web_folder_link_to_asset_word_doc),
+                external_link_to_asset: row[:external_link_to_asset].try(:strip))
+  `rm -f /tmp/*.pdf /tmp/*.doc`
 end
 
-def obtain_pdf_file row
-  if row[:web_folder_link_to_asset_pdf] =~ /\.pdf$/i
-    puts "\n\n*** #{row[:web_folder_link_to_asset_pdf]} ***"
-    file_name = row[:web_folder_link_to_asset_pdf].split("/").last.gsub(/[ \(\)]/, '_')
-    if system("wget '#{row[:web_folder_link_to_asset_pdf]}' -O /tmp/#{file_name}")
+def obtain_file row, sym
+  if row[sym] =~ /\.pdf$/i
+    puts "\n\n*** #{row[sym]} ***"
+    file_name = row[sym].split("/").last.gsub(/[ \(\)]/, '_')
+    if system("wget '#{row[sym]}' -O '/tmp/#{file_name}'")
       pdf = File.new(File.expand_path("/tmp/#{file_name}"))
     end
   end
