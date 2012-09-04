@@ -1,9 +1,19 @@
+#appliedParams {
+  .appliedFilter {
+    display: block;
+    margin-left: 10px;
+    background-color: $light_gray;
+    margin-bottom: 2px;
+  }
+}
+
 .pageEntriesInfo { 
   background-color: $white_gray;
   width: 455px;
   padding: 7px;
   @include border-radius;
   @include box-shadow(1px 1px 2px 2px #999);
+  margin-bottom: 15px;
 }
 
 .pagination {

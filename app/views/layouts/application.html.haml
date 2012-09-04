@@ -15,8 +15,6 @@
       %header.top
         = link_to image_tag('alicelogo.png', class: 'logo'), root_path
         = render partial: '/navigation' if has_user_authentication_provider?
-        - if params[:controller] == 'catalog' && params[:id]
-          = content_tag(:span, 'Search Results', id: 'results_text')
       .sidebar
         = sidebar_items.join('').html_safe
       .main

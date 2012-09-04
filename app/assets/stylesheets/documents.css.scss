@@ -1,34 +1,31 @@
-#documents {
-  .document {
+#documents .document, #document {
+  border-bottom: 1px solid #CCCCCC;
+  clear: both;
+  padding: 0.5em 0 0;
+  max-width: 900px;
+  margin-bottom: 10px;
 
-    border-bottom: 1px solid #CCCCCC;
+  .documentFunctions {
+    float: right;
+  }
+  dl.defList {
     clear: both;
-    padding: 0.5em 0 0;
-    max-width: 900px;
-    margin-bottom: 10px;
-
-    .documentFunctions {
-      float: right;
-    }
-    dl.defList {
+    overflow: auto;
+    padding: 0.5em 0;
+    dt {
       clear: both;
-      overflow: auto;
-      padding: 0.5em 0;
-      dt {
-        clear: both;
-        float: left;
-        margin: 0;
-        padding: 2px 1em 2px 0;
-        text-align: right;
-        width: 100px;
-      }
-      dd {
-        float: left;
-        margin: 0;
-        padding: 2px 0;
-        text-align: left;
-        width: 550px;
-      }
+      float: left;
+      margin: 0;
+      padding: 2px 1em 2px 0;
+      text-align: right;
+      width: 100px;
+    }
+    dd {
+      float: left;
+      margin: 0;
+      padding: 2px 0;
+      text-align: left;
+      width: 550px;
     }
   }
 }
