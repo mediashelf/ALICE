@@ -479,7 +479,7 @@
        <str name="spellcheck.dictionary">default</str>
        <str name="spellcheck.onlyMorePopular">true</str>
        <str name="spellcheck.extendedResults">true</str>
-       <str name="spellcheck.collate">false</str>
+       <str name="spellcheck.collate">true</str>
        <str name="spellcheck.count">5</str>
     </lst>
     <arr name="last-components">
@@ -518,7 +518,7 @@
        <str name="spellcheck.dictionary">default</str>
        <str name="spellcheck.onlyMorePopular">true</str>
        <str name="spellcheck.extendedResults">true</str>
-       <str name="spellcheck.collate">false</str>
+       <str name="spellcheck.collate">true</str>
        <str name="spellcheck.count">5</str>
 
        <arr name="last-components">
