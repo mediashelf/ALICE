@@ -89,7 +89,7 @@ def load_assets_from_csv asset_csv_file_name
 end
 
 def load_asset_from_csv row, topic
-  Asset.create!(asset_file: obtain_file(row, :web_folder_link_to_asset_pdf),
+  Asset.create!(asset_file: obtain_required_file(row, :web_folder_link_to_asset_pdf),
                 format: row[:format].try(:strip) || ' Unknown',
                 level: row[:level].try(:strip) || ' Unknown',
                 source: row[:source].try(:strip) || ' Unknown',
@@ -105,15 +105,15 @@ def load_asset_from_csv row, topic
                 notes: row[:internal_notes].try(:strip),
                 short_title: row[:short_title].try(:strip),
                 source_website: row[:source_website].try(:strip),
-                bill_word: obtain_file(row, :web_folder_link_to_bill_word_doc),
-                bill_pdf: obtain_file(row, :web_folder_link_to_bill_pdf),
-                asset_word: obtain_file(row, :web_folder_link_to_asset_word_doc),
+                bill_word: obtain_optional_file(row, :web_folder_link_to_bill_word_doc),
+                bill_pdf: obtain_optional_file(row, :web_folder_link_to_bill_pdf),
+                asset_word: obtain_optional_file(row, :web_folder_link_to_asset_word_doc),
                 external_link_to_asset: row[:external_link_to_asset].try(:strip))
   `rm -f /tmp/*.pdf /tmp/*.doc`
 end
 
-def obtain_file row, sym
-  if row[sym] =~ /\.pdf$/i
+def obtain_required_file row, sym
+  if row[sym] =~ /\.pdf|\.doc|\.txt|\.rtf|\.docx$/i
     puts "\n\n*** #{row[sym]} ***"
     file_name = row[sym].split("/").last.gsub(/[ \(\)]/, '_')
     if system("wget '#{row[sym]}' -O '/tmp/#{file_name}'")
@@ -121,6 +121,17 @@ def obtain_file row, sym
     end
   end
   pdf || File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.doc')))
+end
+
+def obtain_optional_file row, sym
+  if row[sym] =~ /\.pdf|\.doc|\.txt|\.rtf|\.docx$/i
+    puts "\n\n*** #{row[sym]} ***"
+    file_name = row[sym].split("/").last.gsub(/[ \(\)]/, '_')
+    if system("wget '#{row[sym]}' -O '/tmp/#{file_name}'")
+      doc = File.new(File.expand_path("/tmp/#{file_name}"))
+    end
+  end
+  doc
 end
 
 def report_missing_topics(missing_topics)
