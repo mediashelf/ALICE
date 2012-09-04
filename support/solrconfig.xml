@@ -447,6 +447,7 @@
         alternative_terms_texts
         bill_number_texts
         content_texts
+        bill_pdf_content_texts
         format_ss
         level_ss
         policy_area_texts

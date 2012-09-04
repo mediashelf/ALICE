@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120902202210) do
+ActiveRecord::Schema.define(:version => 20120904182708) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -48,6 +48,10 @@ ActiveRecord::Schema.define(:version => 20120902202210) do
     t.text     "alternative_terms"
     t.string   "legislative_history"
     t.text     "notes"
+    t.string   "bill_pdf"
+    t.text     "bill_pdf_content"
+    t.string   "bill_word"
+    t.string   "asset_word"
   end
 
   create_table "assets_topics", :id => false, :force => true do |t|

@@ -26,10 +26,6 @@ ActiveAdmin.register Asset do
       row :summary
       row :external_link_to_asset
       row :source_website
-      #row :web_folder_link_to_asset_pdf
-      #row :web_folder_link_to_asset_word_doc
-      #row :web_folder_link_to_bill_pdf
-      #row :web_folder_link_to_bill_word_doc
 
       row :alternative_terms
       row :legislative_history
@@ -39,9 +35,27 @@ ActiveAdmin.register Asset do
         link_to 'Download', asset.asset_file.url
       end
 
+      row :asset_word do |asset|
+        link_to 'Download', asset.asset_word.url
+      end
+
+      row :bill_pdf do |asset|
+        link_to 'Download', asset.bill_pdf.url
+      end
+
+      row :bill_word do |asset|
+        link_to 'Download', asset.bill_word.url
+      end
+
       row :content do |asset|
         div class: 'asset_content' do
           asset.content
+        end
+      end
+
+      row :bill_pdf_content do |asset|
+        div class: 'asset_content' do
+          asset.bill_pdf_content
         end
       end
 
@@ -74,22 +88,37 @@ ActiveAdmin.register Asset do
       f.input :summary
       f.input :external_link_to_asset
       f.input :source_website
-      #f.input :web_folder_link_to_asset_pdf
-      #f.input :web_folder_link_to_asset_word_doc
-      #f.input :web_folder_link_to_bill_pdf
-      #f.input :web_folder_link_to_bill_word_doc
 
       f.input :alternative_terms
       f.input :legislative_history
       f.input :notes
 
       if asset.asset_file?
-        f.input :asset_file, label: "Current File: #{asset.asset_file.path.split('/').last}"
+        f.input :asset_file, label: "Current Asset PDF: #{asset.asset_file.path.split('/').last}"
       else
-        f.input :asset_file, label: 'Upload asset:'
+        f.input :asset_file, label: 'Upload Asset PDF:'
+      end
+
+      if asset.asset_word?
+        f.input :asset_word, label: "Current Word Asset: #{asset.asset_word.path.split('/').last}"
+      else
+        f.input :asset_word, label: 'Upload Word Asset:'
+      end
+
+      if asset.bill_pdf?
+        f.input :bill_pdf, label: "Current Bill PDF: #{asset.bill_pdf.path.split('/').last}"
+      else
+        f.input :bill_pdf, label: 'Upload Bill PDF:'
+      end
+
+      if asset.bill_word?
+        f.input :bill_word, label: "Current Word Bill: #{asset.bill_word.path.split('/').last}"
+      else
+        f.input :bill_word, label: 'Upload Word Bill:'
       end
 
       f.input :content, disabled: true
+      f.input :bill_pdf_content, disabled: true
     end
     f.actions
   end

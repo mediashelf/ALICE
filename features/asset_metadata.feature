@@ -37,7 +37,8 @@ Feature: Asset metadata
       | Source website                         | http://www.wikipedia.org                                     |
 
       And I select "Right to a hearing" from "Topics"
-      And I attach the file "fake.pdf" to "Upload asset"
+      And I attach the file "fake.pdf" to "Upload Asset PDF"
+      And I attach the file "fake.pdf" to "Upload Bill PDF"
       And I press "Create Asset"
     Then I should see "Right to a hearing"
     When I follow "Download"
