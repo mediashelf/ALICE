@@ -1,0 +1,21 @@
+article.page {
+  h1 {
+    @include serifed-header;
+  }
+
+  ul.child-nav {
+    list-style: none;
+    @include clearfix;
+    margin-bottom: $base-line-height;
+    li {
+      float: left;
+      padding-right: 1em;
+      font-family: 'MuseoSlab-500';
+    }
+  }
+
+  p {
+    margin-bottom: $base-line-height;
+  }
+
+}
