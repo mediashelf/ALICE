@@ -11,7 +11,7 @@ class Page < ActiveRecord::Base
   before_validation :set_slug
   before_save :set_position
 
-  scope :top_level, where(parent_id: nil)
+  scope :top_level, order(:title).where(parent_id: nil)
 
   def slug_path
     "/#{slug}"
