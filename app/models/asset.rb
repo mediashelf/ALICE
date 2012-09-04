@@ -22,7 +22,7 @@ class Asset < ActiveRecord::Base
       'policy_area_texts' => indexed_policy_areas,
       'short_title_texts' => short_title,
       'source_ss' => source,
-      'state_ss' => state,
+      'state_sms' => state ? state.split(/\s*,\s*/) : [],
       'sub_area_texts' => indexed_sub_areas,
       'summary_texts' => summary,
       'title_texts' => title,
