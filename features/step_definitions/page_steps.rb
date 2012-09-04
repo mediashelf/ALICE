@@ -1,5 +1,5 @@
 Given /^a page "(.*?)" exists with position (\d+)$/ do |title, position|
-  FactoryGirl.create(:page, title: title, position: position)
+  create(:page, title: title, position: position)
 end
 
 Then /^I should see "(.*?)" before "(.*?)"$/ do |first, second|
