@@ -48,6 +48,7 @@ class CatalogController < ApplicationController
     # solr field configuration for document/show views
     config.show.html_title = 'topic_ss'
     config.show.heading = 'title_display'
+    config.add_show_field 'summary_texts', label: 'Summary:'
     config.add_show_field 'policy_area_texts', label: 'Policy Area:'
     config.add_show_field 'sub_area_texts', label: 'Sub-Area:'
     config.add_show_field 'topic_texts', label: 'Topic:'
@@ -57,7 +58,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'level_sms', label: 'Level:'
     config.add_show_field 'type_of_sms', label: 'Type:'
     config.add_show_field 'keywords_texts', label: 'Keywords:'
-    config.add_show_field 'summary_texts', label: 'Summary:'
     config.add_show_field 'year_is', label: 'Year:'
 
     # Stored fields which are not indexed
