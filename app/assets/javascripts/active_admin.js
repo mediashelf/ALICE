@@ -66,4 +66,6 @@ $().ready(function() {
     moreText: "More",
     lessText: "Hide"
   });
+  $('.wysiwyg_editor').tinymce({
+  });
 });
