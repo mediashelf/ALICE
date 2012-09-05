@@ -1,5 +1,6 @@
 require 'csv'
 require 'rsolr'
+require 'uri'
 
 # Use this to seed a development, or staging database for playing around.
 # NOT intended for starting a real, production database
@@ -67,7 +68,12 @@ def load_assets_from_csv asset_csv_file_name
   bad_pdfs = Set.new
   unknown_topic = Topic.find_or_create_by_name(' Unknown')
 
+  row_num = 0
   CSV.foreach("#{Rails.root}/support/website_assets/#{asset_csv_file_name}", opts) do |row|
+    row_num += 1
+    row[:row_num] = row_num
+    puts "#=> Parsing row number: #{row_num}"
+
     topic_name = row[:topic].try(:strip)
 
     begin
@@ -94,12 +100,13 @@ def load_assets_from_csv asset_csv_file_name
   report_missing_topics missing_topics
   report_failed_validations failed_asset_validations, failed_asset_counts
   report_bad_pdfs bad_pdfs
+  report_bad_urls
   puts
   puts "Total number of successfully imported assets: #{imported_asset_count}"
 end
 
 def load_asset_from_csv row, topic
-  Asset.create!(asset_file: obtain_required_file(row, :web_folder_link_to_asset_pdf),
+  Asset.create!(asset_file: obtain_required_file(row[:row_num], row[:web_folder_link_to_asset_pdf]),
                 format: row[:format].try(:strip) || ' Unknown',
                 level: row[:level].try(:strip) || ' Unknown',
                 source: row[:source].try(:strip) || ' Unknown',
@@ -115,29 +122,34 @@ def load_asset_from_csv row, topic
                 notes: row[:internal_notes].try(:strip),
                 short_title: row[:short_title].try(:strip),
                 source_website: row[:source_website].try(:strip),
-                bill_word: obtain_optional_file(row, :web_folder_link_to_bill_word_doc),
-                bill_pdf: obtain_optional_file(row, :web_folder_link_to_bill_pdf),
-                asset_word: obtain_optional_file(row, :web_folder_link_to_asset_word_doc),
+                bill_word: obtain_optional_file(row[:web_folder_link_to_bill_word_doc]),
+                bill_pdf: obtain_optional_file(row[:web_folder_link_to_bill_pdf]),
+                asset_word: obtain_optional_file(row[:web_folder_link_to_asset_word_doc]),
                 external_link_to_asset: row[:external_link_to_asset].try(:strip))
   `rm -f /tmp/*.pdf /tmp/*.doc`
 end
 
-def obtain_required_file row, sym
-  if row[sym] =~ /\.pdf|\.doc|\.txt|\.rtf|\.docx$/i
-    puts "\n\n*** #{row[sym]} ***"
-    file_name = row[sym].split("/").last.gsub(/[ \(\)]/, '_')
-    if system("wget '#{row[sym]}' -O '/tmp/#{file_name}'")
+@bad_urls = []
+def obtain_required_file row_num, url
+  if url =~ /\.pdf|\.doc|\.txt|\.rtf|\.docx$/i
+    url = URI.escape(url)
+    puts "\n\n*** #{url} ***"
+    file_name = url.split("/").last.gsub(/[ \(\)]/, '_')
+    if system("wget \"#{url}\" -O \"/tmp/#{file_name}\"")
       pdf = File.new(File.expand_path("/tmp/#{file_name}"))
+    else
+      @bad_urls << "row #{row_num}: #{url}"
     end
   end
   pdf || File.new(File.expand_path(File.join(Rails.root, 'support', 'fake.doc')))
 end
 
-def obtain_optional_file row, sym
-  if row[sym] =~ /\.pdf|\.doc|\.txt|\.rtf|\.docx$/i
-    puts "\n\n*** #{row[sym]} ***"
-    file_name = row[sym].split("/").last.gsub(/[ \(\)]/, '_')
-    if system("wget '#{row[sym]}' -O '/tmp/#{file_name}'")
+def obtain_optional_file url
+  if url =~ /\.pdf|\.doc|\.txt|\.rtf|\.docx$/i
+    url = URI.escape(url)
+    puts "\n\n*** #{url} ***"
+    file_name = url.split("/").last.gsub(/[ \(\)]/, '_')
+    if system("wget \"#{url}\" -O \"/tmp/#{file_name}\"")
       doc = File.new(File.expand_path("/tmp/#{file_name}"))
     end
   end
@@ -151,6 +163,15 @@ def report_missing_topics(missing_topics)
     puts topic_name
   end
   puts
+end
+
+def report_bad_urls
+  puts
+  puts
+  puts "Bad URLs:"
+  @bad_urls.each do |url|
+    puts url
+  end
 end
 
 def report_bad_pdfs bad_pdfs
