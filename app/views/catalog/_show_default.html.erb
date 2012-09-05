@@ -1,23 +1,26 @@
 <%# default partial to display solr document fields in catalog show view -%>
 <dl class="defList">
-  <% document_show_fields.each do |solr_fname, field| -%>
-    <% if document.has? solr_fname %>
-	    <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_label :field => solr_fname %></dt>
-	    <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_value :document => document, :field => solr_fname %></dd>
-    <% end -%>
-  <% end -%>
+  <%-# Short title? %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'summary_texts', :document=>document} %>
   <% associated_asset_pdf = Asset.find(document[:id].to_i).asset_file -%>
   <% associated_asset_word = Asset.find(document[:id].to_i).asset_word -%>
   <% associated_bill_pdf = Asset.find(document[:id].to_i).bill_pdf -%>
   <% associated_bill_word = Asset.find(document[:id].to_i).bill_word -%>
   <% if associated_asset_pdf.present? %>
-    <dt class='blacklight-asset_pdf_link'>Asset PDF:</dt>
-    <dd class='blacklight-asset_pdf_link'><%= link_to('Download', associated_asset_pdf.url) %></dd>
+    <dt class='blacklight-asset_pdf_link'>Item PDF:</dt>
+    <dd class='blacklight-asset_pdf_link'><%= link_to('Download', associated_asset_pdf.url, :target=>'blank') %></dd>
   <% end -%>
   <% if associated_asset_word.present? %>
-    <dt class='blacklight-asset_word_link'>Asset Word:</dt>
-    <dd class='blacklight-asset_word_link'><%= link_to('Download', associated_asset_word.url) %></dd>
+    <dt class='blacklight-asset_word_link'>Item Word:</dt>
+    <dd class='blacklight-asset_word_link'><%= link_to('Download', associated_asset_word.url, :target=>'blank') %></dd>
   <% end -%>
+
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'topic', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'year', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'source', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'source_website', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'bill_number', :document=>document} %>
+
   <% if associated_bill_pdf.present? %>
     <dt class='blacklight-bill_pdf_link'>Bill PDF:</dt>
     <dd class='blacklight-bill_pdf_link'><%= link_to('Download', associated_bill_pdf.url) %></dd>
@@ -26,4 +29,14 @@
     <dt class='blacklight-bill_word_link'>Bill Word:</dt>
     <dd class='blacklight-bill_word_link'><%= link_to('Download', associated_bill_word.url) %></dd>
   <% end -%>
+
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'legislative_history_display', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'state_sms', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'format_sms', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'level_sms', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'type_of_sms', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'policy_area_texts', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'sub_area_texts', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'keywords_texts', :document=>document} %>
+
 </dl>

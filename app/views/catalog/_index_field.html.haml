@@ -1,0 +1,3 @@
+-if document.has? solr_fname 
+  %dt{class: "blacklight-#{solr_fname.parameterize}"}=render_index_field_label(:field => solr_fname)
+  %dd{class: "blacklight-#{solr_fname.parameterize}"}=render_index_field_value(:document => document, :field => solr_fname)

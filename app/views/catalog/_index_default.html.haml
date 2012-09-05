@@ -1,0 +1,9 @@
+//<%# default partial to display solr document fields in catalog index view -%>
+%dl.defList
+  
+  -if document.has? 'summary_texts' 
+    %dt{class: "blacklight-summary_texts"}=render_index_field_label(:field => 'summary_texts')
+    %dd{class: "blacklight-summary_texts"}=truncate(render_index_field_value(:document => document, :field => 'summary_texts'), :separator => ' ', :length=>210)
+  -index_fields.each do |solr_fname, field| 
+    -if solr_fname != 'summary_texts'
+      = render :partial=>'index_field', :locals=>{:solr_fname=>solr_fname, :document=>document}

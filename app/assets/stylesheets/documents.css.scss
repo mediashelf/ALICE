@@ -8,6 +8,14 @@
   .documentFunctions {
     float: right;
   }
+
+  h3 a {
+    color: $dark_blue;
+  }
+  h3 a:hover {
+    color: $light_blue;
+  }
+
   dl.defList {
     clear: both;
     overflow: auto;
