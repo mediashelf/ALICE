@@ -40,7 +40,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'topic_texts', label: 'Topic:'
     config.add_index_field 'year_is', label: 'Year:'
     config.add_index_field 'source_ss', label: 'Source:'
-    config.add_index_field 'summary_texts', label: 'Summary'
+    config.add_index_field 'summary_texts', label: 'Summary:'
 
     # Future field for use with browsing functionality
     # config.index.record_display_type = 'format'
