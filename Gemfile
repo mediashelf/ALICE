@@ -19,6 +19,7 @@ gem 'activeadmin'
 
 gem 'blacklight'
   gem 'blacklight_range_limit'
+  gem 'blacklight_facet_extras', github: 'mediashelf/blacklight_facet_extras', ref: '0c72bfe597dac34efba22892ffba288bef4ec450'
 
 gem 'carrierwave'
   gem 'fog', '~> 1.4.0'
