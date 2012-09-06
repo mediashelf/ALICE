@@ -126,5 +126,7 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   config.register_javascript 'tiny_mce/tiny_mce.js'
+  config.register_javascript 'tiny_mce/themes/advanced/editor_template.js'
+  config.register_javascript 'tiny_mce/langs/en.js'
   config.register_javascript 'tiny_mce/jquery.tinymce.js'
 end
