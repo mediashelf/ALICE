@@ -21,7 +21,7 @@ cucumber:
   <<: *test
 
 staging:
-  url: http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com:8080/solr-stage
+  url: http://ec2-50-17-0-117.compute-1.amazonaws.com:8983/solr
 
 production:
-  url: http://ec2-50-112-195-52.us-west-2.compute.amazonaws.com:8080/solr-prod
+  url: http://ec2-50-17-0-117.compute-1.amazonaws.com:8982/solr
