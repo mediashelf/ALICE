@@ -28,7 +28,7 @@ solr_push() {
     echo "Uploading schema.xml to $ENVIRONMENT"
     scp -i $HOME/.ec2/gsg-keypair support/schema.xml deploy@ec2-50-17-0-117.compute-1.amazonaws.com:/home/deploy/${SOLR_ENV}/example/solr/conf/schema.xml
     echo "Uploading solrconfig.xml to $ENVIRONMENT"
-    scp -i $HOME/.ec2/gsg-keypair support/schema.xml deploy@ec2-50-17-0-117.compute-1.amazonaws.com:/home/deploy/${SOLR_ENV}/example/solr/conf/schema.xml
+    scp -i $HOME/.ec2/gsg-keypair support/solrconfig.xml deploy@ec2-50-17-0-117.compute-1.amazonaws.com:/home/deploy/${SOLR_ENV}/example/solr/conf/solrconfig.xml
     echo 'Restarting Solr services'
     cmd="nohup /home/deploy/restart-solr.sh $SOLR_ENV > solr-restart.out 2> solr-restart.err < /dev/null &"
     ssh -i $HOME/.ec2/gsg-keypair deploy@ec2-50-17-0-117.compute-1.amazonaws.com $cmd
