@@ -1,0 +1,53 @@
+#!/bin/bash
+
+environment=$1
+
+function is_valid_environment?()
+{
+    [[ $environment == "solr-staging" ]] || [[ $environment == "solr-production" ]]
+}
+
+function get_solr_port()
+{
+    if [ $environment == "solr-staging" ]; then
+        port=8983
+    else
+        port=8982
+    fi
+}
+
+function find_pid_for_solr()
+{
+    pid=$(ps -ef | grep -v grep | grep java | grep $port | awk '{print $2}')
+}
+
+function start_or_restart_solr()
+{
+    if [ -z $pid ]; then
+        echo "-> Starting $environment..."
+        cd /home/deploy/$environment/example && java -Djetty.port=$port -jar start.jar
+    else
+        echo "-> Killing $environment..."
+        kill -15 $pid
+
+        echo "-> Restarting $environment..."
+        cd /home/deploy/$environment/example && java -Djetty.port=$port -jar start.jar
+    fi
+}
+
+
+function main()
+{
+    if is_valid_environment?; then
+        get_solr_port
+        find_pid_for_solr
+        start_or_restart_solr
+
+        exit 0
+    else
+        echo "-> Invalid environment ($environment)!"
+        exit 1
+    fi
+}
+
+main
