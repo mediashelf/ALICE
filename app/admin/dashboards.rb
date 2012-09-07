@@ -9,7 +9,7 @@ ActiveAdmin::Dashboards.build do
     end
   end
 
-  [PolicyArea, SubArea, Topic, Asset, Page].each do |model|
+  [PolicyArea, SubArea, Topic, Page].each do |model|
     name = model.to_s.titleize
     section "Recently Updated #{name.pluralize}" do
       ul do
