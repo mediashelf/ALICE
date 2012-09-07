@@ -67,12 +67,12 @@ private
 
   def index_record
     SolrService.add(self.to_solr)
-    SolrService.commit
+    # SolrService.commit
   end
 
   def remove_from_index
     SolrService.delete_by_id(self.id)
-    SolrService.commit
+    # SolrService.commit
   end
 
   def extract_content_from_pdf
