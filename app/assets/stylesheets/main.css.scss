@@ -22,6 +22,12 @@ body {
   background-color: $dark_blue;
 }
 
+a {
+  img {
+    padding-top: 0.5em;
+  }
+}
+
 .content {
   clear: left;
   margin-top: 1.5em;
