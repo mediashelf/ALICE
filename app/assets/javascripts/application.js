@@ -13,8 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //
-//= require tinymce-jquery
-//
 // Required by Blacklight
 //= require jquery-ui
 //= require blacklight/blacklight

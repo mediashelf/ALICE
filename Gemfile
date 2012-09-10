@@ -31,7 +31,6 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'newrelic_rpm'
 gem 'sendgrid'
-gem 'tinymce-rails'
 gem 'underscore-rails'
 
 group :development do
