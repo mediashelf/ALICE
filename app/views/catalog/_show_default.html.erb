@@ -24,7 +24,6 @@
   <%= render :partial=>'show_field', :locals=>{:solr_fname=>'source_website_display', :document=>document} %>
   <%= render :partial=>'show_field', :locals=>{:solr_fname=>'bill_number_texts', :document=>document} %>
 
-  <%= require 'ruby-debug'; Debugger.start; Debugger.settings[:autoeval] = 1; Debugger.settings[:autolist] = 1; debugger %>
   <% if associated_bill_pdf.present? && (associated_bill_pdf.path.split(/\//).last != 'fake.doc') %>
     <dt class='blacklight-bill_pdf_link'>Bill PDF:</dt>
     <dd class='blacklight-bill_pdf_link'><%= link_to('Download', associated_bill_pdf.url) %></dd>
