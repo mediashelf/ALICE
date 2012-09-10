@@ -63,7 +63,7 @@
       <analyzer>
         <tokenizer class="solr.StandardTokenizerFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
-        <filter class="solr.StopFilterFactory"/>
+        <!-- <filter class="solr.StopFilterFactory"/> -->
         <filter class="solr.PorterStemFilterFactory"/>
       </analyzer>
     </fieldType>
@@ -97,7 +97,7 @@
       <analyzer>
         <tokenizer class="solr.StandardTokenizerFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
-        <filter class="solr.StopFilterFactory"/>
+        <!-- <filter class="solr.StopFilterFactory"/> -->
         <!-- <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>-->
         <filter class="solr.ShingleFilterFactory" maxShingleSize="4" outputUnigrams="true"/>
       </analyzer>
