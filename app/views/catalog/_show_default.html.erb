@@ -8,12 +8,12 @@
   <% associated_bill_pdf = Asset.find(document[:id].to_i).bill_pdf -%>
   <% associated_bill_word = Asset.find(document[:id].to_i).bill_word -%>
 
-  <% if associated_asset_pdf.present? %>
+  <% if associated_asset_pdf.present? && (associated_asset_pdf.path.split(/\//).last != 'fake.doc') %>
     <dt class='blacklight-asset_pdf_link'>Item PDF:</dt>
     <dd class='blacklight-asset_pdf_link'><%= link_to('Download', associated_asset_pdf.url, :target=>'blank') %></dd>
   <% end -%>
 
-  <% if associated_asset_word.present? %>
+  <% if associated_asset_word.present? && (associated_asset_word.path.split(/\//).last != 'fake.doc') %>
     <dt class='blacklight-asset_word_link'>Item Word:</dt>
     <dd class='blacklight-asset_word_link'><%= link_to('Download', associated_asset_word.url, :target=>'blank') %></dd>
   <% end -%>
@@ -24,12 +24,13 @@
   <%= render :partial=>'show_field', :locals=>{:solr_fname=>'source_website_display', :document=>document} %>
   <%= render :partial=>'show_field', :locals=>{:solr_fname=>'bill_number_texts', :document=>document} %>
 
-  <% if associated_bill_pdf.present? %>
+  <%= require 'ruby-debug'; Debugger.start; Debugger.settings[:autoeval] = 1; Debugger.settings[:autolist] = 1; debugger %>
+  <% if associated_bill_pdf.present? && (associated_bill_pdf.path.split(/\//).last != 'fake.doc') %>
     <dt class='blacklight-bill_pdf_link'>Bill PDF:</dt>
     <dd class='blacklight-bill_pdf_link'><%= link_to('Download', associated_bill_pdf.url) %></dd>
   <% end -%>
 
-  <% if associated_bill_word.present? %>
+  <% if associated_bill_word.present? && (associated_bill_word.path.split(/\//).last != 'fake.doc') %>
     <dt class='blacklight-bill_word_link'>Bill Word:</dt>
     <dd class='blacklight-bill_word_link'><%= link_to('Download', associated_bill_word.url) %></dd>
   <% end -%>
