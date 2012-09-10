@@ -8,6 +8,13 @@ GIT
       rails (~> 3.2)
 
 GIT
+  remote: git://github.com/spohlenz/tinymce-rails.git
+  revision: 9b333e820dd593dbd92147dbfc7030d450056857
+  specs:
+    tinymce-rails (3.5.6)
+      railties (>= 3.1.1)
+
+GIT
   remote: git://github.com/voxdolo/decent_exposure.git
   revision: fc344d80dfbd0b7295f58c2d1a21c923332e7743
   ref: fc344d80dfbd0b7295f58c2d1a21c923332e7743
@@ -423,6 +430,7 @@ DEPENDENCIES
   susy
   therubyracer (= 0.11.0beta5)
   thin
+  tinymce-rails!
   uglifier
   underscore-rails
   unicorn

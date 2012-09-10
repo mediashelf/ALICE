@@ -125,8 +125,8 @@ ActiveAdmin.setup do |config|
   #   config.register_stylesheet 'my_print_stylesheet.css', :media => :print
   #
   # To load a javascript file:
-  config.register_javascript 'tiny_mce/tiny_mce.js'
-  config.register_javascript 'tiny_mce/themes/advanced/editor_template.js'
-  config.register_javascript 'tiny_mce/langs/en.js'
-  config.register_javascript 'tiny_mce/jquery.tinymce.js'
+  # config.register_javascript 'tiny_mce/tiny_mce.js'
+  # config.register_javascript 'tiny_mce/themes/advanced/editor_template.js'
+  # config.register_javascript 'tiny_mce/langs/en.js'
+  # config.register_javascript 'tiny_mce/jquery.tinymce.js'
 end

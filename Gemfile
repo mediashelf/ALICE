@@ -13,6 +13,7 @@ group :assets do
   gem 'susy'
   gem 'fancy-buttons'
 end
+gem 'tinymce-rails', github: 'spohlenz/tinymce-rails'
 
 gem 'activeadmin'
   gem 'meta_search', '>= 1.1.0.pre'
