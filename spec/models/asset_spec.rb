@@ -104,6 +104,14 @@ describe Asset do
     end
   end
 
+  describe "index_record" do
+    it "should add and commit" do
+      SolrService.should_receive(:add).with(kind_of Hash)
+      SolrService.should_receive(:commit)
+      subject.index_record
+    end
+  end
+
   def search_returns_results_for? search_text
     solr.get('select', params: {q: search_text, qt: 'standard'})['response']['numFound'] > 0
   end

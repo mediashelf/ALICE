@@ -63,12 +63,12 @@ class Asset < ActiveRecord::Base
     end
   end
 
-private
-
   def index_record
     SolrService.add(self.to_solr)
     SolrService.commit
   end
+
+private
 
   def remove_from_index
     SolrService.delete_by_id(self.id)
