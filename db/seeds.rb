@@ -75,12 +75,13 @@ def load_assets_from_csv asset_csv_file_name
     puts "#=> Parsing row number: #{row_num}"
 
     topic_name = row[:topic].try(:strip)
+    puts "TOPIC #{topic_name}"
 
     begin
       topic = Topic.find_by_name!(topic_name)
     rescue
       topic = unknown_topic
-      missing_topics << topic_name
+      missing_topics << topic_name if topic_name
     end
 
     if topic.present?
@@ -106,6 +107,7 @@ def load_assets_from_csv asset_csv_file_name
 end
 
 def load_asset_from_csv row, topic
+puts "Creating asset"
   Asset.create!(asset_file: obtain_required_file(row[:row_num], row[:upload_asset_pdf]),
                 format: row[:format].try(:strip) || ' Unknown',
                 level: row[:level].try(:strip) || ' Unknown',
@@ -126,6 +128,7 @@ def load_asset_from_csv row, topic
                 bill_pdf: obtain_optional_file(row[:upload_bill_pdf]),
                 asset_word: obtain_optional_file(row[:upload_word_asset]),
                 external_link_to_asset: row[:external_link_to_asset].try(:strip))
+puts "Created"
   `rm -f /tmp/*.pdf /tmp/*.doc`
 end
 
@@ -216,3 +219,6 @@ puts
 puts "Loading Assets"
 puts
 load_assets_from_csv 'assets.csv'
+rsolr = RSolr.connect(url: Blacklight.solr_config[:url])
+rsolr.commit
+
