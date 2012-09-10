@@ -1,4 +1,12 @@
+//= require jquery
+//= require tinymce-jquery
 //= require active_admin/base
+
+tinyMCE.init({
+  mode: 'textareas',
+  theme: 'advanced'
+});
+
 
 (function($){
   $.fn.jTruncate = function(options) {
