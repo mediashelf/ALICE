@@ -48,23 +48,27 @@ class CatalogController < ApplicationController
     # solr field configuration for document/show views
     config.show.html_title = 'topic_ss'
     config.show.heading = 'title_display'
+    config.add_show_field 'short_title', label: 'Short Title:'
     config.add_show_field 'summary_texts', label: 'Summary:'
-    config.add_show_field 'policy_area_texts', label: 'Policy Area:'
-    config.add_show_field 'sub_area_texts', label: 'Sub-Area:'
     config.add_show_field 'topic_texts', label: 'Topic:'
+    config.add_show_field 'year_is', label: 'Year:'
     config.add_show_field 'source_ss', label: 'Source:'
+    config.add_show_field 'source_website_display', label: 'Source Website:'
+    config.add_show_field 'bill_number_texts', label: 'Bill Number:'
+    config.add_show_field 'legislative_history_display', label: 'Legislative History:'
     config.add_show_field 'state_sms', label: 'State:'
     config.add_show_field 'format_sms', label: 'Format:'
     config.add_show_field 'level_sms', label: 'Level:'
     config.add_show_field 'type_of_sms', label: 'Type:'
-    config.add_show_field 'keywords_texts', label: 'Keywords:'
-    config.add_show_field 'year_is', label: 'Year:'
+    config.add_show_field 'policy_area_texts', label: 'Policy Area:'
+    config.add_show_field 'sub_area_texts', label: 'Sub-Area:'
+    config.add_show_field 'alternative_terms_texts', label: 'Alternative Terms:'
 
-    # Stored fields which are not indexed
-    config.add_show_field 'source_website_display', label: 'Source Website:'
-    config.add_show_field 'external_link_to_asset_display', label: 'External Link to Asset:'
-    config.add_show_field 'legislative_history_display', label: 'Legislative History:'
-    config.add_show_field 'notes_display', label: 'Notes:'
+    # Not included in initial bulk import:
+    #config.add_show_field 'external_link_to_asset_display', label: 'External Link to Asset:'
+
+    # Never to be shown to public users:
+    #config.add_show_field 'notes_display', label: 'Notes:'
 
     # Future field for use with browsing functionality
     # config.show.display_type = 'format'
