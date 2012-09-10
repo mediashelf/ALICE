@@ -1,30 +1,34 @@
 <%# default partial to display solr document fields in catalog show view -%>
 <dl class="defList">
-  <%-# Short title? %>
+  <%- render :partial=>'show_field', :locals=>{:solr_fname=>'short_title_texts', :document=>document} %>
   <%= render :partial=>'show_field', :locals=>{:solr_fname=>'summary_texts', :document=>document} %>
+
   <% associated_asset_pdf = Asset.find(document[:id].to_i).asset_file -%>
   <% associated_asset_word = Asset.find(document[:id].to_i).asset_word -%>
   <% associated_bill_pdf = Asset.find(document[:id].to_i).bill_pdf -%>
   <% associated_bill_word = Asset.find(document[:id].to_i).bill_word -%>
+
   <% if associated_asset_pdf.present? %>
     <dt class='blacklight-asset_pdf_link'>Item PDF:</dt>
     <dd class='blacklight-asset_pdf_link'><%= link_to('Download', associated_asset_pdf.url, :target=>'blank') %></dd>
   <% end -%>
+
   <% if associated_asset_word.present? %>
     <dt class='blacklight-asset_word_link'>Item Word:</dt>
     <dd class='blacklight-asset_word_link'><%= link_to('Download', associated_asset_word.url, :target=>'blank') %></dd>
   <% end -%>
 
-  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'topic', :document=>document} %>
-  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'year', :document=>document} %>
-  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'source', :document=>document} %>
-  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'source_website', :document=>document} %>
-  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'bill_number', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'topic_texts', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'year_is', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'source_ss', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'source_website_display', :document=>document} %>
+  <%= render :partial=>'show_field', :locals=>{:solr_fname=>'bill_number_texts', :document=>document} %>
 
   <% if associated_bill_pdf.present? %>
     <dt class='blacklight-bill_pdf_link'>Bill PDF:</dt>
     <dd class='blacklight-bill_pdf_link'><%= link_to('Download', associated_bill_pdf.url) %></dd>
   <% end -%>
+
   <% if associated_bill_word.present? %>
     <dt class='blacklight-bill_word_link'>Bill Word:</dt>
     <dd class='blacklight-bill_word_link'><%= link_to('Download', associated_bill_word.url) %></dd>

@@ -48,7 +48,7 @@ class CatalogController < ApplicationController
     # solr field configuration for document/show views
     config.show.html_title = 'topic_ss'
     config.show.heading = 'title_display'
-    config.add_show_field 'short_title', label: 'Short Title:'
+    config.add_show_field 'short_title_texts', label: 'Short Title:'
     config.add_show_field 'summary_texts', label: 'Summary:'
     config.add_show_field 'topic_texts', label: 'Topic:'
     config.add_show_field 'year_is', label: 'Year:'
