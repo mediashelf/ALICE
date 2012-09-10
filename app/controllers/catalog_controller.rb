@@ -4,6 +4,7 @@ require 'blacklight/catalog'
 class CatalogController < ApplicationController
 
   include Blacklight::Catalog
+  include BlacklightFacetExtras::Multiple::ControllerExtension
 
   expose(:home_page) { Page.default_home_page }
 
@@ -97,10 +98,10 @@ class CatalogController < ApplicationController
     config.add_facet_field 'topic_facet', label: 'Topic', limit: 20
     config.add_facet_field 'year_is', label: 'Year', limit: 20, range: true
     config.add_facet_field 'source_ss', label: 'Source', limit: 20
-    config.add_facet_field 'state_sms', label: 'State', limit: 20
-    config.add_facet_field 'format_sms', label: 'Format', limit: 20
-    config.add_facet_field 'level_sms', label: 'Level', limit: 20
-    config.add_facet_field 'type_of_sms', label: 'Type', limit: 20
+    config.add_facet_field 'state_sms', label: 'State', limit: 20, multiple: true
+    config.add_facet_field 'format_sms', label: 'Format', limit: 20, multiple: true
+    config.add_facet_field 'level_sms', label: 'Level', limit: 20, multiple: true
+    config.add_facet_field 'type_of_sms', label: 'Type', limit: 20, multiple: true
 
     # Future field for use with browsing functionality
     #config.add_facet_field 'format', :label => 'Format'

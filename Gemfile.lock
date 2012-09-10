@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/mediashelf/blacklight_facet_extras.git
+  revision: 0c72bfe597dac34efba22892ffba288bef4ec450
+  ref: 0c72bfe597dac34efba22892ffba288bef4ec450
+  specs:
+    blacklight_facet_extras (0.0.2)
+      blacklight (~> 3.5)
+      rails (~> 3.2)
+
+GIT
   remote: git://github.com/voxdolo/decent_exposure.git
   revision: fc344d80dfbd0b7295f58c2d1a21c923332e7743
   ref: fc344d80dfbd0b7295f58c2d1a21c923332e7743
@@ -372,6 +381,7 @@ DEPENDENCIES
   activeadmin
   acts_as_list
   blacklight
+  blacklight_facet_extras!
   blacklight_range_limit
   capybara
   carrierwave
