@@ -740,7 +740,7 @@
       <str name="name">default</str>
       <str name="field">spell</str>
       <str name="spellcheckIndexDir">./spellchecker</str>
-      <str name="buildOnCommit">true</str>
+      <str name="buildOnOptimize">true</str>
     </lst>
     <!-- a spellchecker that uses a different distance measure
     <lst name="spellchecker">
