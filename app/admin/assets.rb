@@ -78,10 +78,10 @@ ActiveAdmin.register Asset do
       #f.input :topic
       f.input :title
       f.input :short_title
-      f.input :year
+      f.input :year, :as => :select, :collection=>((y = Date.today.year - 200 ) .. y+205).to_a.reverse, :input_html=>{:'data-placeholder'=>"Year", :style=>"width:350px;", :class=>"chzn-select"}
       f.input :bill_number
       f.input :source
-      f.input :state
+      f.input :state_multiple, :label=>"State(s)", :as=>:select, :collection=>us_states, :multiple=>true, :input_html=>{:'data-placeholder'=>"Choose a state...", :style=>"width:350px;", :class=>"chzn-select"}
       f.input :format
       f.input :level
       f.input :type_of

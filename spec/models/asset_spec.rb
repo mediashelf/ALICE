@@ -72,6 +72,21 @@ describe Asset do
     end
   end
 
+  describe "state_multiple" do
+    it "should set states" do
+      subject.state_multiple = ['Washington', 'Texas', 'Maryland']
+      subject.state.should == 'Washington, Texas, Maryland'
+    end
+    it "should strip out blank options" do
+      subject.state_multiple = ['', '', 'Maryland']
+      subject.state.should == 'Maryland'
+    end
+    it "should read states" do
+      subject.state = "New Jersey, California, Connecticut"
+      subject.state_multiple.should == ["New Jersey", "California", "Connecticut"]
+    end
+  end
+
   describe "#to_solr" do
     it "should split state field into multiple values" do
       subject.state = "Washington, Texas, Maryland, New Jersey, California, Connecticut"

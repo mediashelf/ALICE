@@ -1,6 +1,7 @@
 //= require jquery
 //= require tinymce-jquery
 //= require active_admin/base
+//= require chosen-jquery
 
 
 
@@ -72,4 +73,6 @@ $().ready(function() {
   });
   $('.wysiwyg_editor').tinymce({
   });
+  $(".chzn-select").chosen({no_results_text: "No results matched", allow_single_deselect: true});
+
 });
