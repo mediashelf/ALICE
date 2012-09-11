@@ -8,7 +8,7 @@
     = f.input :title
     = f.input :year
     = f.input :source
-    = f.input :state
+    = f.input :state, :as=>:select, :collection=>us_states
     = f.input :format
     = f.input :level
     = f.input :type_of

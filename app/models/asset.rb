@@ -7,7 +7,7 @@ class Asset < ActiveRecord::Base
   has_and_belongs_to_many :topics
 
   attr_accessible :asset_file, :content, :asset_word, :bill_word, :bill_pdf, :bill_pdf_content
-  attr_accessible :alternative_terms, :bill_number, :external_link_to_asset, :format, :legislative_history, :level, :notes, :short_title, :source, :source_website, :state, :summary, :title, :type_of, :year, :topic_ids
+  attr_accessible :alternative_terms, :bill_number, :external_link_to_asset, :format, :legislative_history, :level, :notes, :short_title, :source, :source_website, :state, :state_multiple, :summary, :title, :type_of, :year, :topic_ids
 
   validates_presence_of :asset_file, :title, :summary, :source, :year, :format, :level, :type_of, :topic_ids
 
@@ -66,6 +66,14 @@ class Asset < ActiveRecord::Base
   def index_record
     SolrService.add(self.to_solr)
     SolrService.commit
+  end
+
+  def state_multiple=(states)
+    self.state = states.reject(&:blank?).join(', ')
+  end
+
+  def state_multiple
+    parse_list(state)
   end
 
 private

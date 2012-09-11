@@ -12,6 +12,7 @@ group :assets do
   gem 'compass-rails'
   gem 'susy'
   gem 'fancy-buttons'
+  gem 'chosen-rails'
 end
 gem 'tinymce-rails', github: 'spohlenz/tinymce-rails'
 
