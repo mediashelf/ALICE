@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/mediashelf/blacklight_facet_extras.git
-  revision: 0c72bfe597dac34efba22892ffba288bef4ec450
-  ref: 0c72bfe597dac34efba22892ffba288bef4ec450
+  revision: 08a055f3be23afca1bb1350ba7b42df53b7622d4
+  ref: 08a055f3be23afca1bb1350ba7b42df53b7622d4
   specs:
     blacklight_facet_extras (0.0.2)
       blacklight (~> 3.5)
